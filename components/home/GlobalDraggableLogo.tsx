@@ -2,12 +2,16 @@
 
 import { RefObject, useEffect, useState } from 'react'
 import { motion, useAnimationControls, useMotionValue } from 'framer-motion'
+import { LogoVivo } from '@/components/home/LogoVivo'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 interface GlobalDraggableLogoProps {
   containerRef: RefObject<HTMLElement>
 }
 
 export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) {
+  const isMobile = useIsMobile()
+  const logoSize = isMobile ? 160 : 220
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [initialized, setInitialized] = useState(false)
@@ -17,6 +21,12 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
   const hintControls = useAnimationControls()
 
   useEffect(() => {
+    // En móvil no necesitamos posicionar via anchor — se centra con CSS
+    if (isMobile) {
+      setInitialized(true)
+      return
+    }
+
     const anchor = document.getElementById('draggable-logo-anchor')
     const container = containerRef.current
     if (!anchor || !container) return
@@ -27,10 +37,11 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
     y.set(rect.top - containerRect.top)
     setInitialized(true)
     setIsPositioned(true)
-  }, [containerRef, x, y])
+  }, [containerRef, x, y, isMobile])
 
   useEffect(() => {
-    if (!isPositioned || hintDone) return
+    // Hint bounce solo en desktop
+    if (isMobile || !isPositioned || hintDone) return
 
     let cancelled = false
     let frameOne: number | null = null
@@ -40,23 +51,16 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
       hintControls
         .start({
           y: [0, -18, 0, -10, 0, -4, 0],
-          transition: {
-            duration: 2,
-            ease: [0.22, 1, 0.36, 1],
-          },
+          transition: { duration: 2, ease: [0.22, 1, 0.36, 1] },
         })
         .then(() => {
-          if (!cancelled) {
-            setHintDone(true)
-          }
+          if (!cancelled) setHintDone(true)
         })
     }
 
     frameOne = requestAnimationFrame(() => {
       frameTwo = requestAnimationFrame(() => {
-        if (!cancelled) {
-          startHint()
-        }
+        if (!cancelled) startHint()
       })
     })
 
@@ -66,26 +70,36 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
       if (frameTwo) cancelAnimationFrame(frameTwo)
       hintControls.stop()
     }
-  }, [hintControls, hintDone, isPositioned])
-
-  const resetHintMotion = () => {
-    hintControls.stop()
-    hintControls.start({
-      y: 0,
-      transition: { duration: 0.12, ease: 'easeOut' },
-    })
-  }
+  }, [hintControls, hintDone, isPositioned, isMobile])
 
   const cancelHintIfActive = () => {
     if (hintDone) return
-    resetHintMotion()
+    hintControls.stop()
+    hintControls.start({ y: 0, transition: { duration: 0.12, ease: 'easeOut' } })
     setHintDone(true)
   }
 
-  if (!initialized) {
-    return null
+  if (!initialized) return null
+
+  // MÓVIL — centrado fijo, solo decorativo
+  if (isMobile) {
+    return (
+      <div
+        className="absolute z-[2000] select-none pointer-events-none"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: `${logoSize}px`,
+          mixBlendMode: 'difference',
+        }}
+      >
+        <LogoVivo size={logoSize} />
+      </div>
+    )
   }
 
+  // DESKTOP — draggable con hint bounce
   return (
     <motion.div
       drag
@@ -101,7 +115,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
       style={{
         top: 0,
         left: 0,
-        width: 'clamp(200px, 30vw, 360px)',
+        width: `${logoSize}px`,
         touchAction: 'none',
         mixBlendMode: 'difference',
         x,
@@ -109,12 +123,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
       }}
     >
       <motion.div animate={hintControls} initial={{ y: 0 }}>
-        <img
-          src="/logo_oi0_mask.svg"
-          alt="Logo MASK"
-          draggable={false}
-          className="w-full h-auto"
-        />
+        <LogoVivo size={logoSize} />
       </motion.div>
     </motion.div>
   )

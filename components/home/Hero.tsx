@@ -1,68 +1,91 @@
 'use client'
 
-import { LayoutContainer } from '@/components/ui/layout-container'
+import Link from 'next/link'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 export function Hero() {
+  const isMobile = useIsMobile()
+  const pad = isMobile ? '20px' : '32px'
+
+  const cornerStyle: React.CSSProperties = {
+    position: 'absolute',
+    zIndex: 10,
+    mixBlendMode: 'difference',
+    color: 'white',
+    fontSize: '16px',
+    fontFamily: 'var(--font-manrope)',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.2em',
+    lineHeight: 1.4,
+    padding: pad,
+  }
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen w-full bg-[#111111] overflow-hidden"
+      className="relative h-screen w-full overflow-hidden"
     >
-      <LayoutContainer className="flex flex-1 flex-col pt-10 pb-14 md:pb-8">
-        <div className="relative flex w-full flex-1 flex-col justify-end">
-          <div className="relative max-w-3xl">
-            <div className="pointer-events-none absolute left-0 bottom-full mb-6 sm:mb-8 z-20" aria-hidden>
-              <div
-                id="draggable-logo-anchor"
-                style={{ width: 'clamp(200px, 30vw, 360px)' }}
-              >
-                <img
-                  src="/logo_oi0_mask.svg"
-                  alt=""
-                  aria-hidden="true"
-                  className="w-full h-auto opacity-0"
-                />
-              </div>
-            </div>
+      {/* VIDEO BACKGROUND */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        src="/ocean-bg.mp4"
+      />
 
-            <div className="relative z-10 text-left space-y-6">
-              {/* NOMBRE */}
-              <h1
-                className="
-              text-white/80 font-manrope font-bold
-              text-[11vw] sm:text-[60px] md:text-[80px] lg:text-[80px]
-              leading-[0.92] tracking-[-0.04em]
-            "
-              >
-                Rodrigo Sánchez
-              </h1>
+      {/* LOGO ANCHOR — centrado */}
+      <div
+        id="draggable-logo-anchor"
+        className="pointer-events-none absolute"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '220px',
+          zIndex: 1,
+        }}
+        aria-hidden
+      >
+        <img
+          src="/logo_oi0_mask.svg"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-auto opacity-0"
+        />
+      </div>
 
-              {/* DESCRIPCIÓN */}
-              <p
-                className="
-              text-white/80 font-medium font-manrope
-              text-[15px] sm:text-[17px] md:text-[19px]
-              max-w-2xl leading-relaxed
-            "
-              >
-                Product Designer especializado en diseño y desarrollo web/software, branding y SEO/GEO. Diseños funcionales y con impacto visual.
-              </p>
+      {/* TOP LEFT */}
+      <div style={{ ...cornerStyle, top: 0, left: 0 }}>
+        Product Designer
+        <br />
+        Web · Branding · SEO
+      </div>
 
-              {/* SKILLS / STACK */}
-              <p
-                className="
-              text-white/60 font-manrope text-[12px] sm:text-[13px] md:text-[14px]
-              tracking-[0.32em] uppercase
-              flex flex-wrap gap-x-4 gap-y-1
-            "
-              >
-                Figma • Cursor • Lovable • v0 • Github • Unity • Design Systems • Framer • Shopify • WordPress
-              </p>
-            </div>
-          </div>
-        </div>
-      </LayoutContainer>
+      {/* TOP RIGHT */}
+      <Link
+        href="/work"
+        style={{ ...cornerStyle, top: 0, right: 0 }}
+        className="hover:opacity-60 transition-opacity"
+      >
+        Work
+      </Link>
+
+      {/* BOTTOM LEFT */}
+      <div style={{ ...cornerStyle, bottom: 0, left: 0, fontSize: '19px', fontWeight: 600 }}>
+        Rodrigo Sánchez
+      </div>
+
+      {/* BOTTOM RIGHT */}
+      <Link
+        href="/contact"
+        style={{ ...cornerStyle, bottom: 0, right: 0 }}
+        className="hover:opacity-60 transition-opacity"
+      >
+        Contact
+      </Link>
     </section>
   )
 }

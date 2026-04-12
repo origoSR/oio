@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { getProjectRoute } from '@/lib/projects'
 
 interface ProjectCardProps {
   id: number
   title: string
-  image: string
+  hoverImage: string
   projectId?: string
   description?: string
   year?: string
@@ -26,19 +27,17 @@ export function ProjectCard({
   country,
   type,
   tools,
+  hoverImage,
 }: ProjectCardProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const locationInfo = [country, year].filter(Boolean).join(', ')
+  const projectRoute = projectId ? getProjectRoute(projectId) : '#'
 
-  // (logos eliminados)
-
-  // Forzar textos blancos en hover solo para estos proyectos
-  const forceWhiteHover = ['push', 'rbi', 'santalucia'].includes(projectId || '')
-
-  // Forzar textos oscuros en hover solo para estos proyectos
-  const forceDarkHover = ['catalonia', 'bk', 'rank', 'rmh', 'talengo'].includes(projectId || '')
+  // Metadata line: rol · herramientas principales · ciudad · año
+  const metaParts = [type, tools?.[0], country, year].filter(Boolean)
+  const metaLine = metaParts.join(' · ')
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,161 +50,85 @@ export function ProjectCard({
     }
   }, [])
 
-  const projectRoute = projectId ? getProjectRoute(projectId) : '#'
-
   return (
-    <div
+    <Link
+      href={projectRoute}
+      ref={cardRef}
       className={cn(
-        'relative group w-full overflow-hidden',
-        'flex flex-col',
-        // Padding vertical que coincide con los márgenes laterales de LayoutContainer
-        'py-3 lg:py-6',
-        // Altura mínima: mobile auto, desktop 380px (equilibrado)
-        'lg:min-h-[380px]',
+        'relative w-full overflow-hidden flex flex-col cursor-pointer',
+        'py-5 lg:py-8 min-h-[140px] lg:min-h-[200px]',
+        'border-b border-[#CCCCCC]',
+        'transition-all duration-700',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[10px]',
-        'transition-all duration-[700ms]',
-        forceWhiteHover && 'card-hover-white'
       )}
-      style={{
-        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-      }}
+      style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div ref={cardRef} className="absolute inset-0 pointer-events-none" />
-      {/* Fondo de color en hover - cubre TODA la superficie de línea a línea */}
-      <div className="absolute inset-0 z-0 bg-[var(--hover-color)] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+      {/* IMAGEN DE FONDO */}
+      <motion.img
+        src={hoverImage}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      />
 
-      {/* CONTENIDO: estructura balanceada */}
-      <div
-        className={cn(
-          "relative z-10 flex flex-1 flex-col px-4 lg:px-6 space-y-3 lg:space-y-0 lg:justify-between",
-          forceWhiteHover && "[&_*]:group-hover:!text-white [&_*]:group-hover:![stroke:white]",
-          forceDarkHover && "[&_*]:group-hover:!text-[#111111] [&_*]:group-hover:![stroke:#111111]"
-        )}
-      >
-        {/* BLOQUE A – TOP: Título + Descripción (compacto) */}
-        <div className="flex flex-col space-y-2">
-          <h3
-            className={cn(
-              'font-manrope font-bold tracking-[-0.02em] transition-colors duration-300',
-              'text-2xl lg:text-5xl leading-tight',
-              'card-base-title',
-              forceWhiteHover ? 'group-hover:!text-white' : forceDarkHover ? 'group-hover:!text-[#111111]' : 'group-hover:text-white'
-            )}
-          >
+      {/* OVERLAY */}
+      <motion.div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{ background: 'rgba(0,0,0,0.4)' }}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      />
+
+      {/* CONTENIDO */}
+      <div className="relative z-[2] flex flex-1 flex-col justify-between px-4 lg:px-6 gap-2">
+
+        {/* FILA PRINCIPAL: Título + VER → */}
+        <div className="flex items-start justify-between gap-4">
+          <h3 className={cn(
+            'font-manrope font-bold tracking-[-0.02em] leading-tight transition-colors duration-500',
+            'text-2xl lg:text-5xl',
+            isHovered ? 'text-white' : 'text-[#222222]'
+          )}>
             {title}
           </h3>
 
-          {description && (
-            <p
-              className={cn(
-                'text-neutral-700 text-sm leading-relaxed line-clamp-2 md:line-clamp-none',
-                'font-manrope transition-colors duration-300',
-                'card-base-desc',
-                forceWhiteHover ? 'group-hover:!text-white group-hover:!opacity-100' : forceDarkHover ? 'group-hover:!text-[#111111] group-hover:!opacity-100' : 'group-hover:text-white group-hover:opacity-90'
-              )}
-            >
-              {description}
-            </p>
+          <span className={cn(
+            'font-manrope font-bold uppercase tracking-widest text-sm whitespace-nowrap',
+            'pt-1 lg:pt-2 flex-shrink-0 transition-colors duration-500',
+            isHovered ? 'text-white' : 'text-[#222222]'
+          )}>
+            Ver →
+          </span>
+        </div>
+
+        {/* DESCRIPCIÓN */}
+        {description && (
+          <p className={cn(
+            'font-manrope text-sm lg:text-lg font-normal leading-snug line-clamp-1 transition-colors duration-500 max-w-2xl',
+            isHovered ? 'text-white/80' : 'text-neutral-500'
+          )}>
+            {description}
+          </p>
+        )}
+
+        {/* METADATA — siempre visible en móvil, solo en hover en desktop */}
+        <p
+          className={cn(
+            'font-manrope uppercase tracking-[0.18em] leading-none transition-all duration-[400ms]',
+            isHovered
+              ? 'opacity-100 translate-y-0 text-white/70'
+              : 'opacity-100 md:opacity-0 md:translate-y-1 text-neutral-400'
           )}
+          style={{ fontSize: '12px' }}
+        >
+          {metaLine}
+        </p>
 
-        </div>
-
-        <div className="space-y-3">
-          {/* LÍNEA DIVISORIA */}
-          <div
-            className={cn(
-              'w-full h-px transition-colors duration-300',
-              forceWhiteHover
-                ? 'bg-black/10 group-hover:bg-white/40'
-                : 'bg-black/10 group-hover:bg-black/10'
-            )}
-          />
-
-          {/* BLOQUE B – BOTTOM: baseline alignment */}
-          <div className="pt-3 relative">
-            <div className="flex flex-col space-y-3 md:space-y-0 md:grid md:grid-cols-3 md:items-center">
-              {/* Info proyecto */}
-              <div className="flex flex-col gap-1">
-                <span
-                  className={cn(
-                    'text-[9px] lg:text-[10px] uppercase tracking-[0.12em] font-bold font-manrope transition-colors duration-300',
-                    'card-base-label',
-                    forceWhiteHover ? 'group-hover:!text-white group-hover:!opacity-100' : forceDarkHover ? 'group-hover:!text-[#111111] group-hover:!opacity-100' : 'group-hover:text-white group-hover:opacity-60'
-                  )}
-                >
-                  Info proyecto
-                </span>
-                <div
-                  className={cn(
-                    'text-xs lg:text-sm leading-[1.4] font-manrope transition-colors duration-300',
-                    'card-base-content',
-                    forceWhiteHover ? 'group-hover:!text-white' : forceDarkHover ? 'group-hover:!text-[#111111]' : 'group-hover:text-white'
-                  )}
-                >
-                  {type && <span className={cn('block', forceWhiteHover && 'group-hover:!text-white', forceDarkHover && 'group-hover:!text-[#111111]')}>{type}</span>}
-                  {locationInfo && (
-                    <span className={cn(
-                      'block transition-colors duration-300 card-base-content',
-                      forceWhiteHover ? 'group-hover:!text-white' : forceDarkHover ? 'group-hover:!text-[#111111]' : 'group-hover:text-white'
-                    )}>
-                      {locationInfo}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Herramientas */}
-              <div className="flex flex-col gap-1 text-left md:items-start md:justify-center md:place-self-center">
-                {tools && tools.length > 0 && (
-                  <>
-                    <span
-                      className={cn(
-                        'text-[9px] lg:text-[10px] uppercase tracking-[0.12em] font-bold font-manrope transition-colors duration-300',
-                        'card-base-label',
-                        forceWhiteHover ? 'group-hover:!text-white group-hover:!opacity-100' : forceDarkHover ? 'group-hover:!text-[#111111] group-hover:!opacity-100' : 'group-hover:text-white group-hover:opacity-60'
-                      )}
-                    >
-                      Herramientas
-                    </span>
-                    <div
-                      className={cn(
-                        'text-xs lg:text-sm leading-[1.4] font-manrope transition-colors duration-300',
-                        'card-base-content',
-                        forceWhiteHover ? 'group-hover:!text-white' : forceDarkHover ? 'group-hover:!text-[#111111]' : 'group-hover:text-white'
-                      )}
-                    >
-                      {tools.join(', ')}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* CTA */}
-              <div className="w-full flex justify-end md:justify-end">
-                <Link
-                  href={projectRoute}
-                  className={cn(
-                    'uppercase tracking-wide font-bold text-sm md:text-base cursor-pointer hover:opacity-80 transition',
-                    'font-manrope flex items-center gap-2 text-right self-end text-neutral-800',
-                    'card-base-content',
-                    forceWhiteHover
-                      ? 'group-hover:!text-white'
-                      : forceDarkHover
-                        ? 'group-hover:!text-[#111111]'
-                        : 'group-hover:text-white'
-                  )}
-                  aria-label={`Ver proyecto ${title}`}
-                >
-                  <span className="font-bold whitespace-nowrap">Ver</span>
-                  <span className="text-base">→</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* logos removidos */}
-        </div>
       </div>
-    </div>
+    </Link>
   )
 }

@@ -1,28 +1,7 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Oooh_Baby, Manrope } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { TopTicker } from '@/components/TopTicker'
 import Navbar from '@/components/layout/Navbar'
-import { ProjectProvider } from '@/contexts/project-context'
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-sans',
-})
-
-const ooohBaby = Oooh_Baby({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-logo',
-})
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-manrope',
-})
 
 export const metadata: Metadata = {
   title: 'Rodrigo Sánchez — Product Designer',
@@ -46,13 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${ooohBaby.variable} ${manrope.variable} font-sans antialiased`}
+        className="font-sans antialiased"
       >
-        <ProjectProvider>
-          <TopTicker />
-          <Navbar />
-          {children}
-        </ProjectProvider>
+        <Navbar />
+        {children}
         <Analytics />
       </body>
     </html>

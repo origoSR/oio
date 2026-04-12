@@ -1,8 +1,8 @@
 'use client'
 
+import { NewProjectLayout } from '@/components/project-detail/layouts/NewProjectLayout'
 import { PushLayout } from '@/components/project-detail/layouts/PushLayout'
 import {
-  getProjectBackgroundColor,
   getFrame7BackgroundImage,
   getConfidentialSticker,
   shouldShowSticker,
@@ -24,20 +24,32 @@ export default function PushPage() {
   const sticker = showSticker ? getConfidentialSticker(projectId) : null
 
   return (
-    <PushLayout
-      projectId={projectId}
+    <NewProjectLayout
       title={title}
-      description={description}
-      role={role}
-      year={year}
-      country={country}
-      tools={tools}
-      website={website}
       backgroundColor={backgroundColor}
-      frame7BackgroundImage={getFrame7BackgroundImage(projectId)}
-      sticker={sticker}
-      animationClasses=""
-    />
+      textColor="#FAFAFA"
+      hoverImage="/bluesky.png"
+      description={description}
+      location={country}
+      role={role}
+      tools={tools.join(', ')}
+      year={year}
+    >
+      <PushLayout
+        projectId={projectId}
+        title={title}
+        description={description}
+        role={role}
+        year={year}
+        country={country}
+        tools={tools}
+        website={website}
+        backgroundColor={backgroundColor}
+        frame7BackgroundImage={getFrame7BackgroundImage(projectId)}
+        sticker={sticker}
+        animationClasses=""
+      />
+    </NewProjectLayout>
   )
 }
 
