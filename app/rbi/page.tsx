@@ -1,5 +1,3 @@
-'use client'
-
 import { NewProjectLayout } from '@/components/project-detail/layouts/NewProjectLayout'
 import { RbiLayout } from '@/components/project-detail/layouts/RbiLayout'
 

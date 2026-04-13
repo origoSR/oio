@@ -1,5 +1,3 @@
-'use client'
-
 import { NewProjectLayout } from '@/components/project-detail/layouts/NewProjectLayout'
 import { BurgerKingLayout } from '@/components/project-detail/layouts/BurgerKingLayout'
 

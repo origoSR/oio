@@ -4,29 +4,9 @@ import Image from 'next/image'
 import { LayoutContainer } from '@/components/ui/layout-container'
 import { BrandOverviewPush } from './BrandOverviewPush'
 
-interface PushLayoutProps {
-  projectId: string
-  title: string
-  description: string
-  role?: string
-  year?: string
-  country?: string
-  tools?: string[]
-  website?: string
-  backgroundColor: string
-  frame7BackgroundImage?: string
-  sticker?: React.ReactNode | null
-  animationClasses?: string
-}
-
-export function PushLayout({
-  backgroundColor,
-  animationClasses = '',
-}: PushLayoutProps) {
+export function PushLayout() {
   return (
-    <div
-      className={`w-full bg-[#F5F5F5] text-black overflow-x-hidden project-detail ${animationClasses}`}
-    >
+    <div className="w-full bg-[#F5F5F5] text-black overflow-x-hidden project-detail">
       {/* MOCKUPS */}
       <section className="w-full" style={{ backgroundColor: '#F5F5F5', color: '#222222' }}>
         <LayoutContainer className="pt-10 pb-14 md:pt-16 md:pb-24">

@@ -1,5 +1,3 @@
-'use client'
-
 import { NewProjectLayout } from '@/components/project-detail/layouts/NewProjectLayout'
 import { RankLayout } from '@/components/project-detail/layouts/RankLayout'
 

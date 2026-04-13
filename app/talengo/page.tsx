@@ -1,5 +1,3 @@
-'use client'
-
 import { NewProjectLayout } from '@/components/project-detail/layouts/NewProjectLayout'
 import { TalengoLayout } from '@/components/project-detail/layouts/TalengoLayout'
 
