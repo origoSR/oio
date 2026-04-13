@@ -12,14 +12,13 @@ export default function ContactPage() {
       {/* LEFT / TOP */}
       <div
         className="w-full md:w-1/2 flex-[6] md:flex-none md:h-full flex flex-col justify-center items-center md:items-start px-8 md:px-12"
-        style={{ borderBottom: 'none', borderRight: '1px solid rgba(255,255,255,0.1)' }}
       >
         <div className="w-full max-w-sm md:max-w-none">
           <h1
             className="font-manrope font-bold text-white leading-none"
             style={{ fontSize: 'clamp(60px, 10vw, 140px)' }}
           >
-            ¡Hablemos.
+            Hablemos.
           </h1>
 
           <p
@@ -55,7 +54,6 @@ export default function ContactPage() {
       {/* RIGHT / BOTTOM */}
       <div
         className="w-full md:w-1/2 flex-[4] md:flex-none md:h-full flex items-center justify-center"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}
       >
         <div style={{ mixBlendMode: 'difference' }}>
           <LogoVivo size={isMobile ? 200 : 500} />

@@ -5,20 +5,45 @@ import { useIsMobile } from '@/hooks/use-mobile'
 
 export function Hero() {
   const isMobile = useIsMobile()
-  const pad = isMobile ? '20px' : '32px'
+  const pad = isMobile ? '16px' : '32px'
 
-  const cornerStyle: React.CSSProperties = {
+  const baseCorner: React.CSSProperties = {
     position: 'absolute',
     zIndex: 10,
-    mixBlendMode: 'difference',
-    color: 'white',
-    fontSize: '16px',
     fontFamily: 'var(--font-manrope)',
-    fontWeight: 600,
     textTransform: 'uppercase',
     letterSpacing: '0.2em',
     lineHeight: 1.4,
     padding: pad,
+  }
+
+  // Textos decorativos — blanco puro, sin blend mode
+  const infoStyle: React.CSSProperties = {
+    ...baseCorner,
+    color: '#FFFFFF',
+    fontSize: isMobile ? '13px' : '12px',
+    fontWeight: 700,
+    opacity: 0.9,
+  }
+
+  const nameStyle: React.CSSProperties = {
+    ...baseCorner,
+    color: '#FFFFFF',
+    fontSize: isMobile ? '13px' : '12px',
+    fontWeight: 700,
+    opacity: 0.9,
+  }
+
+  // Links de navegación — con mix-blend-mode difference
+  const navLinkStyle: React.CSSProperties = {
+    ...baseCorner,
+    mixBlendMode: 'difference',
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 500,
+    opacity: 1,
+    cursor: 'pointer',
+    padding: isMobile ? '12px' : pad,
   }
 
   return (
@@ -57,34 +82,34 @@ export function Hero() {
         />
       </div>
 
-      {/* TOP LEFT */}
-      <div style={{ ...cornerStyle, top: 0, left: 0 }}>
+      {/* TOP LEFT — decorativo */}
+      <div style={{ ...infoStyle, top: 0, left: 0 }}>
         Product Designer
         <br />
         Web · Branding · SEO
       </div>
 
-      {/* TOP RIGHT */}
+      {/* TOP RIGHT — nav */}
       <Link
         href="/work"
-        style={{ ...cornerStyle, top: 0, right: 0 }}
+        style={{ ...navLinkStyle, top: 0, right: 0 }}
         className="hover:opacity-60 transition-opacity"
       >
-        Work
+        Work →
       </Link>
 
-      {/* BOTTOM LEFT */}
-      <div style={{ ...cornerStyle, bottom: 0, left: 0, fontSize: '19px', fontWeight: 600 }}>
+      {/* BOTTOM LEFT — decorativo */}
+      <div style={{ ...nameStyle, bottom: 0, left: 0 }}>
         Rodrigo Sánchez
       </div>
 
-      {/* BOTTOM RIGHT */}
+      {/* BOTTOM RIGHT — nav */}
       <Link
         href="/contact"
-        style={{ ...cornerStyle, bottom: 0, right: 0 }}
+        style={{ ...navLinkStyle, bottom: 0, right: 0 }}
         className="hover:opacity-60 transition-opacity"
       >
-        Contact
+        Contact →
       </Link>
     </section>
   )

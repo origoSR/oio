@@ -74,7 +74,7 @@ export function NewProjectLayout({
             className="font-manrope font-bold leading-none"
             style={{
               color: textColor,
-              fontSize: 'clamp(80px, 18vw, 260px)',
+              fontSize: 'clamp(56px, 12vw, 260px)',
             }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,8 +86,8 @@ export function NewProjectLayout({
           {/* 3. Descripción */}
           {description && (
             <motion.p
-              className="text-[16px] leading-[1.5]"
-              style={{ color: textColor, maxWidth: '400px', marginTop: '16px' }}
+              className="text-[16px] leading-[1.5] max-w-full md:max-w-[400px]"
+              style={{ color: textColor, marginTop: '16px' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -99,7 +99,7 @@ export function NewProjectLayout({
           {/* 4. Metadata */}
           {metaItems.length > 0 && (
             <motion.div
-              className="flex flex-wrap gap-x-4 gap-y-1"
+              className="flex flex-col md:flex-row md:flex-wrap gap-y-1 md:gap-x-4"
               style={{ marginTop: '12px' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -109,9 +109,11 @@ export function NewProjectLayout({
                 <span
                   key={i}
                   className="text-xs uppercase tracking-widest"
-                  style={{ color: textColor, opacity: 0.5 }}
+                  style={{ color: textColor, opacity: 0.6 }}
                 >
-                  {i > 0 && <span className="mr-4 opacity-40">·</span>}
+                  <span className="hidden md:inline">
+                    {i > 0 && <span className="mr-4 opacity-40">·</span>}
+                  </span>
                   {item}
                 </span>
               ))}
