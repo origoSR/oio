@@ -116,7 +116,7 @@ export function FeaturedProjects() {
     <section className="bg-transparent">
       <div className="w-full">
         {/* FILTER PILLS */}
-        <div className="flex gap-3 px-6 pt-6 pb-2">
+        <div className="flex gap-3 px-6 pt-6 pb-2 overflow-x-auto scrollbar-hide">
           {FILTERS.map((f) => (
             <button
               key={f}
