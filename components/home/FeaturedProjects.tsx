@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { ProjectCard } from './ProjectCard'
 
 const featuredProjects = [
@@ -14,6 +15,7 @@ const featuredProjects = [
     type: 'Cofundador. Diseño y desarrollo de software',
     tools: ['Figma', 'v0', 'Cursor', 'Lovable', 'Unity', 'SEMRush'],
     behanceUrl: null,
+    tags: ['SEO', 'GEO', 'Branding', 'Dev'],
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ const featuredProjects = [
     type: 'UX/UI Design, Design Systems',
     tools: ['Figma', 'SEMRush'],
     behanceUrl: null,
+    tags: ['UX/UI'],
   },
   {
     id: 5,
@@ -38,6 +41,7 @@ const featuredProjects = [
     type: 'UX/UI Design',
     tools: ['Figma', 'Photoshop', 'VS Code'],
     behanceUrl: null,
+    tags: ['UX/UI'],
   },
   {
     id: 3,
@@ -50,6 +54,7 @@ const featuredProjects = [
     type: 'UX/UI Design, SEO, GEO',
     tools: ['Figma', 'Wordpress', 'Shopify', 'SEMRush'],
     behanceUrl: null,
+    tags: ['UX/UI', 'SEO', 'GEO', 'Branding'],
   },
   {
     id: 4,
@@ -62,6 +67,7 @@ const featuredProjects = [
     type: 'Product design, Design Systems',
     tools: ['Figma', 'Lovable', 'Cursor', 'Power BI'],
     behanceUrl: null,
+    tags: ['UX/UI'],
   },
   {
     id: 6,
@@ -74,6 +80,7 @@ const featuredProjects = [
     type: 'UX/UI Design',
     tools: ['Figma', 'Photoshop'],
     behanceUrl: null,
+    tags: ['UX/UI'],
   },
   {
     id: 7,
@@ -86,19 +93,45 @@ const featuredProjects = [
     type: 'UX/UI Design',
     tools: ['Figma'],
     behanceUrl: null,
+    tags: ['UX/UI'],
   },
 ]
 
 const PROJECT_ORDER = ['push', 'catalonia', 'bk', 'rank', 'talengo', 'rbi', 'santalucia']
 
+const FILTERS = ['Todo', 'UX/UI', 'SEO', 'GEO', 'Branding', 'Dev']
+
+const projectsById = Object.fromEntries(featuredProjects.map((p) => [p.projectId, p]))
+
 export function FeaturedProjects() {
-  const orderedProjects = PROJECT_ORDER.map((id) =>
-    featuredProjects.find((p) => p.projectId === id)
-  ).filter(Boolean)
+  const [activeFilter, setActiveFilter] = useState<string>('Todo')
+
+  const visibleProjects = activeFilter === 'Todo'
+    ? PROJECT_ORDER
+    : PROJECT_ORDER.filter((id) => projectsById[id]?.tags?.includes(activeFilter))
+
+  const orderedProjects = visibleProjects.map((id) => projectsById[id]).filter(Boolean)
 
   return (
     <section className="bg-transparent">
       <div className="w-full">
+        {/* FILTER PILLS */}
+        <div className="flex gap-3 px-6 pt-6 pb-2">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActiveFilter(f)}
+              className={`text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full transition-all duration-150
+                ${activeFilter === f
+                  ? 'bg-[#222222] text-[#F5F5F5]'
+                  : 'bg-transparent text-[#222222] border border-[#222222] hover:bg-[#222222] hover:text-[#F5F5F5]'
+                }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
         <div className="w-full h-px bg-white/20" />
         {orderedProjects.map((project) => (
           <div key={project.id}>

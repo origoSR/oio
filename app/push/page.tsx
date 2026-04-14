@@ -13,6 +13,7 @@ export default function PushPage() {
       role="Product Design"
       tools="Figma, v0, Cursor, Lovable, Unity, SEMRush"
       year="2024 - Actualidad"
+      websiteUrl="https://www.virtualpush.es/"
     >
       <PushLayout />
     </NewProjectLayout>

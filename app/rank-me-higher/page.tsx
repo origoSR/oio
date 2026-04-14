@@ -13,6 +13,7 @@ export default function RankMeHigherPage() {
       role="UX/UI Design, SEO, GEO"
       tools="Figma, Wordpress, Shopify, SEMRush"
       year="2022 - Actualidad"
+      websiteUrl="https://rankmehigher.co/ux-ui-design/"
     >
       <RankLayout />
     </NewProjectLayout>

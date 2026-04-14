@@ -16,6 +16,7 @@ interface NewProjectLayoutProps {
   tools?: string
   year?: string
   isConfidential?: boolean
+  websiteUrl?: string
 }
 
 export function NewProjectLayout({
@@ -30,6 +31,7 @@ export function NewProjectLayout({
   tools,
   year,
   isConfidential = false,
+  websiteUrl,
 }: NewProjectLayoutProps) {
   const imageRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(imageRef, { once: true, margin: '-10%' })
@@ -94,6 +96,19 @@ export function NewProjectLayout({
             >
               {description}
             </motion.p>
+          )}
+
+          {/* 3b. Website link */}
+          {websiteUrl && (
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest opacity-70 hover:opacity-100 transition-opacity duration-150 mt-3"
+              style={{ color: textColor }}
+            >
+              Visitar web →
+            </a>
           )}
 
           {/* 4. Metadata */}

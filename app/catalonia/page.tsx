@@ -13,6 +13,7 @@ export default function CataloniaPage() {
       role="UX/UI Design, Design Systems"
       tools="Figma, SEMRush"
       year="2023"
+      websiteUrl="https://www.cataloniahotels.com/es"
     >
       <CataloniaLayout />
     </NewProjectLayout>

@@ -21,26 +21,25 @@ export function Hero() {
   const infoStyle: React.CSSProperties = {
     ...baseCorner,
     color: '#FFFFFF',
-    fontSize: isMobile ? '13px' : '12px',
-    fontWeight: 700,
+    fontSize: isMobile ? '13px' : '16px',
+    fontWeight: 800,
     opacity: 0.9,
   }
 
   const nameStyle: React.CSSProperties = {
     ...baseCorner,
     color: '#FFFFFF',
-    fontSize: isMobile ? '13px' : '12px',
-    fontWeight: 700,
+    fontSize: isMobile ? '13px' : '16px',
+    fontWeight: 800,
     opacity: 0.9,
   }
 
   // Links de navegación — con mix-blend-mode difference
   const navLinkStyle: React.CSSProperties = {
     ...baseCorner,
-    mixBlendMode: 'difference',
     color: 'white',
-    fontSize: '16px',
-    fontWeight: 500,
+    fontSize: isMobile ? '20px' : '32px',
+    fontWeight: 900,
     opacity: 1,
     cursor: 'pointer',
     padding: isMobile ? '12px' : pad,
@@ -84,30 +83,52 @@ export function Hero() {
 
       {/* TOP LEFT — decorativo */}
       <div style={{ ...infoStyle, top: 0, left: 0 }}>
-        Product Designer
-        <br />
-        Web · Branding · SEO
+        {isMobile ? (
+          <>
+            Product Designer
+            <br />
+            Web
+            <br />
+            Branding
+            <br />
+            SEO
+          </>
+        ) : (
+          <>
+            Product Designer
+            <br />
+            Web · Branding · SEO
+          </>
+        )}
       </div>
 
       {/* TOP RIGHT — nav */}
       <Link
         href="/work"
         style={{ ...navLinkStyle, top: 0, right: 0 }}
-        className="hover:opacity-60 transition-opacity"
+        className="hover:opacity-50 transition-opacity duration-150"
       >
         Work →
       </Link>
 
       {/* BOTTOM LEFT — decorativo */}
       <div style={{ ...nameStyle, bottom: 0, left: 0 }}>
-        Rodrigo Sánchez
+        {isMobile ? (
+          <>
+            Rodrigo
+            <br />
+            Sánchez
+          </>
+        ) : (
+          <>Rodrigo Sánchez</>
+        )}
       </div>
 
       {/* BOTTOM RIGHT — nav */}
       <Link
         href="/contact"
         style={{ ...navLinkStyle, bottom: 0, right: 0 }}
-        className="hover:opacity-60 transition-opacity"
+        className="hover:opacity-50 transition-opacity duration-150"
       >
         Contact →
       </Link>
