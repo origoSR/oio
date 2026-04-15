@@ -56,8 +56,10 @@ export function Hero() {
         muted
         loop
         playsInline
+        preload="auto"
+        poster="/ocean-bg-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/ocean-bg.mp4"
+        src="/ocean-bg-compressed.mp4"
       />
 
       {/* LOGO ANCHOR — centrado */}
