@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
-import { LoaderOnce } from '@/components/home/LoaderOnce'
 
 export const metadata: Metadata = {
   title: 'Rodrigo Sánchez — Product Designer',
@@ -10,8 +9,9 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' }, // favicon principal
     ],
+    apple: '/icon.png', // si quieres un PNG para Apple, sino bórralo
   },
 
   openGraph: {
@@ -27,7 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className="font-sans antialiased"
       >
-        <LoaderOnce />
         <Navbar />
         {children}
         <Analytics />
