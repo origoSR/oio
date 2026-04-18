@@ -8,10 +8,9 @@ export const metadata: Metadata = {
   description: 'Product Designer specializing in UX/UI, Web, Systems, XR & AI',
 
   icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' }, // favicon principal
-    ],
-    apple: '/icon.png', // si quieres un PNG para Apple, sino bórralo
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    other: [{ rel: 'icon', url: '/icon.svg' }],
   },
 
   openGraph: {
