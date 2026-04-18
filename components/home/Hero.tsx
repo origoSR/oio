@@ -17,10 +17,10 @@ export function Hero() {
     padding: pad,
   }
 
-  // Textos decorativos — blanco puro, sin blend mode
+  // Textos decorativos — oscuro sobre fondo claro
   const infoStyle: React.CSSProperties = {
     ...baseCorner,
-    color: '#FFFFFF',
+    color: '#222222',
     fontSize: isMobile ? '13px' : '16px',
     fontWeight: 800,
     opacity: 0.9,
@@ -28,16 +28,16 @@ export function Hero() {
 
   const nameStyle: React.CSSProperties = {
     ...baseCorner,
-    color: '#FFFFFF',
+    color: '#222222',
     fontSize: isMobile ? '13px' : '16px',
     fontWeight: 800,
     opacity: 0.9,
   }
 
-  // Links de navegación — con mix-blend-mode difference
+  // Links de navegación
   const navLinkStyle: React.CSSProperties = {
     ...baseCorner,
-    color: 'white',
+    color: '#222222',
     fontSize: isMobile ? '20px' : '32px',
     fontWeight: 900,
     opacity: 1,
@@ -49,18 +49,8 @@ export function Hero() {
     <section
       id="hero"
       className="relative h-screen w-full overflow-hidden"
+      style={{ backgroundColor: '#F5F5F5' }}
     >
-      {/* VIDEO BACKGROUND */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/ocean-bg-poster.jpg"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/ocean-bg-compressed.mp4"
-      />
 
       {/* LOGO ANCHOR — centrado */}
       <div

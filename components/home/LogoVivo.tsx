@@ -25,6 +25,15 @@ export function LogoVivo({ size = 220 }: LogoVivoProps) {
     let t = 0
     let animId: number
 
+    // Crear vídeo como textura
+    const video = document.createElement('video')
+    video.src = '/ocean-bg.mp4'
+    video.autoplay = true
+    video.muted = true
+    video.loop = true
+    video.playsInline = true
+    video.play().catch(() => {})
+
     function blobPath(
       t: number,
       baseR: number,
@@ -59,11 +68,28 @@ export function LogoVivo({ size = 220 }: LogoVivoProps) {
       ctx.clearRect(0, 0, W, H)
       t += 0.018
 
-      // Anillo exterior — blanco para que difference funcione igual que el SVG original
+      // Anillo exterior — vídeo como textura, recortado a la forma circular
+      ctx.save()
       ctx.beginPath()
       ctx.arc(cx, cy, outerR, 0, Math.PI * 2)
-      ctx.fillStyle = '#ffffff'
-      ctx.fill()
+      ctx.clip()
+
+      if (video.readyState >= 2) {
+        const vw = video.videoWidth || W
+        const vh = video.videoHeight || H
+        const diameter = outerR * 2
+        const scaleV = Math.max(diameter / vw, diameter / vh)
+        const dw = vw * scaleV
+        const dh = vh * scaleV
+        const dx = cx - outerR - (dw - diameter) / 2
+        const dy = cy - outerR - (dh - diameter) / 2
+        ctx.drawImage(video, dx, dy, dw, dh)
+      } else {
+        // Fallback mientras carga el vídeo
+        ctx.fillStyle = '#1a3a5c'
+        ctx.fill()
+      }
+      ctx.restore()
 
       // Blob interior orgánico
       const innerPts = blobPath(t, innerBaseR, 80, (angle, t) => (
@@ -89,7 +115,11 @@ export function LogoVivo({ size = 220 }: LogoVivoProps) {
 
     frame()
 
-    return () => cancelAnimationFrame(animId)
+    return () => {
+      cancelAnimationFrame(animId)
+      video.pause()
+      video.src = ''
+    }
   }, [size])
 
   return (

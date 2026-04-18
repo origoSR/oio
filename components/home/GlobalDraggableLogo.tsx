@@ -11,7 +11,7 @@ interface GlobalDraggableLogoProps {
 
 export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) {
   const isMobile = useIsMobile()
-  const logoSize = isMobile ? 160 : 220
+  const [logoSize, setLogoSize] = useState(0)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [initialized, setInitialized] = useState(false)
@@ -20,24 +20,40 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
   const [hintDone, setHintDone] = useState(false)
   const hintControls = useAnimationControls()
 
+  // Tamaño relativo al viewport — 43vh/vw en desktop, fijo en móvil
   useEffect(() => {
+    const compute = () => {
+      if (isMobile) {
+        setLogoSize(Math.round(Math.min(window.innerWidth * 0.70, window.innerHeight * 0.70)))
+      } else {
+        setLogoSize(Math.round(Math.min(window.innerHeight * 0.55, window.innerWidth * 0.55)))
+      }
+    }
+    compute()
+    window.addEventListener('resize', compute)
+    return () => window.removeEventListener('resize', compute)
+  }, [isMobile])
+
+  useEffect(() => {
+    // Esperar a que el tamaño esté calculado
+    if (logoSize === 0) return
+
     // En móvil no necesitamos posicionar via anchor — se centra con CSS
     if (isMobile) {
       setInitialized(true)
       return
     }
 
-    const anchor = document.getElementById('draggable-logo-anchor')
     const container = containerRef.current
-    if (!anchor || !container) return
+    if (!container) return
 
-    const rect = anchor.getBoundingClientRect()
+    // Centrar usando dimensiones del container, independiente del anchor
     const containerRect = container.getBoundingClientRect()
-    x.set(rect.left - containerRect.left)
-    y.set(rect.top - containerRect.top)
+    x.set((containerRect.width - logoSize) / 2)
+    y.set((containerRect.height - logoSize) / 2)
     setInitialized(true)
     setIsPositioned(true)
-  }, [containerRef, x, y, isMobile])
+  }, [containerRef, x, y, isMobile, logoSize])
 
   useEffect(() => {
     // Hint bounce solo en desktop
@@ -91,7 +107,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: `${logoSize}px`,
-          mixBlendMode: 'difference',
+          filter: 'drop-shadow(0px 20px 60px rgba(0, 0, 0, 0.18))',
         }}
       >
         <LogoVivo size={logoSize} />
@@ -117,7 +133,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
         left: 0,
         width: `${logoSize}px`,
         touchAction: 'none',
-        mixBlendMode: 'difference',
+        filter: 'drop-shadow(0px 20px 60px rgba(0, 0, 0, 0.18))',
         x,
         y,
       }}
