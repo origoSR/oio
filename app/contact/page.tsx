@@ -23,7 +23,7 @@ export default function ContactPage() {
     <main className="h-screen overflow-hidden bg-[#F5F5F5] flex flex-col md:flex-row items-center">
 
       {/* TEXT — mitad superior en mobile, izquierda en desktop */}
-      <div className="w-full md:w-1/2 flex-1 md:flex-none md:h-full flex flex-col justify-center px-4 lg:px-6">
+      <div className="w-full md:w-1/2 flex-1 md:flex-none md:h-full flex flex-col justify-start pt-28 md:justify-center md:pt-0 px-4 lg:px-6">
 
         <h1
           className="font-manrope font-bold tracking-[-0.02em] leading-none"
