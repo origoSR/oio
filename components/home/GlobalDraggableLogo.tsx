@@ -20,7 +20,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
   const [hintDone, setHintDone] = useState(false)
   const hintControls = useAnimationControls()
 
-  // Tamaño relativo al viewport — 43vh/vw en desktop, fijo en móvil
+  // Tamaño relativo al viewport
   useEffect(() => {
     const compute = () => {
       if (isMobile) {
@@ -34,30 +34,23 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
     return () => window.removeEventListener('resize', compute)
   }, [isMobile])
 
+  // Posición inicial centrada
   useEffect(() => {
-    // Esperar a que el tamaño esté calculado
     if (logoSize === 0) return
-
-    // En móvil no necesitamos posicionar via anchor — se centra con CSS
-    if (isMobile) {
-      setInitialized(true)
-      return
-    }
 
     const container = containerRef.current
     if (!container) return
 
-    // Centrar usando dimensiones del container, independiente del anchor
     const containerRect = container.getBoundingClientRect()
     x.set((containerRect.width - logoSize) / 2)
     y.set((containerRect.height - logoSize) / 2)
     setInitialized(true)
     setIsPositioned(true)
-  }, [containerRef, x, y, isMobile, logoSize])
+  }, [containerRef, x, y, logoSize])
 
+  // Hint bounce al cargar
   useEffect(() => {
-    // Hint bounce solo en desktop
-    if (isMobile || !isPositioned || hintDone) return
+    if (!isPositioned || hintDone) return
 
     let cancelled = false
     let frameOne: number | null = null
@@ -86,7 +79,7 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
       if (frameTwo) cancelAnimationFrame(frameTwo)
       hintControls.stop()
     }
-  }, [hintControls, hintDone, isPositioned, isMobile])
+  }, [hintControls, hintDone, isPositioned])
 
   const cancelHintIfActive = () => {
     if (hintDone) return
@@ -97,31 +90,13 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
 
   if (!initialized) return null
 
-  // MÓVIL — centrado fijo, solo decorativo
-  if (isMobile) {
-    return (
-      <div
-        className="absolute z-[2000] select-none pointer-events-none"
-        style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: `${logoSize}px`,
-          filter: 'drop-shadow(0px 20px 60px rgba(0, 0, 0, 0.18))',
-        }}
-      >
-        <LogoVivo size={logoSize} />
-      </div>
-    )
-  }
-
-  // DESKTOP — draggable con hint bounce
   return (
     <motion.div
       drag
       dragMomentum={false}
-      dragElastic={0.12}
-      whileTap={{ scale: 0.98 }}
+      dragElastic={0.08}
+      dragConstraints={containerRef}
+      whileTap={{ scale: 0.97 }}
       onDragStart={() => {
         setIsDragging(true)
         cancelHintIfActive()
@@ -132,7 +107,6 @@ export function GlobalDraggableLogo({ containerRef }: GlobalDraggableLogoProps) 
         top: 0,
         left: 0,
         width: `${logoSize}px`,
-        touchAction: 'none',
         filter: 'drop-shadow(0px 20px 60px rgba(0, 0, 0, 0.18))',
         x,
         y,
