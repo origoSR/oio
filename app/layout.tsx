@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' }, // favicon principal
+      { url: '/logo.svg', type: 'image/svg+xml' },
     ],
-    apple: '/icon.png', // si quieres un PNG para Apple, sino bórralo
+    apple: '/icon.png',
   },
 
   openGraph: {

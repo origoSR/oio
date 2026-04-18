@@ -14,6 +14,10 @@ export function Loader() {
     const handleEnded = () => setVisible(false)
     video.addEventListener('ended', handleEnded)
 
+    // iOS Safari requiere .play() explícito aunque autoPlay esté presente
+    // Si falla (autoplay bloqueado), ocultamos el loader para no bloquear la web
+    video.play().catch(() => setVisible(false))
+
     // Fallback: si el vídeo no arranca en 5s, ocultamos el loader
     const fallback = setTimeout(() => setVisible(false), 5000)
 
