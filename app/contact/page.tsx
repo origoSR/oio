@@ -38,11 +38,11 @@ export default function ContactPage() {
 
         <div className="flex flex-wrap gap-x-8 gap-y-2 mt-6">
           <a
-            href="mailto:rosanchez92@gmail.com"
+            href="mailto:rodrigo@oi0.es"
             className="font-manrope text-xs uppercase tracking-widest hover:opacity-60 transition-opacity duration-300"
             style={{ color: '#222222' }}
           >
-            rosanchez92@gmail.com
+            rodrigo@oi0.es
           </a>
           <a
             href="https://www.linkedin.com/in/rodrigosanchezromero/"

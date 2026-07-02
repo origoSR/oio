@@ -44,10 +44,10 @@ export function RbiLayout({ backgroundColor = '#AE2825' }: RbiLayoutProps) {
             </p>
 
             <a
-              href="mailto:rodrigo@oi0.co"
+              href="mailto:rodrigo@oi0.es"
               className="inline-block text-[15px] md:text-[17px] font-medium underline decoration-[2px] decoration-[#222222]/40 underline-offset-4 hover:opacity-70 transition-opacity text-[#222222]"
             >
-              rosanchez92@gmail.com
+              rodrigo@oi0.es
             </a>
 
           </div>

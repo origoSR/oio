@@ -44,10 +44,10 @@ export function TalengoLayout({ backgroundColor = '#84BDC9' }: TalengoLayoutProp
             </p>
 
             <a
-              href="mailto:rodrigo@oi0.co"
+              href="mailto:rodrigo@oi0.es"
               className="inline-block text-[15px] md:text-[17px] font-medium underline decoration-[2px] decoration-[#1A1A1A]/40 underline-offset-4 hover:opacity-70 transition-opacity text-[#1A1A1A]"
             >
-              rosanchez92@gmail.com
+              rodrigo@oi0.es
             </a>
 
           </div>

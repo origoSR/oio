@@ -44,10 +44,10 @@ export function BurgerKingLayout({ backgroundColor = '#E7863F' }: BurgerKingLayo
             </p>
 
             <a
-              href="mailto:rodrigo@oi0.co"
+              href="mailto:rodrigo@oi0.es"
               className="inline-block text-[15px] md:text-[17px] font-medium underline decoration-[2px] decoration-black/40 underline-offset-4 hover:opacity-70 transition-opacity"
             >
-              rosanchez92@gmail.com
+              rodrigo@oi0.es
             </a>
 
           </div>
