@@ -97,7 +97,7 @@ const featuredProjects = [
   },
 ]
 
-const PROJECT_ORDER = ['push', 'catalonia', 'bk', 'rank', 'talengo', 'rbi', 'santalucia']
+const PROJECT_ORDER = ['catalonia', 'bk', 'push', 'talengo', 'rbi', 'santalucia', 'rank']
 
 const FILTERS = ['Todo', 'UX/UI', 'SEO', 'GEO', 'Branding', 'Dev']
 

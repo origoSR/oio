@@ -7,7 +7,7 @@ export default function RbiPage() {
       title="RBI"
       backgroundColor="#AE2825"
       textColor="#FFFFFF"
-      hoverImage="/card_rbi.png"
+      hoverImage="/rbi-portada.png"
       description="Rediseño funcional y visual de la app interna de empleados orientado a mejorar accesos, flujos y usabilidad general."
       location="Garaje de Ideas, Madrid"
       role="UX/UI Design"

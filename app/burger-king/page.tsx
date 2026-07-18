@@ -7,7 +7,7 @@ export default function BurgerKingPage() {
       title="Burger King / Popeyes"
       backgroundColor="#E7863F"
       textColor="#FFFFFF"
-      hoverImage="/card_burger.png"
+      hoverImage="/bk-portada-cierre.png"
       description="Rediseño completo del proceso de compra de la app y de los kioskos para optimizar velocidad, consistencia visual y experiencia del usuario."
       location="Garaje de Ideas, Madrid"
       role="UX/UI Design"

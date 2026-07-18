@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { LayoutContainer } from '@/components/ui/layout-container'
 
 interface NewProjectLayoutProps {
   title: string
@@ -137,21 +138,23 @@ export function NewProjectLayout({
         </div>
       </section>
 
-      {/* SECCIÓN 2 — Imagen fullscreen con animación scroll */}
-      <section ref={imageRef} className="relative h-screen w-full overflow-hidden">
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <Image
-            src={hoverImage}
-            alt={`${title} visual`}
-            fill
-            className="object-cover"
-          />
-        </motion.div>
+      {/* SECCIÓN 2 — Imagen con márgenes y animación scroll */}
+      <section ref={imageRef} className="w-full bg-[#F5F5F5]">
+        <LayoutContainer className="pt-10 pb-14 md:pt-16 md:pb-24">
+          <motion.div
+            className="relative w-full aspect-[16/9] max-w-6xl mx-auto"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.05 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image
+              src={hoverImage}
+              alt={`${title} visual`}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </LayoutContainer>
       </section>
 
       {/* SECCIÓN 3 — Contenido específico del proyecto */}
