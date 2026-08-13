@@ -8,7 +8,7 @@ export function BrandOverviewCatalonia() {
             {/* FILA 0: Project overview */}
             <div className="border-b border-[#1A1A1A]">
                 <div className="px-4 lg:px-0 py-6">
-                    <h3 className="text-md font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Project overview
                     </h3>
                 </div>
@@ -24,7 +24,7 @@ export function BrandOverviewCatalonia() {
             >
                 {/* LOGO */}
                 <div className="px-4 lg:px-0 lg:pr-4 py-4">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Logo
                     </h3>
 
@@ -44,7 +44,7 @@ export function BrandOverviewCatalonia() {
 
                 {/* COLORS */}
                 <div className="px-4 py-4 pr-[20px] flex flex-col justify-start">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">Color</h3>
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">Color</h3>
                     <div className="mt-8 grid grid-cols-3 gap-6">
                         <div className="w-16 h-16 rounded-full bg-[#F6D57A]" />
                         <div className="w-16 h-16 rounded-full bg-[#E8C35A]" />
@@ -57,7 +57,7 @@ export function BrandOverviewCatalonia() {
 
                 {/* TYPOGRAPHY */}
                 <div className="px-4 py-4 pr-[0px] flex flex-col justify-start">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Typography & tone of voice
                     </h3>
                     <p className="mt-4 text-[15px] leading-relaxed text-neutral-800 max-w-[90%]">
@@ -82,7 +82,7 @@ export function BrandOverviewCatalonia() {
             >
                 {/* PHOTOSTYLE */}
                 <div className="px-4 lg:px-0 lg:pr-4 py-4">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Photostyle
                     </h3>
 
@@ -98,7 +98,7 @@ export function BrandOverviewCatalonia() {
 
                 {/* COMPONENTES UI */}
                 <div className="px-4 py-4 flex flex-col justify-start border-r border-neutral-700">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Componentes UI
                     </h3>
 
@@ -114,7 +114,7 @@ export function BrandOverviewCatalonia() {
 
                 {/* VERSIÓN MÓVIL */}
                 <div className="px-4 py-4 flex flex-col justify-start">
-                    <h3 className="text-xs font-medium tracking-tight text-neutral-700">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
                         Versión móvil
                     </h3>
 

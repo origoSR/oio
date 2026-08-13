@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { LayoutContainer } from '@/components/ui/layout-container'
+import Footer from '@/components/layout/Footer'
 
 interface NewProjectLayoutProps {
   title: string
@@ -159,6 +160,8 @@ export function NewProjectLayout({
 
       {/* SECCIÓN 3 — Contenido específico del proyecto */}
       {children}
+
+      <Footer />
     </div>
   )
 }
