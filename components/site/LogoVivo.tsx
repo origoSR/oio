@@ -10,6 +10,7 @@ export function LogoVivo() {
       className="w-[120px] h-[120px] lg:w-[200px] lg:h-[200px]"
       style={{ filter: 'drop-shadow(0 24px 48px rgb(0 0 0 / 0.16))' }}
       priority
+      unoptimized
     />
   )
 }
