@@ -21,9 +21,10 @@ function DetailRow({ row, onCanvas }: { row: FichaRow; onCanvas: boolean }) {
 }
 
 export function Ficha({ ficha, nda, onCanvas = false }: { ficha: FichaRow[]; nda: boolean; onCanvas?: boolean }) {
+  const base = nda ? ficha.filter((row) => !(row.label === 'Enlaces' && !row.href)) : ficha
   const rows: FichaRow[] = nda
-    ? [...ficha, { label: 'Confidencial', content: 'Proyecto bajo acuerdo de confidencialidad (NDA): algunos detalles no pueden mostrarse.' }]
-    : ficha
+    ? [...base, { label: 'Confidencial', content: 'Proyecto bajo acuerdo de confidencialidad (NDA): algunos detalles no pueden mostrarse.' }]
+    : base
 
   return (
     <div className="flex flex-col gap-4">
