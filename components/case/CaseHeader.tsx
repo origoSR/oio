@@ -1,24 +1,39 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 import { CaseNavbar } from '@/components/case/CaseNavbar'
 import { Ficha } from '@/components/case/Ficha'
+import { cn } from '@/lib/utils'
 import type { Project } from '@/content/types'
 
 export function CaseHeader({ project }: { project: Project }) {
   const [open, setOpen] = useState(false)
   const [stuck, setStuck] = useState(false)
+  const [navVisible, setNavVisible] = useState(false)
   const [barHeight, setBarHeight] = useState(0)
+  const [navHeight, setNavHeight] = useState(0)
   const sentinelRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
+  const fixedNavRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const panelId = useId()
+  const reducedMotion = useReducedMotion()
+  const transitionClass = reducedMotion ? '' : 'transition-all duration-[250ms] ease-out'
 
+  // Barra pegada: la detecta un sentinel de 1px justo antes.
   useEffect(() => {
     const sentinel = sentinelRef.current
     if (!sentinel) return
-    const observer = new IntersectionObserver(([entry]) => setStuck(!entry.isIntersecting), { threshold: 0 })
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setStuck(!entry.isIntersecting)
+        // Al cruzar el umbral en cualquier direccion, se vuelve al estado inicial: solo la barra.
+        setNavVisible(false)
+      },
+      { threshold: 0 }
+    )
     observer.observe(sentinel)
     return () => observer.disconnect()
   }, [])
@@ -30,6 +45,39 @@ export function CaseHeader({ project }: { project: Project }) {
     observer.observe(bar)
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    const nav = fixedNavRef.current
+    if (!nav) return
+    const observer = new ResizeObserver(([entry]) => setNavHeight(entry.contentRect.height))
+    observer.observe(nav)
+    return () => observer.disconnect()
+  }, [])
+
+  // Con la barra pegada: al bajar se esconde la navbar fija; al subir ~8px vuelve a aparecer.
+  useEffect(() => {
+    if (!stuck) return
+
+    let lastY = window.scrollY
+    let upAccum = 0
+
+    const onScroll = () => {
+      const y = window.scrollY
+      const diff = y - lastY
+      lastY = y
+
+      if (diff > 0.5) {
+        upAccum = 0
+        setNavVisible(false)
+      } else if (diff < -0.5) {
+        upAccum += -diff
+        if (upAccum >= 8) setNavVisible(true)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [stuck])
 
   useEffect(() => {
     if (!open) return
@@ -60,6 +108,9 @@ export function CaseHeader({ project }: { project: Project }) {
     .filter(Boolean)
     .join(' · ')
 
+  const navOut = !(stuck && navVisible)
+  const barTopOffset = stuck && navVisible ? navHeight : 0
+
   return (
     <>
       <header className="bg-project text-on-project">
@@ -72,12 +123,30 @@ export function CaseHeader({ project }: { project: Project }) {
         </div>
       </header>
 
+      {/* Navbar fija: aparece al subir ~8px con la barra pegada, se esconde al bajar. */}
+      <div
+        ref={fixedNavRef}
+        inert={navOut}
+        className={cn(
+          'fixed top-0 left-0 w-full z-40 bg-project text-on-project',
+          navOut ? 'pointer-events-none' : undefined,
+          transitionClass
+        )}
+        style={{ transform: navOut ? 'translateY(-100%)' : 'translateY(0)' }}
+      >
+        <CaseNavbar />
+      </div>
+
       <div ref={sentinelRef} className="h-px" aria-hidden="true" />
 
       <div
         ref={barRef}
         data-stuck={stuck ? '' : undefined}
-        className="sticky top-0 z-40 bg-project text-on-project border-t border-on-project/20 py-4 page-x grid-page"
+        className={cn(
+          'sticky z-30 bg-project text-on-project border-t border-on-project/20 py-4 page-x grid-page',
+          transitionClass
+        )}
+        style={{ top: barTopOffset }}
       >
         <div className="col-span-2 lg:col-span-6">
           <button
@@ -110,7 +179,7 @@ export function CaseHeader({ project }: { project: Project }) {
             ? 'fixed left-0 right-0 z-30 bg-canvas text-fg shadow-media page-x pt-6 pb-8 max-h-[70vh] overflow-y-auto transition-[opacity] duration-300 ease-out'
             : 'bg-project text-on-project page-x pt-6 pb-8 transition-[opacity] duration-300 ease-out'
         }
-        style={stuck ? { top: barHeight } : undefined}
+        style={stuck ? { top: barTopOffset + barHeight } : undefined}
       >
         <Ficha ficha={project.ficha} nda={project.nda} onCanvas={stuck} />
       </div>
