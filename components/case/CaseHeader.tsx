@@ -92,7 +92,8 @@ export function CaseHeader({ project }: { project: Project }) {
           </button>
         </div>
         <div className="col-span-2 lg:col-span-6">
-          <p className="label text-right lg:text-left truncate">
+          <p className="label hidden md:block text-left">{metaLabel}</p>
+          <p className="label md:hidden text-right">
             {stuck ? (project.nda ? `Confidencial · NDA · ${project.sector}` : project.sector) : metaLabel}
           </p>
         </div>
