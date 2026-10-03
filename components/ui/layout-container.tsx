@@ -7,7 +7,7 @@ interface LayoutContainerProps {
 
 export function LayoutContainer({ children, className }: LayoutContainerProps) {
   return (
-    <div className={cn('w-full px-4 lg:px-6', className)}>
+    <div className={cn('mx-auto w-full max-w-page page-x', className)}>
       {children}
     </div>
   )
