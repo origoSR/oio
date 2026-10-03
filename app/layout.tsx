@@ -3,7 +3,7 @@ import { Manrope, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
-import Navbar from '@/components/layout/Navbar'
+import { SiteNavbar } from '@/components/site/SiteNavbar'
 
 const manrope = Manrope({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-manrope', display: 'swap' })
 const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['500'], variable: '--font-geist-mono', display: 'swap' })
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className="antialiased"
       >
-        <Navbar />
+        <SiteNavbar />
         {children}
         <Analytics />
         <SpeedInsights />
