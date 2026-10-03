@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="bg-inverse text-fg-on-inverse section-y page-x">
       <p className="label text-fg-on-inverse-secondary">{site.footer.label}</p>
       <h2 className="text-h1 mt-4">{site.footer.title}</h2>
-      <div className="flex flex-col gap-2 mt-8">
+      <div className="flex flex-col lg:flex-row lg:items-baseline gap-2 lg:gap-8 mt-8">
         <a href={`mailto:${site.email}`} className="text-h3 hover:opacity-70 transition-opacity">
           {site.email}
         </a>
