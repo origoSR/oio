@@ -1,12 +1,16 @@
 import type { Metadata } from 'next'
+import { Manrope, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 
+const manrope = Manrope({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-manrope', display: 'swap' })
+const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['500'], variable: '--font-geist-mono', display: 'swap' })
+
 export const metadata: Metadata = {
-  title: 'Rodrigo Sánchez — Product Designer',
-  description: 'Product Designer specializing in UX/UI, Web, Systems, XR & AI',
+  title: 'Rodrigo Sánchez — Diseñador de producto',
+  description: 'Diseñador de producto especializado en UX/UI, web, sistemas, XR e IA',
 
   icons: {
     icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
@@ -15,7 +19,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Rodrigo Sánchez — Product Designer',
+    title: 'Rodrigo Sánchez — Diseñador de producto',
     description: 'Portfolio de diseño digital, producto, UX/UI, XR y sistemas',
     images: ['/og-image.png'], // si aún no lo tienes, puedo generarlo
   },
@@ -23,9 +27,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es" className={`${manrope.variable} ${geistMono.variable}`}>
       <body
-        className="font-sans antialiased"
+        className="antialiased"
       >
         <Navbar />
         {children}
