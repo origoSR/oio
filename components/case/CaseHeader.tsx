@@ -99,22 +99,20 @@ export function CaseHeader({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className={stuck ? 'relative' : undefined}>
-        <div
-          id={panelId}
-          ref={panelRef}
-          tabIndex={-1}
-          hidden={!open}
-          inert={!open}
-          className={
-            stuck
-              ? 'absolute left-0 right-0 top-0 z-30 bg-project text-on-project page-x pt-6 pb-8 overflow-y-auto transition-[opacity] duration-300 ease-out'
-              : 'bg-project text-on-project page-x pt-6 pb-8 transition-[opacity] duration-300 ease-out'
-          }
-          style={stuck ? { maxHeight: `calc(100dvh - ${barHeight}px)` } : undefined}
-        >
-          <Ficha ficha={project.ficha} nda={project.nda} />
-        </div>
+      <div
+        id={panelId}
+        ref={panelRef}
+        tabIndex={-1}
+        hidden={!open}
+        inert={!open}
+        className={
+          stuck
+            ? 'fixed left-0 right-0 z-30 bg-canvas text-fg shadow-media page-x pt-6 pb-8 max-h-[70vh] overflow-y-auto transition-[opacity] duration-300 ease-out'
+            : 'bg-project text-on-project page-x pt-6 pb-8 transition-[opacity] duration-300 ease-out'
+        }
+        style={stuck ? { top: barHeight } : undefined}
+      >
+        <Ficha ficha={project.ficha} nda={project.nda} onCanvas={stuck} />
       </div>
     </>
   )
