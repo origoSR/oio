@@ -34,7 +34,7 @@ export function TalengoLayout({ backgroundColor = '#84BDC9' }: TalengoLayoutProp
               />
             </div>
 
-            <h3 className="font-manrope font-bold text-[#1A1A1A] text-[34px] md:text-[46px] leading-[1.05] tracking-tight mb-6">
+            <h3 className="font-bold text-[#1A1A1A] text-[34px] md:text-[46px] leading-[1.05] tracking-tight mb-6">
               Parte de este proyecto no puede mostrarse.
             </h3>
 

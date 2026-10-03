@@ -14,7 +14,7 @@ export function ProjectCTA({ label, href, className }: ProjectCTAProps) {
       target="_blank"
       rel="noreferrer"
       className={cn(
-        'flex items-center gap-2 uppercase text-[10px] lg:text-[12px] tracking-[0.18em] font-medium font-manrope',
+        'flex items-center gap-2 uppercase text-[10px] lg:text-[12px] tracking-[0.18em] font-medium',
         'transition-colors duration-300 hover:opacity-80',
         className
       )}

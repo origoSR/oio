@@ -26,20 +26,20 @@ export default function ContactPage() {
       <div className="w-full md:w-1/2 flex-1 md:flex-none md:h-full flex flex-col justify-start pt-28 md:justify-center md:pt-0 px-4 lg:px-6">
 
         <h1
-          className="font-manrope font-bold tracking-[-0.02em] leading-none"
+          className="font-bold tracking-[-0.02em] leading-none"
           style={{ fontSize: 'clamp(60px, 10vw, 140px)', color: '#222222' }}
         >
           Hablemos.
         </h1>
 
-        <p className="font-manrope text-lg lg:text-xl font-normal leading-snug mt-6" style={{ color: '#222222', opacity: 0.6, maxWidth: '380px' }}>
+        <p className="text-lg lg:text-xl font-normal leading-snug mt-6" style={{ color: '#222222', opacity: 0.6, maxWidth: '380px' }}>
           Cuéntame tu proyecto y construimos algo que funcione.
         </p>
 
         <div className="flex flex-wrap gap-x-8 gap-y-2 mt-6">
           <a
             href="mailto:rodrigo@oi0.es"
-            className="font-manrope text-xs uppercase tracking-widest hover:opacity-60 transition-opacity duration-300"
+            className="text-xs uppercase tracking-widest hover:opacity-60 transition-opacity duration-300"
             style={{ color: '#222222' }}
           >
             rodrigo@oi0.es
@@ -48,14 +48,14 @@ export default function ContactPage() {
             href="https://www.linkedin.com/in/rodrigosanchezromero/"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-manrope text-xs uppercase tracking-widest hover:opacity-60 transition-opacity duration-300"
+            className="text-xs uppercase tracking-widest hover:opacity-60 transition-opacity duration-300"
             style={{ color: '#222222' }}
           >
             LinkedIn
           </a>
         </div>
 
-        <p className="font-manrope text-xs mt-6" style={{ color: '#888888' }}>
+        <p className="text-xs mt-6" style={{ color: '#888888' }}>
           © 2025 Rodrigo Sánchez
         </p>
 

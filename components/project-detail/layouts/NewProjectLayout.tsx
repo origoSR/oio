@@ -75,7 +75,7 @@ export function NewProjectLayout({
 
           {/* 2. Título */}
           <motion.h1
-            className="font-manrope font-bold leading-none"
+            className="font-bold leading-none"
             style={{
               color: textColor,
               fontSize: 'clamp(56px, 12vw, 260px)',

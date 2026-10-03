@@ -33,7 +33,7 @@ export function RbiLayout({ backgroundColor = '#AE2825' }: RbiLayoutProps) {
       <section className="w-full bg-[#AE2825] border-t border-white/20 pt-10 md:pt-24 pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h2 className="font-manrope font-bold text-white leading-[1.05] text-[40px] md:text-[56px] max-w-3xl mb-8 md:mb-12">
+            <h2 className="font-bold text-white leading-[1.05] text-[40px] md:text-[56px] max-w-3xl mb-8 md:mb-12">
               Contexto y reto
             </h2>
             <p className="text-white/80 text-[18px] leading-[1.5] max-w-2xl mb-6 md:mb-8">
@@ -72,7 +72,7 @@ export function RbiLayout({ backgroundColor = '#AE2825' }: RbiLayoutProps) {
       <section className="w-full bg-inherit pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h3 className="font-manrope font-bold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
+            <h3 className="font-bold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
               Rol y proceso
             </h3>
             <p className="text-black/70 text-[18px] leading-[1.5] max-w-2xl">
@@ -86,7 +86,7 @@ export function RbiLayout({ backgroundColor = '#AE2825' }: RbiLayoutProps) {
       <section className="w-full bg-inherit pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h3 className="font-manrope font-bold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
+            <h3 className="font-bold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
               Resultado
             </h3>
             <p className="text-black/70 text-[18px] leading-[1.5] max-w-2xl">

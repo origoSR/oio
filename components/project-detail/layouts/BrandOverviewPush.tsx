@@ -8,7 +8,7 @@ export function BrandOverviewPush() {
             {/* FILA 0: Project overview */}
             <div className="border-b border-[#1A1A1A]">
                 <div className="px-4 lg:px-0 py-6">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">
                         Project overview
                     </h3>
                 </div>
@@ -24,7 +24,7 @@ export function BrandOverviewPush() {
             >
                 {/* LOGO */}
                 <div className="px-4 lg:px-0 lg:pr-4 py-4">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">Logo</h3>
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">Logo</h3>
                     <p className="mt-4 text-[15px] leading-relaxed text-neutral-800">
                         Hoja como símbolo principal, adaptada a la
                         identidad fluorescente y minimalista.
@@ -40,7 +40,7 @@ export function BrandOverviewPush() {
 
                 {/* COLORS */}
                 <div className="px-4 py-4 pr-[20px] flex flex-col justify-start">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">Color</h3>
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">Color</h3>
                     <div className="mt-8 grid grid-cols-3 gap-6">
                         <div className="w-16 h-16 rounded-full bg-[#6B8F4E]" />
                         <div className="w-16 h-16 rounded-full bg-[#93CC5A]" />
@@ -53,14 +53,14 @@ export function BrandOverviewPush() {
 
                 {/* TYPOGRAPHY */}
                 <div className="px-4 py-4 pr-[0px] flex flex-col justify-start">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">
                         Typography & tone of voice
                     </h3>
                     <p className="mt-4 text-[15px] leading-relaxed text-neutral-800 max-w-[90%]">
                         Uso principal de Montserrat para UI y
                         sitio web.
                     </p>
-                    <span className="mt-10 text-[80px] leading-none font-montserrat text-neutral-900">
+                    <span className="mt-10 text-[80px] leading-none text-neutral-900">
                         Aa
                     </span>
                 </div>
@@ -79,7 +79,7 @@ export function BrandOverviewPush() {
             >
                 {/* PHOTOSTYLE */}
                 <div className="px-4 lg:px-0 lg:pr-4 py-4">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">
                         Photostyle
                     </h3>
 
@@ -95,7 +95,7 @@ export function BrandOverviewPush() {
 
                 {/* COMPONENTES UI */}
                 <div className="px-4 py-4 flex flex-col justify-start border-r border-neutral-700">
-                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50 font-manrope">
+                    <h3 className="text-xs uppercase tracking-[0.15em] text-black/50">
                         Componentes UI
                     </h3>
 

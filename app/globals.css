@@ -1,154 +1,259 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Oooh+Baby&display=swap');
-
-:root {
-  color-scheme: light;
-}
+/* ==========================================================================
+   oi0.es — Fundamentos v1.1 (oct 2026) · + on-project-secondary, titulares 400
+   Fuente única de tokens. Espejo 1:1 de las variables de Figma
+   (Primitivos · Color · Proyecto · Espaciado · Layout · Radio · Tipografía · Movimiento).
+   Regla: nada de valores arbitrarios (`text-[17px]`, `#222`, `max-w-[672px]`…) fuera de este archivo.
+   ========================================================================== */
 
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* --------------------------------------------------------------------------
+   1. Primitivos (no se usan directamente en componentes)
+   -------------------------------------------------------------------------- */
+:root {
+  --neutral-0: #ffffff;
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #6b6b6b;
+  --neutral-600: #525252;
+  --neutral-900: #111111;
+
+  --push-accent: #835ae3;       /* antes #865DE5: 4,46:1 → 4,63:1 con blanco */
+  --push-tint: #f3effc;
+  --catalonia-accent: #f6d57a;
+  --catalonia-tint: #fefbf2;
+  --rank-accent: #f1965b;
+  --rank-tint: #fef4ef;
+  --talengo-accent: #84bdc9;
+  --talengo-tint: #f3f8fa;
+  --bk-accent: #e7863f;
+  --bk-tint: #fdf3ec;
+  --rbi-accent: #ae2825;
+  --rbi-tint: #f7eae9;
+  --santalucia-accent: #f29e39;
+  --santalucia-tint: #fef5eb;
+
+  /* Texto secundario sobre acento: SOLO ≥ 24 px (≥ 3:1) */
+  --neutral-on-accent-2: #676767;
+  --push-on-accent-2: #e0d6f8;
+  --catalonia-on-accent-2: #817144;
+  --rank-on-accent-2: #714a31;
+  --talengo-on-accent-2: #455e64;
+  --bk-on-accent-2: #694124;
+  --rbi-on-accent-2: #dfa9a8;
+  --santalucia-on-accent-2: #765023;
+
+
+  /* Proyecto · modo Neutral (por defecto) */
+  --project-accent: var(--neutral-900);
+  --project-tint: var(--neutral-50);
+  --project-on-accent: var(--neutral-0);
+  --project-on-accent-2: var(--neutral-on-accent-2);
+
+  /* Layout · modo Desktop se activa en lg; base = Mobile */
+  --margin: 20px;
+  --gutter: 16px;
+  --section-y: 80px;
+  --block-gap: 48px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --margin: 64px;
+    --gutter: 32px;
+    --section-y: 128px;
+    --block-gap: 64px;
+  }
+}
+
+/* Proyecto · modos (equivalen a los modos de la colección "Proyecto" en Figma).
+   Se aplican con <main data-project="push"> en el layout de cada proyecto. */
+[data-project="push"]       { --project-accent: var(--push-accent);       --project-tint: var(--push-tint);       --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--push-on-accent-2); }
+[data-project="catalonia"]  { --project-accent: var(--catalonia-accent);  --project-tint: var(--catalonia-tint);  --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--catalonia-on-accent-2); }
+[data-project="rank"]       { --project-accent: var(--rank-accent);       --project-tint: var(--rank-tint);       --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--rank-on-accent-2); }
+[data-project="talengo"]    { --project-accent: var(--talengo-accent);    --project-tint: var(--talengo-tint);    --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--talengo-on-accent-2); }
+[data-project="bk"]         { --project-accent: var(--bk-accent);         --project-tint: var(--bk-tint);         --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--bk-on-accent-2); }
+[data-project="rbi"]        { --project-accent: var(--rbi-accent);        --project-tint: var(--rbi-tint);        --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--rbi-on-accent-2); }
+[data-project="santalucia"] { --project-accent: var(--santalucia-accent); --project-tint: var(--santalucia-tint); --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--santalucia-on-accent-2); }
+
+/* --------------------------------------------------------------------------
+   2. @theme — lo que Tailwind convierte en utilidades
+   -------------------------------------------------------------------------- */
+@theme {
+  /* Reset de las escalas por defecto: solo existe lo nuestro */
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --font-*: initial;
+
+  /* Color semántico (Figma: Color/*) → bg-canvas, text-fg, border-line… */
+  --color-canvas: var(--neutral-100);
+  --color-surface: var(--neutral-0);
+  --color-subtle: var(--neutral-50);
+  --color-inverse: var(--neutral-900);
+
+  --color-fg: var(--neutral-900);                 /* text/primary   · 17,3:1 */
+  --color-fg-secondary: var(--neutral-600);       /* text/secondary ·  7,2:1 */
+  --color-fg-tertiary: var(--neutral-500);        /* text/tertiary  ·  4,9:1 */
+  --color-fg-on-inverse: var(--neutral-0);
+  --color-fg-on-inverse-secondary: var(--neutral-400);
+
+  --color-line-subtle: var(--neutral-200);
+  --color-line: var(--neutral-300);
+  --color-line-strong: var(--neutral-900);
+  --color-focus: var(--neutral-900);
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: var(--neutral-0);
+
+  /* Puente shadcn/ui (button, dialog, input, sheet, toast…). Solo para esos componentes. */
+  --color-background: var(--neutral-100);
+  --color-foreground: var(--neutral-900);
+  --color-primary: var(--neutral-900);
+  --color-primary-foreground: var(--neutral-0);
+  --color-secondary: var(--neutral-200);
+  --color-secondary-foreground: var(--neutral-900);
+  --color-muted: var(--neutral-200);
+  --color-muted-foreground: var(--neutral-600);
+  --color-accent: var(--neutral-200);
+  --color-accent-foreground: var(--neutral-900);
+  --color-border: var(--neutral-300);
+  --color-input: var(--neutral-300);
+  --color-ring: var(--neutral-900);
+  --color-card: var(--neutral-0);
+  --color-card-foreground: var(--neutral-900);
+  --color-popover: var(--neutral-0);
+  --color-popover-foreground: var(--neutral-900);
+  --color-destructive: #b42318;
+
+  /* Tipografía — next/font inyecta --font-manrope y --font-geist-mono */
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Escala: 8 pasos + display. Tamaño móvil por defecto; el de escritorio en lg: (ver @layer base) */
+  --text-label: 0.75rem;     --text-label--line-height: 1.4;  --text-label--letter-spacing: 0.08em;
+  --text-small: 0.875rem;    --text-small--line-height: 1.5;
+  --text-body: 1rem;         --text-body--line-height: 1.6;
+  --text-lead: var(--fs-lead);   --text-lead--line-height: 1.5;
+  --text-h4: var(--fs-h4);   --text-h4--line-height: 1.25; --text-h4--font-weight: 600; --text-h4--letter-spacing: -0.01em;
+  --text-h3: var(--fs-h3);   --text-h3--line-height: 1.15; --text-h3--font-weight: 600; --text-h3--letter-spacing: -0.015em;
+  --text-h2: var(--fs-h2);   --text-h2--line-height: 1.1;  --text-h2--font-weight: 400; --text-h2--letter-spacing: -0.02em;
+  --text-h1: var(--fs-h1);   --text-h1--line-height: 1.05; --text-h1--font-weight: 400; --text-h1--letter-spacing: -0.025em;
+  --text-display: clamp(3.5rem, 10vw, 9rem); --text-display--line-height: 0.95; --text-display--letter-spacing: -0.03em; --text-display--font-weight: 400;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  /* Espaciado base 4: p-4 = 16px, gap-8 = 32px… (escala de Tailwind 4 ya es base 4) */
+  --spacing: 0.25rem;
+
+  /* Anchos de retícula → max-w-text, max-w-media-m… */
+  --container-text: 40rem;      /* 640  · 6 col */
+  --container-media-m: 54rem;   /* 864  · 8 col */
+  --container-media-l: 68rem;   /* 1088 · 10 col */
+  --container-page: 82rem;      /* 1312 · 12 col (no "full": max-w-full ya es 100%) */
+  --container-bleed: 90rem;     /* 1440 */
+
+  /* Radios */
+  --radius-none: 0;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-full: 9999px;
+
+  /* Elevación: una sola */
+  --shadow-media: 0 24px 48px -12px rgb(0 0 0 / 0.08);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 300ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 :root {
-  --background: oklch(0.96 0 0);
-  --foreground: oklch(0.11 0 0);
-
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-
-  --primary: oklch(0.78 0.10 270);
-  --primary-foreground: oklch(0.98 0 0);
-
-  --secondary: oklch(0.22 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-
-  --muted: oklch(0.55 0 0);
-  --muted-foreground: oklch(0.70 0 0);
-
---accent: oklch(0.78 0.12 50);     
---accent-foreground: oklch(0.18 0 0);
-
-  --border: oklch(0.22 0 0);
-  --input: oklch(0.22 0 0);
-  --ring: oklch(0.78 0.10 270);
-
-  --radius: 0.5rem;
-
-  --sidebar: oklch(0.90 0 0);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.20 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.95 0 0);
-  --sidebar-accent-foreground: oklch(0.20 0 0);
-  --sidebar-border: oklch(0.90 0 0);
-  --sidebar-ring: oklch(0.70 0 0);
+  --fs-lead: 1.125rem;  /* 18 */
+  --fs-h4: 1.375rem;    /* 22 */
+  --fs-h3: 1.75rem;     /* 28 */
+  --fs-h2: 2.25rem;     /* 36 */
+  --fs-h1: 3rem;        /* 48 */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+}
+@media (min-width: 1024px) {
+  :root {
+    --fs-lead: 1.25rem; /* 20 */
+    --fs-h4: 1.5rem;    /* 24 */
+    --fs-h3: 2rem;      /* 32 */
+    --fs-h2: 3rem;      /* 48 */
+    --fs-h1: 4.5rem;    /* 72 */
+  }
 }
 
-.dark {
-  --background: oklch(0.16 0 0);
-  --foreground: oklch(0.95 0 0);
-}
+/* Utilidades de ritmo y retícula */
+@utility section-y   { padding-block: var(--section-y); }
+@utility block-gap   { gap: var(--block-gap); }
+@utility page-x      { padding-inline: var(--margin); }
+@utility grid-page   { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gutter);
+                       @media (min-width: 1024px) { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+@utility label       { font-family: var(--font-mono); font-size: var(--text-label); line-height: 1.4;
+                       letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
 
+/* Proyecto: `inline` para que la utilidad lea la variable en el propio elemento
+   (si no, se resolvería en :root y data-project no tendría efecto) → bg-project, text-on-project… */
 @theme inline {
-  --font-sans: "Space Grotesk", "Inter", "Geist", system-ui, sans-serif;
-  --font-manrope: "Manrope", sans-serif;
-  --font-logo: "Oooh Baby", cursive;
-  --font-mono: "Geist Mono", monospace;
-
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-
-  --radius-lg: var(--radius);
+  --color-project: var(--project-accent);
+  --color-project-tint: var(--project-tint);
+  --color-on-project: var(--project-on-accent);
+  --color-on-project-secondary: var(--project-on-accent-2); /* solo ≥ 24 px */
 }
 
+/* --------------------------------------------------------------------------
+   3. Base
+   -------------------------------------------------------------------------- */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
     font-family: var(--font-sans);
-    letter-spacing: -0.015em;
-    background-color: #F5F5F5;
-  }
-
-  body {
-    background-color: #F5F5F5;
-    color: #111111;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    min-height: 100vh;
+    scroll-behavior: smooth;
   }
+  body { min-height: 100dvh; font-size: var(--text-body); line-height: 1.6; }
 
-  h1, h2, h3 {
-    font-family: var(--font-manrope), sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #111111;
-}
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 
-  p, span, a, button, li {
-    font-family: var(--font-manrope), sans-serif;
-    font-weight: 400;
-    color: #111111;
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
-}
+  [data-project] :focus-visible { outline-color: var(--project-on-accent); }
 
-@layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .font-manrope {
-    font-family: var(--font-manrope), sans-serif;
-  }
-
-  .project-detail-enter {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-
-  .project-detail-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .project-detail-exit {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .project-detail-exit-active {
-    opacity: 0;
-    transform: translateY(100%);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-@keyframes topticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-topticker {
-  animation: topticker 15s linear infinite;
-}
-
-.project-card-hover:hover {
-  background-color: var(--hover-bg);
+/* --------------------------------------------------------------------------
+   4. Utilidades heredadas que siguen en uso
+   (project-detail-enter*, animate-topticker y project-card-hover no se usan → eliminadas.
+    .font-manrope y .font-montserrat se eliminan: borrar la clase en los 57 usos, Manrope ya es font-sans.)
+   -------------------------------------------------------------------------- */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
 }

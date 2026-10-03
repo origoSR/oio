@@ -89,7 +89,7 @@ export function ProjectCard({
         {/* FILA PRINCIPAL: Título + VER → */}
         <div className="flex items-start justify-between gap-4">
           <h3 className={cn(
-            'font-manrope font-bold tracking-[-0.02em] leading-tight transition-colors duration-500',
+            'font-bold tracking-[-0.02em] leading-tight transition-colors duration-500',
             'text-2xl lg:text-5xl',
             isHovered ? 'text-white' : 'text-[#222222]'
           )}>
@@ -97,7 +97,7 @@ export function ProjectCard({
           </h3>
 
           <span className={cn(
-            'font-manrope font-bold uppercase tracking-widest text-sm whitespace-nowrap',
+            'font-bold uppercase tracking-widest text-sm whitespace-nowrap',
             'pt-1 lg:pt-2 flex-shrink-0 transition-colors duration-500',
             isHovered ? 'text-white' : 'text-[#222222]'
           )}>
@@ -108,7 +108,7 @@ export function ProjectCard({
         {/* DESCRIPCIÓN */}
         {description && (
           <p className={cn(
-            'font-manrope text-sm lg:text-lg font-normal leading-snug line-clamp-1 transition-colors duration-500 max-w-2xl',
+            'text-sm lg:text-lg font-normal leading-snug line-clamp-1 transition-colors duration-500 max-w-2xl',
             isHovered ? 'text-white/80' : 'text-neutral-500'
           )}>
             {description}
@@ -118,7 +118,7 @@ export function ProjectCard({
         {/* METADATA — siempre visible en móvil, solo en hover en desktop */}
         <p
           className={cn(
-            'font-manrope uppercase tracking-[0.18em] leading-none transition-all duration-[400ms]',
+            'uppercase tracking-[0.18em] leading-none transition-all duration-[400ms]',
             isHovered
               ? 'opacity-100 translate-y-0 text-white/70'
               : 'opacity-100 md:opacity-0 md:translate-y-1 text-neutral-400'

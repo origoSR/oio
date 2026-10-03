@@ -31,7 +31,7 @@ export function WorkTitle() {
       <LayoutContainer>
         <h2
           className={cn(
-            "font-manrope font-bold tracking-[-0.02em] text-[#111111]",
+            "font-bold tracking-[-0.02em] text-[#111111]",
             "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[112px]",
             "mt-28 md:mt-32 lg:mt-[140px] mb-8 sm:mb-10 md:mb-12",
             "transition-all duration-1000 ease-out",

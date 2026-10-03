@@ -48,7 +48,7 @@ function BrowserFrame({
           <span className="w-3 h-3 rounded-full bg-[#D9D9D9]" />
         </div>
         <div className="flex-1 mx-4 bg-white/60 rounded-md px-3 py-1 text-center">
-          <span className="text-sm font-medium text-black/60 font-manrope">
+          <span className="text-sm font-medium text-black/60">
             cataloniahotels.com
           </span>
         </div>
@@ -101,7 +101,7 @@ export function CataloniaLayout() {
       <section className="w-full bg-[#F5F5F5] border-t border-[#1A1A1A] pt-10 md:pt-24 pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h2 className="font-manrope font-bold text-black leading-[1.05] text-[40px] md:text-[56px] max-w-3xl mb-8 md:mb-12">
+            <h2 className="font-bold text-black leading-[1.05] text-[40px] md:text-[56px] max-w-3xl mb-8 md:mb-12">
               Diseñando experiencias digitales que elevan la marca.
             </h2>
             <p className="text-black/70 text-[18px] leading-[1.5] max-w-2xl mb-6 md:mb-8">
@@ -126,7 +126,7 @@ export function CataloniaLayout() {
       <section className="w-full bg-[#F6D57A] pt-10 md:pt-16 pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h3 className="font-manrope font-semibold text-[#2C3E50] leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
+            <h3 className="font-semibold text-[#2C3E50] leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
               Contexto y reto
             </h3>
             <p className="text-[#2C3E50]/80 text-[18px] leading-[1.5] max-w-2xl">
@@ -162,7 +162,7 @@ export function CataloniaLayout() {
       <section className="w-full bg-white pb-10 md:pb-16">
         <FadeInSection>
           <LayoutContainer>
-            <h3 className="font-manrope font-semibold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
+            <h3 className="font-semibold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
               Rol y proceso
             </h3>
             <p className="text-black/70 text-[18px] leading-[1.5] max-w-2xl">
@@ -198,7 +198,7 @@ export function CataloniaLayout() {
       <section className="w-full bg-[#FBF8F2] pb-14 md:pb-24">
         <FadeInSection>
           <LayoutContainer>
-            <h3 className="font-manrope font-semibold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
+            <h3 className="font-semibold text-black leading-[1.1] text-[28px] md:text-[36px] max-w-3xl mb-6">
               Resultado
             </h3>
             <p className="text-black/70 text-[18px] leading-[1.5] max-w-2xl">
