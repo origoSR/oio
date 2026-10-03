@@ -6,6 +6,19 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      { source: '/work', destination: '/proyectos', permanent: true },
+      { source: '/contact', destination: '/contacto', permanent: true },
+      { source: '/talengo', destination: '/proyectos', permanent: true },
+      { source: '/catalonia', destination: '/proyectos/catalonia', permanent: true },
+      { source: '/burger-king', destination: '/proyectos/burger-king', permanent: true },
+      { source: '/push', destination: '/proyectos/push', permanent: true },
+      { source: '/rbi', destination: '/proyectos/rbi', permanent: true },
+      { source: '/santalucia', destination: '/proyectos/santalucia', permanent: true },
+      { source: '/rank-me-higher', destination: '/proyectos/rank-me-higher', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
