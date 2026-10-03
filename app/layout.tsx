@@ -9,6 +9,7 @@ const manrope = Manrope({ subsets: ['latin'], weight: ['400', '600'], variable: 
 const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['500'], variable: '--font-geist-mono', display: 'swap' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://oi0.es'),
   title: 'Rodrigo Sánchez — Diseñador de producto',
   description: 'Diseñador de producto especializado en UX/UI, web, sistemas, XR e IA',
 
