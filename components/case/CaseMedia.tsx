@@ -47,7 +47,7 @@ export function CaseMedia({ item }: { item: MediaItem }) {
   } else if (layout === 'phones') {
     body = (
       <div className="page-x bg-subtle rounded-md py-24 px-8">
-        <div className="flex gap-[var(--gutter)] justify-center overflow-x-auto scrollbar-hide snap-x lg:overflow-visible">
+        <div className="flex gap-4 lg:gap-8 justify-center overflow-x-auto scrollbar-hide snap-x lg:overflow-visible">
           {images.map((img, i) => (
             <div key={i} className="shrink-0 w-[70vw] lg:w-[280px] snap-center">
               <MediaImage img={img} sizes={sizesFor.phones} className="rounded-md" />
@@ -58,7 +58,7 @@ export function CaseMedia({ item }: { item: MediaItem }) {
     )
   } else if (layout === 'pair') {
     body = (
-      <div className="page-x grid grid-cols-1 lg:grid-cols-2 gap-[var(--gutter)]">
+      <div className="page-x grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
         {images.map((img, i) => (
           <MediaImage key={i} img={img} sizes={sizesFor.pair} className="rounded-md aspect-[4/5]" />
         ))}

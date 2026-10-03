@@ -64,7 +64,7 @@ export function CaseHeader({ project }: { project: Project }) {
     <>
       <header className="bg-project text-on-project">
         <CaseNavbar />
-        <div className="page-x" style={{ paddingTop: 'var(--block-gap)', paddingBottom: 'var(--block-gap)' }}>
+        <div className="page-x pt-12 lg:pt-16 pb-12 lg:pb-16">
           <h1 className="max-w-page">
             <span className="block text-h1 text-on-project">{project.title}</span>
             <span className="block text-h1 text-on-project-secondary">{project.subtitle}</span>

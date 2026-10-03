@@ -28,7 +28,7 @@ export default function ContactoPage() {
         <CopyEmailButton email={site.email} copyLabel={site.contact.copyLabel} copiedLabel={site.contact.copiedLabel} />
       </section>
 
-      <section className="page-x section-y grid grid-cols-1 lg:grid-cols-3 gap-x-[var(--gutter)] gap-y-12">
+      <section className="page-x section-y grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12">
         {site.contact.columns.map((col) => (
           <div key={col.label} className="flex flex-col gap-2">
             <p className="label text-fg-secondary mb-2">{col.label}</p>

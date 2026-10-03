@@ -54,7 +54,7 @@ export default function HomePage() {
             {site.home.projectsLink.label}
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[var(--gutter)] gap-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 lg:gap-x-8 gap-y-16">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
@@ -64,7 +64,7 @@ export default function HomePage() {
       <section className="bg-surface section-y page-x">
         <p className="label text-fg-secondary">{site.home.how.label}</p>
         <h2 className="text-h2 max-w-media-l mt-4">{site.home.how.title}</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-[var(--gutter)] gap-y-12 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 mt-12">
           {site.home.how.steps.map((step) => (
             <div key={step.n} className="border-t border-line-strong pt-4 flex flex-col gap-2">
               <p className="label text-fg-tertiary">{step.n}</p>
