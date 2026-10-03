@@ -11,12 +11,16 @@ interface FadeInSectionProps {
 export function FadeInSection({ children, className }: FadeInSectionProps) {
   const reducedMotion = useReducedMotion()
 
+  if (reducedMotion) {
+    return <div className={className}>{children}</div>
+  }
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: reducedMotion ? 0 : 24 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-10%' }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
