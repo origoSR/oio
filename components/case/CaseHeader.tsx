@@ -167,7 +167,7 @@ export function CaseHeader({ project }: { project: Project }) {
             onClick={() => setOpen((v) => !v)}
             className="text-body font-semibold hover:opacity-70 transition-opacity"
           >
-            {open ? '− Cerrar ficha' : '+ Ficha del proyecto'}
+            {open ? '− Ficha del proyecto' : '+ Ficha del proyecto'}
           </button>
         </div>
         <div className="col-span-2 lg:col-span-6">
