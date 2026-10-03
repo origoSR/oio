@@ -1,9 +1,8 @@
-import { cn } from '@/lib/utils'
 import type { FichaRow } from '@/content/types'
 
-function DetailRow({ row, onCanvas }: { row: FichaRow; onCanvas: boolean }) {
+function DetailRow({ row }: { row: FichaRow }) {
   return (
-    <div className={cn('grid-page border-t pt-4', onCanvas ? 'border-line' : 'border-on-project/20')}>
+    <div className="grid-page border-t border-on-project/20 pt-4">
       <div className="col-span-4 lg:col-span-4">
         <p className="text-body font-semibold">{row.label}</p>
       </div>
@@ -20,7 +19,7 @@ function DetailRow({ row, onCanvas }: { row: FichaRow; onCanvas: boolean }) {
   )
 }
 
-export function Ficha({ ficha, nda, onCanvas = false }: { ficha: FichaRow[]; nda: boolean; onCanvas?: boolean }) {
+export function Ficha({ ficha, nda }: { ficha: FichaRow[]; nda: boolean }) {
   const base = nda ? ficha.filter((row) => !(row.label === 'Enlaces' && !row.href)) : ficha
   const rows: FichaRow[] = nda
     ? [...base, { label: 'Confidencial', content: 'Proyecto bajo acuerdo de confidencialidad (NDA): algunos detalles no pueden mostrarse.' }]
@@ -29,7 +28,7 @@ export function Ficha({ ficha, nda, onCanvas = false }: { ficha: FichaRow[]; nda
   return (
     <div className="flex flex-col gap-4">
       {rows.map((row, i) => (
-        <DetailRow key={i} row={row} onCanvas={onCanvas} />
+        <DetailRow key={i} row={row} />
       ))}
     </div>
   )

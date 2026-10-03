@@ -13,10 +13,12 @@ export function CaseHeader({ project }: { project: Project }) {
   const [navVisible, setNavVisible] = useState(false)
   const [barHeight, setBarHeight] = useState(0)
   const [navHeight, setNavHeight] = useState(0)
+  const [contentHeight, setContentHeight] = useState(0)
   const sentinelRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const fixedNavRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const panelId = useId()
   const reducedMotion = useReducedMotion()
@@ -54,6 +56,14 @@ export function CaseHeader({ project }: { project: Project }) {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const content = contentRef.current
+    if (!content) return
+    const observer = new ResizeObserver(([entry]) => setContentHeight(entry.contentRect.height))
+    observer.observe(content)
+    return () => observer.disconnect()
+  }, [])
+
   // Con la barra pegada: al bajar se esconde la navbar fija; al subir ~8px vuelve a aparecer.
   useEffect(() => {
     if (!stuck) return
@@ -85,7 +95,7 @@ export function CaseHeader({ project }: { project: Project }) {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setOpen(false)
-        buttonRef.current?.focus()
+        buttonRef.current?.focus({ preventScroll: true })
       }
     }
     const onPointerDown = (e: PointerEvent) => {
@@ -96,7 +106,7 @@ export function CaseHeader({ project }: { project: Project }) {
 
     document.addEventListener('keydown', onKeyDown)
     document.addEventListener('pointerdown', onPointerDown)
-    panelRef.current?.focus()
+    panelRef.current?.focus({ preventScroll: true })
 
     return () => {
       document.removeEventListener('keydown', onKeyDown)
@@ -172,16 +182,21 @@ export function CaseHeader({ project }: { project: Project }) {
         id={panelId}
         ref={panelRef}
         tabIndex={-1}
-        hidden={!open}
         inert={!open}
-        className={
-          stuck
-            ? 'fixed left-0 right-0 z-30 bg-canvas text-fg shadow-media page-x pt-6 pb-8 max-h-[70vh] overflow-y-auto transition-[opacity] duration-300 ease-out'
-            : 'bg-project text-on-project page-x pt-6 pb-8 transition-[opacity] duration-300 ease-out'
-        }
-        style={stuck ? { top: barTopOffset + barHeight } : undefined}
+        className={cn(
+          'z-20 bg-project text-on-project overflow-y-auto',
+          stuck ? 'fixed left-0 right-0 shadow-media' : 'relative',
+          reducedMotion ? undefined : 'transition-[max-height,opacity] duration-[250ms] ease-out'
+        )}
+        style={{
+          top: stuck ? barTopOffset + barHeight : undefined,
+          maxHeight: !open ? '0px' : stuck ? `min(${contentHeight}px, 70vh)` : `${contentHeight}px`,
+          opacity: open ? 1 : 0,
+        }}
       >
-        <Ficha ficha={project.ficha} nda={project.nda} onCanvas={stuck} />
+        <div ref={contentRef} className="page-x pt-6 pb-8">
+          <Ficha ficha={project.ficha} nda={project.nda} />
+        </div>
       </div>
     </>
   )
