@@ -10,7 +10,7 @@ export function CaseNavbar() {
       </Link>
       <div className="flex items-center gap-8">
         {site.nav.map((item) => (
-          <Link key={item.href} href={item.href} className="label hover:opacity-70 transition-opacity">
+          <Link key={item.href} href={item.href} className="text-body font-medium hover:opacity-70 transition-opacity">
             {item.label}
           </Link>
         ))}

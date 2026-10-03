@@ -49,7 +49,7 @@ export function SiteNavbar() {
               key={item.href}
               href={item.href}
               aria-current={active ? 'page' : undefined}
-              className={cn('label hover:opacity-70 transition-opacity', active && 'underline')}
+              className={cn('text-body font-medium text-fg hover:text-fg-secondary transition-colors', active && 'underline')}
             >
               {item.label}
             </Link>
