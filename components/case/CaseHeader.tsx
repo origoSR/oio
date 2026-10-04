@@ -8,7 +8,8 @@ import { cn } from '@/lib/utils'
 import type { Project } from '@/content/types'
 
 export function CaseHeader({ project }: { project: Project }) {
-  const [open, setOpen] = useState(false)
+  // Proyectos de marca: la ficha sale abierta por defecto (en linea, debajo de la barra).
+  const [open, setOpen] = useState(project.kind === 'brand')
   const [stuck, setStuck] = useState(false)
   const [navVisible, setNavVisible] = useState(false)
   const [barHeight, setBarHeight] = useState(0)

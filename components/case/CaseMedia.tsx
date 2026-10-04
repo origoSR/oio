@@ -57,10 +57,11 @@ export function CaseMedia({ item }: { item: MediaItem }) {
       </div>
     )
   } else if (layout === 'pair') {
+    // Proyectos de marca: radio md, fondo transparente, sin recorte (cada imagen conserva su proporcion).
     body = (
       <div className="page-x grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
         {images.map((img, i) => (
-          <MediaImage key={i} img={img} sizes={sizesFor.pair} className="rounded-md aspect-[4/5]" />
+          <MediaImage key={i} img={img} sizes={sizesFor.pair} className="rounded-md" />
         ))}
       </div>
     )
