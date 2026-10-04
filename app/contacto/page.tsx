@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { site } from '@/content/site'
+import { getProject } from '@/content/projects'
 import { CopyEmailButton } from '@/components/site/CopyEmailButton'
 
 export const metadata: Metadata = {
@@ -12,7 +13,24 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ContactoPage() {
+// '?proyecto=<slug|nombre>': para cualquier proyecto con NDA, no solo Talengo.
+function displayNameFromSlug(value: string) {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+}
+
+export default async function ContactoPage({ searchParams }: { searchParams: Promise<{ proyecto?: string }> }) {
+  const { proyecto } = await searchParams
+  const matched = proyecto ? getProject(proyecto) : undefined
+  const projectName = matched ? matched.title : proyecto ? displayNameFromSlug(proyecto) : undefined
+
+  const mailtoHref = projectName
+    ? `mailto:${site.email}?subject=${encodeURIComponent(`Caso ${projectName}`)}`
+    : `mailto:${site.email}`
+
   return (
     <main className="bg-canvas">
       <section className="page-x pt-32 lg:pt-48 pb-16">
@@ -21,8 +39,9 @@ export default function ContactoPage() {
       </section>
 
       <section className="page-x pb-16 flex flex-col gap-4">
+        {projectName && <p className="label text-fg-secondary">Sobre: {projectName}</p>}
         <p className="label text-fg-secondary">{site.contact.emailLabel}</p>
-        <a href={`mailto:${site.email}`} className="text-h2 hover:opacity-70 transition-opacity">
+        <a href={mailtoHref} className="text-h2 hover:opacity-70 transition-opacity">
           {site.email}
         </a>
         <CopyEmailButton email={site.email} copyLabel={site.contact.copyLabel} copiedLabel={site.contact.copiedLabel} />

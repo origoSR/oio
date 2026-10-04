@@ -8,6 +8,8 @@ const nextConfig = {
       { source: '/work', destination: '/proyectos', permanent: true },
       { source: '/contact', destination: '/contacto', permanent: true },
       { source: '/talengo', destination: '/proyectos', permanent: true },
+      { source: '/work/talengo', destination: '/proyectos', permanent: true },
+      { source: '/proyectos/talengo', destination: '/proyectos', permanent: true },
       { source: '/catalonia', destination: '/proyectos/catalonia', permanent: true },
       { source: '/burger-king', destination: '/proyectos/burger-king', permanent: true },
       { source: '/push', destination: '/proyectos/push', permanent: true },
