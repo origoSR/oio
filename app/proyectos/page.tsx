@@ -4,10 +4,9 @@ import { projects } from '@/content/projects'
 import type { Service } from '@/content/types'
 import { FilterChip } from '@/components/site/FilterChip'
 import { WorkCard } from '@/components/site/WorkCard'
-import { ContactGridCard } from '@/components/site/ContactGridCard'
 import { OtherRow } from '@/components/site/OtherRow'
 import { SiteFooter } from '@/components/site/SiteFooter'
-import { workCardWidth, workCardColSpan } from '@/lib/work-grid'
+import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
   title: site.projectsPage.seo.title,
@@ -48,16 +47,14 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
 
       <section className="page-x pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
-          {visible.map((project, i) => (
-            <div key={project.slug} className={workCardColSpan(workCardWidth(i))}>
-              <WorkCard project={project} variant={workCardWidth(i) === 8 ? 'wide' : 'narrow'} />
-            </div>
-          ))}
-          {visible.length % 2 === 1 && (
-            <div className={workCardColSpan(workCardWidth(visible.length))}>
-              <ContactGridCard contact={site.projectsPage.contactCard} />
-            </div>
-          )}
+          {visible.map((project, i) => {
+            const variant = workCardVariant(i, visible.length)
+            return (
+              <div key={project.slug} className={workCardColSpan(variant)}>
+                <WorkCard project={project} variant={variant} />
+              </div>
+            )
+          })}
         </div>
       </section>
 

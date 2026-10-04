@@ -3,15 +3,20 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import type { Project } from '@/content/types'
 
-/** Site/WorkCard. `variant` decide que imagen de `card` se usa segun el ancho en la rejilla. */
-export function WorkCard({ project, variant }: { project: Project; variant: 'wide' | 'narrow' }) {
+/**
+ * Site/WorkCard. `variant` decide que imagen de `card` se usa y el ancho en la rejilla.
+ * 'full' es la ultima tarjeta cuando el numero de proyectos visibles es impar: usa la
+ * imagen wide (o el logo) a las 12 columnas, con una media mas alta en desktop.
+ */
+export function WorkCard({ project, variant }: { project: Project; variant: 'wide' | 'narrow' | 'full' }) {
   const { card } = project
-  const image = card.logo ? undefined : variant === 'wide' ? card.wide : card.narrow
-  const sizes = variant === 'wide' ? '(min-width: 1024px) 864px, 100vw' : '(min-width: 1024px) 416px, 100vw'
+  const image = card.logo ? undefined : variant === 'narrow' ? card.narrow : card.wide
+  const sizes = variant === 'narrow' ? '(min-width: 1024px) 416px, 100vw' : '(min-width: 1024px) 1312px, 100vw'
 
   return (
     <Link href={`/proyectos/${project.slug}`} data-project={project.key} className="group block">
-      <div className="relative w-full h-[300px] lg:h-[540px] overflow-hidden">
+      <div className={cn('relative w-full h-[300px] overflow-hidden', variant === 'full' ? 'lg:h-[640px]' : 'lg:h-[540px]')}>
+
         {card.logo ? (
           <div className="absolute inset-0 bg-project flex items-center justify-center p-12">
             <Image

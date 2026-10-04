@@ -4,7 +4,7 @@ import { site } from '@/content/site'
 import { projects, featuredSlugs, getProject } from '@/content/projects'
 import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
-import { workCardWidth, workCardColSpan } from '@/lib/work-grid'
+import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
   title: site.home.seo.title,
@@ -68,11 +68,14 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
-          {featured.map((project, i) => (
-            <div key={project.slug} className={workCardColSpan(workCardWidth(i))}>
-              <WorkCard project={project} variant={workCardWidth(i) === 8 ? 'wide' : 'narrow'} />
-            </div>
-          ))}
+          {featured.map((project, i) => {
+            const variant = workCardVariant(i, featured.length)
+            return (
+              <div key={project.slug} className={workCardColSpan(variant)}>
+                <WorkCard project={project} variant={variant} />
+              </div>
+            )
+          })}
         </div>
       </section>
 

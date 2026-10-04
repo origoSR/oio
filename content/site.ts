@@ -68,14 +68,6 @@ export const site = {
       { slug: 'branding', label: 'Branding' },
       { slug: 'redes-sociales', label: 'Redes sociales' },
     ],
-    // Tarjeta que cierra la rejilla cuando el número de proyectos visibles es impar.
-    contactCard: {
-      title: '¿El siguiente es el tuyo?',
-      text: 'Webs, producto y sistemas de diseño. Cuéntame qué tienes entre manos.',
-      label: 'Escríbeme →',
-      meta: 'Contacto',
-      href: '/contacto',
-    },
     othersLabel: 'Otros proyectos',
     others: [
       {
