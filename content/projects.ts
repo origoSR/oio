@@ -77,7 +77,7 @@ const burgerKing: Project = {
   card: {
     services: 'Producto · Sistema de diseño · Kioskos',
     tagline: 'Kioskos de pedido para dos marcas con una sola librería',
-    wide: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con la pantalla de más vendidos'),
+    wide: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con su portada de promociones'),
     narrow: bk('03-img', 1080, 1920, 'Kiosko de Burger King: más vendidos', 'contain'),
   },
   title: 'Burger King / Popeyes',
@@ -95,7 +95,7 @@ const burgerKing: Project = {
     { label: 'Enlaces', content: 'Proyecto bajo NDA.' },
   ],
   blocks: [
-    { type: 'cover', image: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con la pantalla de más vendidos') },
+    { type: 'cover', image: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con su portada de promociones') },
     { type: 'statement', label: 'Resumen', text: 'Diseñé flujos del Kiosk 2.0 de Burger King y Popeyes y mantuve su librería: una sola base de componentes para dos marcas y más de 500 pantallas de kiosko.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '515', label: 'Pantallas de kiosko' },
@@ -106,14 +106,15 @@ const burgerKing: Project = {
     { type: 'gallery', items: [
       { layout: 'full', images: [bk('02-img', 2624, 1476, 'La misma pantalla de hamburguesas en Burger King y en Popeyes')], caption: 'Burger King y Popeyes con los mismos componentes.' },
       { layout: 'phones', images: [
+        bk('10-img', 1080, 1920, 'Portada del kiosko de Burger King con promociones y MyBurgerKing'),
         bk('03-img', 1080, 1920, 'Kiosko de Burger King: más vendidos'),
-        bk('04-img', 1080, 1920, 'Kiosko de Burger King: categoría de hamburguesas'),
         bk('05-img', 1080, 1920, 'Kiosko de Popeyes: categoría de pollo'),
-      ], caption: 'Más vendidos y hamburguesas de Burger King, y pollo de Popeyes.' },
+      ], caption: 'Portada y más vendidos de Burger King, y pollo de Popeyes.' },
     ] },
     { type: 'decision', order: 'text-media', number: '01 · Carrito', title: 'El carrito siempre a la vista', text: 'Al navegar por el menú el pedido se perdía de vista. El carrito pasa a estar fijo abajo durante todo el recorrido, con el número de productos y el botón de pago, para que nadie llegue al final con sorpresas.', caption: 'Barra inferior con carrito y pago.', image: bk('06-img', 1080, 1920, 'Kiosko de Popeyes con la barra inferior de carrito y pago', 'contain') },
     { type: 'decision', order: 'media-text', number: '02 · Venta', title: 'Recomendaciones según lo que llevas', text: 'Las sugerencias dependen del carrito: si falta la bebida o el postre, se ofrecen en el paso donde tienen sentido. Y quien ya ha pedido antes puede repetir su pedido con un toque.', caption: 'Resumen del pedido con productos en tendencia.', image: bk('07-img', 1080, 1920, 'Resumen del pedido con productos recomendados', 'contain') },
     { type: 'decision', order: 'text-media', number: '03 · Librería', title: 'Reglas también para la foto de producto', text: 'La librería comparte componentes entre marcas, con un modo de tokens para cada una. Y fija cómo se encuadra cada foto: tamaño, composición del menú y altura del producto principal, para que la carta se vea ordenada.', caption: 'Guía de imagen de producto: antes y después.', image: bk('08-img', 2028, 1167, 'Guía de composición de foto de producto, antes y después', 'contain') },
+    { type: 'decision', order: 'media-text', number: '04 · Alérgenos', title: 'Los alérgenos, en el móvil del cliente', text: 'La tabla de alérgenos no cabe en el kiosko sin estorbar al pedido. Desde el menú superior se abre un código QR: el cliente lo escanea, elige alérgenos o información nutricional y consulta en su móvil el PDF siempre actualizado.', caption: 'Del kiosko al móvil con un código QR.', image: bk('11-img', 2400, 1500, 'Kiosko con el código QR de alérgenos y tres móviles con el listado en PDF', 'contain') },
     { type: 'gallery', items: [
       { layout: 'full', images: [bk('09-img', 1280, 853, 'Clientes pidiendo en un kiosko de Burger King')], caption: 'El kiosko en el restaurante.' },
     ] },
