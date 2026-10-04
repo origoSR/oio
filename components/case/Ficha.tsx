@@ -20,7 +20,8 @@ function DetailRow({ row }: { row: FichaRow }) {
 }
 
 export function Ficha({ ficha, nda }: { ficha: FichaRow[]; nda: boolean }) {
-  const base = nda ? ficha.filter((row) => !(row.label === 'Enlaces' && !row.href)) : ficha
+  // Una fila de ficha con href: '' no se pinta (p. ej. "Enlaces" pendiente de confirmar).
+  const base = ficha.filter((row) => !(row.label === 'Enlaces' && !row.href))
   const rows: FichaRow[] = nda
     ? [...base, { label: 'Confidencial', content: 'Proyecto bajo acuerdo de confidencialidad (NDA): algunos detalles no pueden mostrarse.' }]
     : base

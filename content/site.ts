@@ -26,8 +26,21 @@ export const site = {
       { label: 'Ver proyectos →', href: '/proyectos' },
       { label: 'Escríbeme →', href: '/contacto' },
     ],
-    projectsLabel: 'Proyectos seleccionados',
-    projectsLink: { label: 'Todos los proyectos →', href: '/proyectos' },
+    clientsLabel: 'He trabajado con',
+    // TODO Rodrigo: confirmar que el NDA permite nombrar Burger King, Popeyes y Tim Hortons.
+    clients: ['Catalonia Hotels', 'Burger King', 'Popeyes', 'Tim Hortons', 'Santalucía', 'Rank Me Higher', 'Salma', 'Málaga Tech', 'Laskurain'],
+    projectsLabel: 'Proyectos destacados',
+    projectsLink: { label: 'Ver los 9 proyectos →', href: '/proyectos' }, // el número se calcula con projects.length
+    servicesLabel: 'Qué hago',
+    services: [
+      { slug: 'producto', title: 'Producto', text: 'Apps y herramientas, de la investigación a la pantalla final.' },
+      { slug: 'web', title: 'Web', text: 'Webs y landings que se entienden y venden.' },
+      { slug: 'sistemas-de-diseno', title: 'Sistemas de diseño', text: 'Tokens y componentes que comparten Figma y el código.' },
+      { slug: 'seo', title: 'SEO', text: 'Estructura, contenido y rendimiento para que te encuentren, también en buscadores con IA.' },
+      { slug: 'branding', title: 'Branding', text: 'Identidad, logotipo e isotipo para marcas que empiezan.' },
+      { slug: 'redes-sociales', title: 'Redes sociales', text: 'Plantillas y calendario de contenido coherentes con la marca.' },
+    ],
+    servicesLinkLabel: 'Ver proyectos →',
     how: {
       label: 'Cómo trabajo',
       title: 'De Figma a producción, sin traducir nada a mano.',
@@ -36,21 +49,41 @@ export const site = {
         { n: '02 · IA', title: 'Claude en medio del proceso', text: 'Con MCP, Claude lee el archivo de Figma y el repositorio. Me ayuda a montar pantallas, revisar y documentar.' },
         { n: '03 · Código', title: 'Lo diseñado es lo publicado', text: 'Next.js, Tailwind y Vercel. Entrego webs funcionando, no solo pantallas.' },
       ],
-      capabilities: 'Producto · UX/UI · Sistemas de diseño · Web · SEO y GEO · XR',
     },
   },
 
   projectsPage: {
     seo: {
       title: 'Proyectos · Rodrigo Sánchez',
-      description: 'Casos de producto, web y sistemas de diseño: Catalonia Hotels, Burger King y Popeyes, Push, RBI, Santalucía y Rank Me Higher.',
+      description: 'Proyectos de producto, web, sistemas de diseño y branding: Catalonia Hotels, Push, RBI, Burger King y Popeyes, Santalucía, Rank Me Higher, Salma, Málaga Tech y Laskurain.',
     },
-    title: 'Proyectos.',
-    lead: 'Seis casos de producto, web y sistemas de diseño, de 2022 a hoy.',
+    title: 'Proyectos',
+    filters: [
+      { slug: null, label: 'Todos' },
+      { slug: 'producto', label: 'Producto' },
+      { slug: 'web', label: 'Web' },
+      { slug: 'sistemas-de-diseno', label: 'Sistemas de diseño' },
+      { slug: 'ux-ui', label: 'UX/UI' },
+      { slug: 'seo', label: 'SEO' },
+      { slug: 'branding', label: 'Branding' },
+      { slug: 'redes-sociales', label: 'Redes sociales' },
+    ],
+    // Tarjeta que cierra la rejilla cuando el número de proyectos visibles es impar.
+    contactCard: {
+      title: '¿El siguiente es el tuyo?',
+      text: 'Webs, producto y sistemas de diseño. Cuéntame qué tienes entre manos.',
+      label: 'Escríbeme →',
+      meta: 'Contacto',
+      href: '/contacto',
+    },
     othersLabel: 'Otros proyectos',
     others: [
-      { title: 'Talengo', description: 'Plataforma de RRHH con IA. Producto y sistema de diseño.', meta: '2024 · NDA' },
-      // TODO Rodrigo: añadir más proyectos pequeños o borrar esta línea.
+      {
+        title: 'Talengo',
+        description: 'Plataforma de RRHH con IA. Producto y sistema de diseño.',
+        meta: '2024 · NDA',
+        cta: { label: 'Te lo enseño en una llamada →', href: '/contacto?proyecto=talengo' },
+      },
     ],
   },
 

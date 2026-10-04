@@ -1,4 +1,4 @@
-// Contenido de los casos. Extraído de Figma (página "Casos · v1") el 3 oct 2026.
+// Contenido de los casos. Extraído de Figma (página "Casos · v1") el 3 oct 2026; v2 el 5 oct 2026 (tarjetas, filtros y proyectos de marca).
 // El orden del array es el orden de la web y la cadena de "Siguiente proyecto".
 // Las cifras con provisional: true son ficticias o están por confirmar: no publicarlas sin revisar.
 
@@ -17,6 +17,14 @@ const cat = (f: string, w: number, h: number, alt: string, fit?: 'contain') => i
 const catalonia: Project = {
   slug: 'catalonia',
   key: 'catalonia',
+  kind: 'case',
+  services: ['web', 'sistemas-de-diseno', 'ux-ui'],
+  card: {
+    services: 'Web · Sistema de diseño · UX/UI',
+    tagline: 'Un sistema de diseño para una web de reservas',
+    wide: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques: valoración, calendario y buscador'),
+    narrow: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques'),
+  },
   title: 'Catalonia Hotels',
   subtitle: 'Un sistema de diseño para una web de reservas',
   sector: 'Hoteles · Web',
@@ -32,7 +40,7 @@ const catalonia: Project = {
     { label: 'Enlaces', content: 'cataloniahotels.com', href: 'https://www.cataloniahotels.com' },
   ],
   blocks: [
-    { type: 'cover', image: cat('01-portada', 1440, 860, 'Portada de la web de Catalonia Hotels con el buscador de reservas') },
+    { type: 'cover', image: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques: valoración, calendario y buscador') },
     { type: 'statement', label: 'Resumen', text: 'Rediseñamos la web de reservas de Catalonia Hotels en diez sprints, del buscador al área privada, sobre un sistema de 230 componentes que lo mantiene todo coherente.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '230', label: 'Componentes' },
@@ -64,6 +72,14 @@ const bk = (f: string, w: number, h: number, alt: string, fit?: 'contain') => im
 const burgerKing: Project = {
   slug: 'burger-king',
   key: 'bk',
+  kind: 'case',
+  services: ['producto', 'sistemas-de-diseno', 'ux-ui'],
+  card: {
+    services: 'Producto · Sistema de diseño · Kioskos',
+    tagline: 'Kioskos de pedido para dos marcas con una sola librería',
+    wide: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con la pantalla de más vendidos'),
+    narrow: bk('03-img', 1080, 1920, 'Kiosko de Burger King: más vendidos', 'contain'),
+  },
   title: 'Burger King / Popeyes',
   subtitle: 'Kioskos de pedido para dos marcas con una sola librería',
   sector: 'Restauración · Kioskos',
@@ -79,7 +95,7 @@ const burgerKing: Project = {
     { label: 'Enlaces', content: 'Proyecto bajo NDA.' },
   ],
   blocks: [
-    { type: 'cover', image: bk('01-portada', 2880, 1620, 'Seis pantallas del kiosko de Burger King y Popeyes sobre fondo beige') },
+    { type: 'cover', image: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con la pantalla de más vendidos') },
     { type: 'statement', label: 'Resumen', text: 'Diseñé flujos del Kiosk 2.0 de Burger King y Popeyes y mantuve su librería: una sola base de componentes para dos marcas y más de 500 pantallas de kiosko.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '515', label: 'Pantallas de kiosko' },
@@ -115,6 +131,14 @@ const push = (f: string, w: number, h: number, alt: string, fit?: 'contain') => 
 const pushProject: Project = {
   slug: 'push',
   key: 'push',
+  kind: 'case',
+  services: ['web', 'seo', 'producto', 'ux-ui'],
+  card: {
+    services: 'Web · SEO · Producto · XR',
+    tagline: 'Web de venta y app de terapia con realidad virtual',
+    wide: push('01-portada', 1920, 1032, 'Portada de virtualpush.es'),
+    narrow: push('00-tarjeta', 1664, 2160, 'Logo de Push y la web en un móvil sobre un cielo de nubes'),
+  },
   title: 'Push',
   subtitle: 'Web de venta y app de terapia con realidad virtual',
   sector: 'Salud mental · XR',
@@ -168,6 +192,14 @@ const rbi = (f: string, w: number, h: number, alt: string, fit?: 'contain') => i
 const rbiProject: Project = {
   slug: 'rbi',
   key: 'rbi',
+  kind: 'case',
+  services: ['producto', 'ux-ui'],
+  card: {
+    services: 'Producto · UX/UI · App',
+    tagline: 'La app de los empleados de Burger King, Popeyes y Tim Hortons',
+    wide: rbi('01-portada', 1015, 884, 'App de empleados de RBI con el calendario de turnos'),
+    narrow: rbi('02-img', 739, 1600, 'App de empleados de RBI: turnos', 'contain'),
+  },
   title: 'RBI',
   subtitle: 'La app de los empleados de Burger King, Popeyes y Tim Hortons',
   sector: 'Restauración · App interna',
@@ -210,6 +242,14 @@ const sl = (f: string, w: number, h: number, alt: string, fit?: 'contain') => im
 const santalucia: Project = {
   slug: 'santalucia',
   key: 'santalucia',
+  kind: 'case',
+  services: ['producto', 'ux-ui'],
+  card: {
+    services: 'UX research · Producto',
+    tagline: 'Saber en qué punto está la reparación de tu casa',
+    wide: sl('01-portada', 1556, 884, 'Portada de Santalucía Impulsa'),
+    narrow: sl('02-img', 425, 856, 'Notificación de la app de Santalucía Impulsa', 'contain'),
+  },
   title: 'Santalucía Impulsa',
   subtitle: 'Saber en qué punto está la reparación de tu casa',
   sector: 'Seguros · App',
@@ -252,6 +292,14 @@ const rmh = (f: string, w: number, h: number, alt: string, fit?: 'contain') => i
 const rankMeHigher: Project = {
   slug: 'rank-me-higher',
   key: 'rank',
+  kind: 'case',
+  services: ['web', 'seo', 'ux-ui'],
+  card: {
+    services: 'Web · SEO · UX/UI',
+    tagline: 'Diseño y SEO para una agencia de Londres',
+    wide: rmh('01-portada', 2400, 1284, 'Web de Rank Me Higher'),
+    narrow: rmh('01-portada', 2400, 1284, 'Web de Rank Me Higher', 'contain'),
+  },
   title: 'Rank Me Higher',
   subtitle: 'Diseño y SEO para una agencia de Londres',
   sector: 'Marketing · SEO',
@@ -289,8 +337,132 @@ const rankMeHigher: Project = {
   seo: { title: 'Rank Me Higher: diseño y SEO para una agencia de Londres', description: 'Web de Rank Me Higher y SEO/GEO para sus clientes: pymes que necesitan salir en Google y en buscadores con IA.' },
 }
 
+
+// ───────────────────────────────── Proyectos de marca (kind: 'brand')
+// Página corta: cabecera + barra con la ficha ABIERTA por defecto, una pareja de imágenes y "Siguiente proyecto".
+const svg = (slug: string, w: number, h: number, alt: string): Img => ({ src: `/proyectos/${slug}/logo.svg`, w, h, alt })
+
+const salma: Project = {
+  slug: 'salma',
+  key: 'salma',
+  kind: 'brand',
+  title: 'Salma',
+  subtitle: 'Identidad y redes para un centro de entrenamiento en Málaga',
+  sector: 'Fitness',
+  role: 'Branding y redes sociales',
+  year: '2026', // TODO Rodrigo: confirmar año
+  nda: false,
+  services: ['branding', 'redes-sociales'],
+  card: {
+    services: 'Branding · Redes sociales',
+    tagline: 'Identidad y redes para un centro de entrenamiento en Málaga',
+    logo: svg('salma', 300, 80, 'Logotipo de Salma'),
+  },
+  cardMeta: 'Fitness · Branding · 2026',
+  rowMeta: 'Fitness · Branding y redes sociales · 2026',
+  ficha: [
+    { label: 'Contexto', content: 'Salma es un centro de entrenamiento en grupos pequeños en Málaga, pensado para entrenar a tu ritmo y cuidar el cuerpo en momentos delicados: embarazo, postparto o a partir de cierta edad.' },
+    { label: 'Rol y equipo', content: 'Diseñador de marca y redes sociales. Trabajo directo con los dos fundadores.' },
+    { label: 'Servicios / stack', content: 'Identidad de marca · Logotipo e isotipo · Plantillas y calendario de contenido para Instagram' },
+    { label: 'Enlaces', content: 'Instagram', href: '' /* TODO Rodrigo: URL de Instagram de Salma, o borrar la fila */ },
+  ],
+  blocks: [
+    { type: 'gallery', items: [
+      { layout: 'pair', images: [
+        img('salma', '01-isotipo', 1280, 1280, 'Isotipo de Salma en crema sobre verde oliva'),
+        img('salma', '02-logo', 1280, 1280, 'Logotipo de Salma en verde oscuro sobre crema'),
+      ] },
+    ] },
+  ],
+  seo: { title: 'Salma: identidad y redes para un centro de entrenamiento', description: 'Identidad de marca, logotipo, isotipo y contenido de Instagram para Salma, centro de entrenamiento en grupos pequeños en Málaga.' },
+}
+
+const malagaTech: Project = {
+  slug: 'malaga-tech',
+  key: 'malaga-tech',
+  kind: 'brand',
+  title: 'Málaga Tech',
+  subtitle: 'Identidad de marca para la comunidad de startups de Málaga', // TODO Rodrigo: si fue una propuesta, cambiar a "Propuesta de identidad…"
+  sector: 'Emprendimiento',
+  role: 'Branding',
+  year: '2026', // TODO Rodrigo: confirmar año
+  nda: false,
+  services: ['branding'],
+  card: {
+    services: 'Branding',
+    tagline: 'Identidad de marca para la comunidad de startups de Málaga',
+    logo: svg('malaga-tech', 340, 66, 'Logotipo de Málaga Tech'),
+  },
+  cardMeta: 'Emprendimiento · Branding · 2026',
+  rowMeta: 'Emprendimiento · Branding · 2026',
+  ficha: [
+    { label: 'Contexto', content: 'Málaga Tech es la asociación de emprendedores tecnológicos más grande del sur de España. Organiza eventos, programas de incubación y aceleración, y conecta a las startups con inversores y empresas.' },
+    { label: 'Rol y equipo', content: 'Diseñador de marca.' },
+    { label: 'Servicios / stack', content: 'Identidad de marca · Logotipo e isotipo · Sistema de iconos' },
+    { label: 'Enlaces', content: 'techmalaga.com', href: 'https://techmalaga.com' },
+  ],
+  blocks: [
+    { type: 'gallery', items: [
+      { layout: 'pair', images: [
+        img('malaga-tech', '01-isotipo', 1280, 1280, 'Isotipo de Málaga Tech sobre negro'),
+        img('malaga-tech', '02-logo', 1280, 1280, 'Logotipo de Málaga Tech con su sistema de iconos sobre blanco'),
+      ] },
+    ] },
+  ],
+  seo: { title: 'Málaga Tech: identidad de marca', description: 'Identidad de marca para Málaga Tech, la asociación de emprendedores tecnológicos de Málaga.' },
+}
+
+const laskurain: Project = {
+  slug: 'laskurain',
+  key: 'laskurain',
+  kind: 'brand',
+  title: 'Laskurain',
+  subtitle: 'Web para un consultor de estrategia de marca',
+  sector: 'Consultoría',
+  role: 'Diseño y desarrollo web',
+  year: '2026', // TODO Rodrigo: confirmar año
+  nda: false,
+  services: ['web'],
+  card: {
+    services: 'Web · WordPress',
+    tagline: 'Web para un consultor de estrategia de marca',
+    wide: img('laskurain', '00-tarjeta', 2880, 1800, 'Portada de laskurain.es en un navegador'),
+    narrow: img('laskurain', '00-tarjeta', 2880, 1800, 'Portada de laskurain.es en un navegador', 'contain'),
+  },
+  cardMeta: 'Consultoría · Web · 2026',
+  rowMeta: 'Consultoría · Diseño y desarrollo web · 2026',
+  ficha: [
+    { label: 'Contexto', content: 'Miguel Ángel Laskurain ayuda a empresas cuyo valor no llega al mercado, después de veinte años en Silicon Valley. Su web tenía que explicar un servicio intangible con la misma claridad que vende.' },
+    { label: 'Rol y equipo', content: 'Diseño web y desarrollo en WordPress con Elementor Pro.' },
+    { label: 'Servicios / stack', content: 'Diseño web · Desarrollo en WordPress · Web bilingüe (ES/EN)' },
+    { label: 'Enlaces', content: 'laskurain.es', href: 'https://laskurain.es' },
+  ],
+  blocks: [
+    { type: 'gallery', items: [
+      { layout: 'pair', images: [
+        img('laskurain', '01-web-escritorio', 1728, 1280, 'Portada de laskurain.es en escritorio'),
+        img('laskurain', '02-web-movil', 832, 1280, 'Portada de laskurain.es en móvil'),
+      ] },
+    ] },
+  ],
+  seo: { title: 'Laskurain: web para un consultor de estrategia de marca', description: 'Diseño y desarrollo en WordPress de laskurain.es, la web de Miguel Ángel Laskurain, consultor de posicionamiento de marca.' },
+}
+
 /** Orden de la web. "Siguiente proyecto" = el siguiente del array (el último vuelve al primero). */
-export const projects: Project[] = [catalonia, burgerKing, pushProject, rbiProject, santalucia, rankMeHigher]
+export const projects: Project[] = [
+  catalonia,
+  pushProject,
+  rbiProject,
+  burgerKing,
+  santalucia,
+  rankMeHigher,
+  salma,
+  malagaTech,
+  laskurain,
+]
+
+/** Slugs de la home ("Proyectos destacados"), en este orden: filas 8+4 / 4+8. */
+export const featuredSlugs = ['catalonia', 'push', 'rbi', 'burger-king'] as const
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug)
 export const getNextProject = (slug: string) => {
