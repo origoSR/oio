@@ -28,8 +28,6 @@
   --catalonia-tint: #fefbf2;
   --rank-accent: #f1965b;
   --rank-tint: #fef4ef;
-  --talengo-accent: #84bdc9;
-  --talengo-tint: #f3f8fa;
   --bk-accent: #e7863f;
   --bk-tint: #fdf3ec;
   --rbi-accent: #ae2825;
@@ -42,7 +40,6 @@
   --push-on-accent-2: #e0d6f8;
   --catalonia-on-accent-2: #817144;
   --rank-on-accent-2: #714a31;
-  --talengo-on-accent-2: #455e64;
   --bk-on-accent-2: #694124;
   --rbi-on-accent-2: #dfa9a8;
   --santalucia-on-accent-2: #765023;
@@ -74,11 +71,13 @@
    Se aplican con <main data-project="push"> en el layout de cada proyecto. */
 [data-project="push"]       { --project-accent: var(--push-accent);       --project-tint: var(--push-tint);       --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--push-on-accent-2); }
 [data-project="catalonia"]  { --project-accent: var(--catalonia-accent);  --project-tint: var(--catalonia-tint);  --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--catalonia-on-accent-2); }
-[data-project="rank"]       { --project-accent: var(--rank-accent);       --project-tint: var(--rank-tint);       --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--rank-on-accent-2); }
-[data-project="talengo"]    { --project-accent: var(--talengo-accent);    --project-tint: var(--talengo-tint);    --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--talengo-on-accent-2); }
-[data-project="bk"]         { --project-accent: var(--bk-accent);         --project-tint: var(--bk-tint);         --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--bk-on-accent-2); }
-[data-project="rbi"]        { --project-accent: var(--rbi-accent);        --project-tint: var(--rbi-tint);        --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--rbi-on-accent-2); }
-[data-project="santalucia"] { --project-accent: var(--santalucia-accent); --project-tint: var(--santalucia-tint); --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--santalucia-on-accent-2); }
+[data-project="rank"]        { --project-accent: var(--rank-accent);       --project-tint: var(--rank-tint);       --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--rank-on-accent-2); }
+[data-project="bk"]          { --project-accent: var(--bk-accent);         --project-tint: var(--bk-tint);         --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--bk-on-accent-2); }
+[data-project="rbi"]         { --project-accent: var(--rbi-accent);        --project-tint: var(--rbi-tint);        --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--rbi-on-accent-2); }
+[data-project="santalucia"]  { --project-accent: var(--santalucia-accent); --project-tint: var(--santalucia-tint); --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--santalucia-on-accent-2); }
+[data-project="salma"]       { --project-accent: #8F8749; --project-tint: #F3ECE2; --project-on-accent: #F3ECE2; --project-on-accent-2: rgb(243 236 226 / .72); }
+[data-project="malaga-tech"] { --project-accent: #111111; --project-tint: #FFFFFF; --project-on-accent: #FFFFFF; --project-on-accent-2: rgb(255 255 255 / .72); }
+[data-project="laskurain"]   { --project-accent: #F2F0EB; --project-tint: #E6E1D6; --project-on-accent: #1C1C1A; --project-on-accent-2: rgb(28 28 26 / .72); }
 
 /* --------------------------------------------------------------------------
    2. @theme — lo que Tailwind convierte en utilidades
