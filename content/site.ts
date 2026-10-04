@@ -4,8 +4,6 @@ export const site = {
   name: 'Rodrigo Sánchez',
   brand: 'oio',
   email: 'rodrigo@oi0.es',
-  phone: '+34 669 57 02 60',
-  phoneHref: 'tel:+34669570260',
   linkedin: 'https://www.linkedin.com/in/rodrigosanchezromero',
   location: 'Málaga · En remoto',
 
@@ -26,9 +24,6 @@ export const site = {
       { label: 'Ver proyectos →', href: '/proyectos' },
       { label: 'Escríbeme →', href: '/contacto' },
     ],
-    clientsLabel: 'He trabajado con',
-    // TODO Rodrigo: confirmar que el NDA permite nombrar Burger King, Popeyes y Tim Hortons.
-    clients: ['Catalonia Hotels', 'Burger King', 'Popeyes', 'Tim Hortons', 'Santalucía', 'Rank Me Higher', 'Salma', 'Málaga Tech', 'Laskurain'],
     projectsLabel: 'Proyectos destacados',
     projectsLink: { label: 'Ver los 9 proyectos →', href: '/proyectos' }, // el número se calcula con projects.length
     servicesLabel: 'Qué hago',
@@ -37,8 +32,7 @@ export const site = {
       { slug: 'web', title: 'Web', text: 'Webs y landings que se entienden y venden.' },
       { slug: 'sistemas-de-diseno', title: 'Sistemas de diseño', text: 'Tokens y componentes que comparten Figma y el código.' },
       { slug: 'seo', title: 'SEO', text: 'Estructura, contenido y rendimiento para que te encuentren, también en buscadores con IA.' },
-      { slug: 'branding', title: 'Branding', text: 'Identidad, logotipo e isotipo para marcas que empiezan.' },
-      { slug: 'redes-sociales', title: 'Redes sociales', text: 'Plantillas y calendario de contenido coherentes con la marca.' },
+      { slug: 'branding', title: 'Branding', text: 'Identidad, logotipo e isotipo para marcas.' },
     ],
     servicesLinkLabel: 'Ver proyectos →',
     how: {
@@ -66,7 +60,6 @@ export const site = {
       { slug: 'ux-ui', label: 'UX/UI' },
       { slug: 'seo', label: 'SEO' },
       { slug: 'branding', label: 'Branding' },
-      { slug: 'redes-sociales', label: 'Redes sociales' },
     ],
     othersLabel: 'Otros proyectos',
     others: [

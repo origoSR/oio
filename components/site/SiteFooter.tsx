@@ -9,9 +9,6 @@ export function SiteFooter() {
         <a href={`mailto:${site.email}`} className="text-h3 hover:opacity-70 transition-opacity">
           {site.email}
         </a>
-        <a href={site.phoneHref} className="text-body hover:opacity-70 transition-opacity">
-          {site.phone}
-        </a>
         <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-body hover:opacity-70 transition-opacity">
           LinkedIn ↗
         </a>

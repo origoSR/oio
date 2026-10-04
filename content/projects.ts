@@ -199,7 +199,7 @@ const rbiProject: Project = {
     services: 'Producto · UX/UI · App',
     tagline: 'La app de los empleados de Burger King, Popeyes y Tim Hortons',
     wide: rbi('01-portada', 1015, 884, 'App de empleados de RBI con el calendario de turnos'),
-    narrow: rbi('02-img', 739, 1600, 'App de empleados de RBI: turnos', 'contain'),
+    narrow: rbi('02-img', 739, 1600, 'App de empleados de RBI: turnos'),
   },
   title: 'RBI',
   subtitle: 'La app de los empleados de Burger King, Popeyes y Tim Hortons',
@@ -353,7 +353,7 @@ const salma: Project = {
   role: 'Branding y redes sociales',
   year: '2026', // TODO Rodrigo: confirmar año
   nda: false,
-  services: ['branding', 'redes-sociales'],
+  services: ['branding'],
   card: {
     services: 'Branding · Redes sociales',
     tagline: 'Identidad y redes para un centro de entrenamiento en Málaga',

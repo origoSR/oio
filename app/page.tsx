@@ -47,19 +47,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. He trabajado con. */}
-      <section className="page-x py-12 lg:py-16 border-t border-line-strong">
-        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 lg:gap-x-12 lg:gap-y-4">
-          <p className="label text-fg-secondary shrink-0">{site.home.clientsLabel}</p>
-          {site.home.clients.map((name) => (
-            <h4 key={name} className="text-h4 text-fg-tertiary">
-              {name}
-            </h4>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Proyectos destacados. */}
+      {/* 2. Proyectos destacados. */}
       <section className="section-y page-x">
         <div className="flex items-end justify-between mb-12 gap-4">
           <p className="label text-fg-secondary">{site.home.projectsLabel}</p>
@@ -79,7 +67,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. Qué hago · 5. Cómo trabajo (mismo fondo, un bloque). */}
+      {/* 3. Qué hago · 4. Cómo trabajo (mismo fondo, un bloque). */}
       <section className="bg-surface section-y page-x">
         <p className="label text-fg-secondary mb-12">{site.home.servicesLabel}</p>
         <div>
@@ -112,7 +100,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Pie. */}
+      {/* 5. Pie. */}
       <SiteFooter />
     </main>
   )

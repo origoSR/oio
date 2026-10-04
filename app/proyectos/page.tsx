@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { permanentRedirect } from 'next/navigation'
 import { site } from '@/content/site'
 import { projects } from '@/content/projects'
 import type { Service } from '@/content/types'
@@ -20,6 +21,8 @@ export const metadata: Metadata = {
 
 export default async function ProyectosPage({ searchParams }: { searchParams: Promise<{ servicio?: string }> }) {
   const { servicio } = await searchParams
+  // El filtro de redes-sociales ya no existe (ver FIXES-5): quien llegue con el, a /proyectos.
+  if (servicio === 'redes-sociales') permanentRedirect('/proyectos')
   const activeSlug = (servicio as Service | undefined) ?? null
 
   const visible = activeSlug ? projects.filter((p) => p.services.includes(activeSlug)) : projects

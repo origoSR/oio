@@ -60,9 +60,6 @@ export default async function ContactoPage({ searchParams }: { searchParams: Pro
         ))}
         <div className="flex flex-col gap-2">
           <p className="label text-fg-secondary mb-2">Otros canales</p>
-          <a href={site.phoneHref} className="text-body text-fg-secondary hover:opacity-70 transition-opacity">
-            {site.phone}
-          </a>
           <a
             href={site.linkedin}
             target="_blank"
