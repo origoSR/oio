@@ -15,7 +15,7 @@ export function Decision({ order, number, title, text, image, caption }: Decisio
   const mediaFirst = order === 'media-text'
 
   return (
-    <div className="section-y page-x grid-page">
+    <div className="section-y page-x grid-page gap-y-6">
       <div className={cn('col-span-4 lg:col-span-4 flex flex-col gap-4', mediaFirst && 'lg:order-2')}>
         <p className="label text-fg-tertiary">{number}</p>
         <h3 className="text-h3">{title}</h3>

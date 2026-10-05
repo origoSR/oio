@@ -6,7 +6,7 @@ export function CaseNavbar() {
   return (
     <div className="page-x py-4 flex items-center justify-between">
       <Link href="/" aria-label="Inicio">
-        <Logo className="h-8 w-8" />
+        <Logo className="h-10 w-10" />
       </Link>
       <div className="flex items-center gap-8">
         {site.nav.map((item) => (
