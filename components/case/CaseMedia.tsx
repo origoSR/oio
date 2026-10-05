@@ -7,7 +7,7 @@ const sizesFor = {
   full: '(min-width: 1024px) 1312px, 100vw',
   browser: '1088px',
   phones: '280px',
-  pair: '(min-width: 1024px) 648px, 100vw',
+  pair: '(min-width: 1024px) 50vw, 100vw',
   video: '(min-width: 1024px) 1312px, 100vw',
   bleed: '100vw',
 } as const
@@ -57,12 +57,23 @@ export function CaseMedia({ item }: { item: MediaItem }) {
       </div>
     )
   } else if (layout === 'pair') {
-    // Proyectos de marca: radio md, fondo transparente, sin recorte (cada imagen conserva su proporcion).
+    // Proyectos de marca: radio md. Pareja de logos (imagen ya cuadrada, p. ej. Salma y
+    // Malaga Tech): aspect-ratio 1/1 + object-cover, como pide el brief. Pareja de capturas
+    // de pantalla no cuadradas (p. ej. Laskurain): conserva su proporcion natural, sin recorte.
+    // En movil se apilan solas con el gap del gutter (grid-cols-1 por debajo de lg).
     body = (
       <div className="page-x grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-        {images.map((img, i) => (
-          <MediaImage key={i} img={img} sizes={sizesFor.pair} className="rounded-md" />
-        ))}
+        {images.map((img, i) => {
+          const isSquare = Math.abs(img.w / img.h - 1) < 0.05
+          return (
+            <MediaImage
+              key={i}
+              img={img}
+              sizes={sizesFor.pair}
+              className={cn('rounded-md', isSquare && 'aspect-square object-cover')}
+            />
+          )
+        })}
       </div>
     )
   } else if (layout === 'video') {
