@@ -60,6 +60,18 @@
   /* Alto real del Site/Navbar fixed, medido por SiteNavbar (ver componente).
      Este valor es solo el respaldo antes de que el JS lo corrija. */
   --navbar-h: 72px;
+
+  /* Hero de la home: 160/56 no caben en --section-y ni --block-gap (tienen su
+     propia escala de 3 pasos, 96/128/160), así que son variables propias. */
+  --hero-pad-y: 96px;
+  --hero-cta-gap: 40px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-pad-y: 128px;
+    --hero-cta-gap: 56px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -68,6 +80,7 @@
     --gutter: 32px;
     --section-y: 128px;
     --block-gap: 64px;
+    --hero-pad-y: 160px;
   }
 }
 
