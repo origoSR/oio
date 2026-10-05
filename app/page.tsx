@@ -33,17 +33,19 @@ export default function HomePage() {
     <main className="bg-canvas">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* 1. Hero: sin el anillo del logo. */}
-      <section id="hero" className="page-x pt-32 lg:pt-48 pb-16 flex flex-col gap-6">
-        <p className="label text-fg-secondary">{site.home.eyebrow}</p>
-        <h1 className="text-h1">{site.home.title}</h1>
-        <p className="text-lead text-fg-secondary max-w-text">{site.home.lead}</p>
-        <div className="flex flex-wrap gap-8 mt-2">
-          {site.home.ctas.map((cta) => (
-            <Link key={cta.href} href={cta.href} className="text-body font-semibold hover:opacity-70 transition-opacity">
-              {cta.label}
-            </Link>
-          ))}
+      {/* 1. Hero: sin el anillo del logo. pt compensa el navbar fixed con su alto real (--navbar-h). */}
+      <section id="hero" className="page-x pt-[calc(var(--navbar-h)+var(--block-gap))] flex flex-col gap-6">
+        <div className="max-w-media-l flex flex-col gap-6">
+          <p className="label text-fg-secondary">{site.home.eyebrow}</p>
+          <h1 className="text-h1">{site.home.title}</h1>
+          <p className="text-lead text-fg-secondary max-w-text">{site.home.lead}</p>
+          <div className="flex flex-wrap gap-8 mt-2">
+            {site.home.ctas.map((cta) => (
+              <Link key={cta.href} href={cta.href} className="text-body font-semibold hover:opacity-70 transition-opacity">
+                {cta.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -55,7 +57,7 @@ export default function HomePage() {
             Ver los {projects.length} proyectos →
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-24">
           {featured.map((project, i) => {
             const variant = workCardVariant(i, featured.length)
             return (
@@ -67,12 +69,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Qué hago · 4. Cómo trabajo (mismo fondo, un bloque). */}
-      <section className="bg-surface section-y page-x">
+      {/* 3. Qué hago: en canvas, sin fondo propio (Figma: bloque separado de "Cómo trabajo"). */}
+      <section className="section-y page-x">
         <p className="label text-fg-secondary mb-12">{site.home.servicesLabel}</p>
         <div>
           {site.home.services.map((service) => (
-            <div key={service.slug} className="border-t border-line-strong py-8 grid-page gap-y-4 items-start">
+            <div key={service.slug} className="border-t border-line-strong py-6 grid-page gap-y-4 items-start">
               <h2 className="col-span-4 lg:col-span-4 text-h2">{service.title}</h2>
               <p className="col-span-4 lg:col-span-5 text-body text-fg-secondary">{service.text}</p>
               <Link
@@ -84,19 +86,23 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+        <div className="bg-line h-px w-full" />
+      </section>
 
-        <div className="mt-24 lg:mt-32">
-          <p className="label text-fg-secondary">{site.home.how.label}</p>
-          <h2 className="text-h2 max-w-media-l mt-4">{site.home.how.title}</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 mt-12">
-            {site.home.how.steps.map((step) => (
-              <div key={step.n} className="border-t border-line-strong pt-4 flex flex-col gap-2">
-                <p className="label text-fg-tertiary">{step.n}</p>
-                <h3 className="text-h4">{step.title}</h3>
-                <p className="text-body text-fg-secondary">{step.text}</p>
-              </div>
-            ))}
-          </div>
+      {/* 4. Cómo trabajo: fondo surface, bloque propio. */}
+      <section className="bg-surface section-y page-x flex flex-col block-gap">
+        <div className="max-w-media-m flex flex-col gap-4">
+          <p className="label text-fg-tertiary">{site.home.how.label}</p>
+          <h2 className="text-h2">{site.home.how.title}</h2>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+          {site.home.how.steps.map((step) => (
+            <div key={step.n} className="border-t border-line-strong pt-4 flex flex-col gap-2">
+              <p className="label text-fg-tertiary">{step.n}</p>
+              <h3 className="text-h4">{step.title}</h3>
+              <p className="text-body text-fg-secondary">{step.text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
