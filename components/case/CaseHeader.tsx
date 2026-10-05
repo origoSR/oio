@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils'
 import type { Project } from '@/content/types'
 
 export function CaseHeader({ project }: { project: Project }) {
-  // El boton de la barra empieza siempre cerrado, tambien en proyectos de marca
-  // (que ademas tienen su propia ficha fija mas abajo, fuera de este mecanismo).
+  // El boton de la barra empieza siempre cerrado. Un unico estado `open` para todo el
+  // componente, tambien en proyectos de marca: funcionan igual que los casos completos.
   const [open, setOpen] = useState(false)
   const [stuck, setStuck] = useState(false)
   const [navVisible, setNavVisible] = useState(false)
@@ -327,14 +327,6 @@ export function CaseHeader({ project }: { project: Project }) {
           </div>
         </div>
       </div>
-
-      {/* Proyectos de marca: la ficha va fija en el flujo de la pagina, entre la cabecera
-          y la pareja de imagenes. Nunca fixed/absolute, independiente del boton de arriba. */}
-      {project.kind === 'brand' && (
-        <div className="bg-project text-on-project page-x pt-6 pb-8">
-          <Ficha ficha={project.ficha} nda={project.nda} />
-        </div>
-      )}
     </>
   )
 }
