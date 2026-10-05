@@ -33,49 +33,47 @@ export default async function ContactoPage({ searchParams }: { searchParams: Pro
 
   return (
     <main className="bg-canvas">
-      <section className="page-x pt-32 lg:pt-48 pb-16">
-        <h1 className="text-display">{site.contact.title}</h1>
-        <p className="text-lead text-fg-secondary max-w-text mt-6">{site.contact.lead}</p>
-      </section>
+      <section className="page-x pt-[calc(var(--navbar-h)+var(--block-gap))] pb-[var(--section-y)] flex flex-col block-gap">
+        <div className="flex flex-col gap-6">
+          <h1 className="text-display">{site.contact.title}</h1>
+          <p className="text-lead text-fg-secondary max-w-text">{site.contact.lead}</p>
+        </div>
 
-      <section className="page-x pb-16 flex flex-col gap-4">
-        {projectName && <p className="label text-fg-secondary">Sobre: {projectName}</p>}
-        <p className="label text-fg-secondary">{site.contact.emailLabel}</p>
-        <a href={mailtoHref} className="text-h2 hover:opacity-70 transition-opacity">
-          {site.email}
-        </a>
-        <CopyEmailButton email={site.email} copyLabel={site.contact.copyLabel} copiedLabel={site.contact.copiedLabel} />
-      </section>
-
-      <section className="page-x section-y grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12">
-        {site.contact.columns.map((col) => (
-          <div key={col.label} className="flex flex-col gap-2">
-            <p className="label text-fg-secondary mb-2">{col.label}</p>
-            {col.lines.map((line) => (
-              <p key={line} className="text-body text-fg-secondary">
-                {line}
-              </p>
-            ))}
-          </div>
-        ))}
         <div className="flex flex-col gap-2">
-          <p className="label text-fg-secondary mb-2">Otros canales</p>
-          <a
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-body text-fg-secondary hover:opacity-70 transition-opacity"
-          >
-            LinkedIn ↗
+          {projectName && <p className="label text-fg-tertiary">Sobre: {projectName}</p>}
+          <p className="label text-fg-tertiary">{site.contact.emailLabel}</p>
+          <a href={mailtoHref} className="text-h2 hover:opacity-70 transition-opacity">
+            {site.email}
           </a>
+          <CopyEmailButton email={site.email} copyLabel={site.contact.copyLabel} copiedLabel={site.contact.copiedLabel} />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+          {site.contact.columns.map((col) => (
+            <div key={col.label} className="border-t border-line-strong pt-4 flex flex-col gap-3">
+              <p className="label text-fg-tertiary">{col.label}</p>
+              {col.lines.map((line) => (
+                <p key={line} className="text-body">
+                  {line}
+                </p>
+              ))}
+            </div>
+          ))}
+          <div className="border-t border-line-strong pt-4 flex flex-col gap-3">
+            <p className="label text-fg-tertiary">Otros canales</p>
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-body hover:opacity-70 transition-opacity">
+              LinkedIn ↗
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="page-x pb-16">
+      <div className="border-t border-line-subtle flex flex-wrap items-start justify-between gap-2 page-x py-6">
         <p className="label text-fg-tertiary">
           © {new Date().getFullYear()} {site.name} · {site.brand}
         </p>
-      </section>
+        <p className="label text-fg-tertiary">{site.location}</p>
+      </div>
     </main>
   )
 }
