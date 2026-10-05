@@ -34,9 +34,9 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
 
   return (
     <main className="bg-canvas">
-      <section className="page-x pt-32 lg:pt-48 pb-12 lg:pb-16">
-        <h1 className="text-display">{site.projectsPage.title}</h1>
-        <div className="flex gap-2 mt-10 overflow-x-auto scrollbar-hide lg:flex-wrap">
+      <section className="page-x pt-[calc(var(--navbar-h)+48px)] lg:pt-[calc(var(--navbar-h)+96px)] pb-8 lg:pb-16">
+        <h1 className="text-h2">{site.projectsPage.title}</h1>
+        <div className="flex gap-2 mt-6 lg:mt-8 overflow-x-auto scrollbar-hide lg:flex-wrap">
           {filters.map((f) => (
             <FilterChip
               key={f.slug ?? 'todos'}
@@ -48,8 +48,8 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
         </div>
       </section>
 
-      <section className="page-x pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+      <section className="page-x">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-24">
           {visible.map((project, i) => {
             const variant = workCardVariant(i, visible.length)
             return (
@@ -61,7 +61,7 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
         </div>
       </section>
 
-      <section className="page-x section-y">
+      <section className="page-x pt-[var(--block-gap)] lg:pt-[var(--section-y)] pb-[var(--section-y)]">
         <p className="label text-fg-secondary mb-6">{site.projectsPage.othersLabel}</p>
         <div>
           {site.projectsPage.others.map((other) => (
