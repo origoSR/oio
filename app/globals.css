@@ -76,7 +76,7 @@
 [data-project="rbi"]         { --project-accent: var(--rbi-accent);        --project-tint: var(--rbi-tint);        --project-on-accent: var(--neutral-0); --project-on-accent-2: var(--rbi-on-accent-2); }
 [data-project="santalucia"]  { --project-accent: var(--santalucia-accent); --project-tint: var(--santalucia-tint); --project-on-accent: var(--neutral-900); --project-on-accent-2: var(--santalucia-on-accent-2); }
 [data-project="salma"]       { --project-accent: #8F8749; --project-tint: #F3ECE2; --project-on-accent: #F3ECE2; --project-on-accent-2: rgb(243 236 226 / .72); }
-[data-project="malaga-tech"] { --project-accent: #111111; --project-tint: #FFFFFF; --project-on-accent: #FFFFFF; --project-on-accent-2: rgb(255 255 255 / .72); }
+[data-project="malaga-tech"] { --project-accent: #465EFF; --project-tint: #FFFFFF; --project-on-accent: #FFFFFF; --project-on-accent-2: rgb(255 255 255 / .72); }
 [data-project="laskurain"]   { --project-accent: #F2F0EB; --project-tint: #E6E1D6; --project-on-accent: #1C1C1A; --project-on-accent-2: rgb(28 28 26 / .72); }
 
 /* --------------------------------------------------------------------------
