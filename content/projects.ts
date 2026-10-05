@@ -22,8 +22,8 @@ const catalonia: Project = {
   card: {
     services: 'Web · Sistema de diseño · UX/UI',
     tagline: 'Un sistema de diseño para una web de reservas',
-    wide: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques: valoración, calendario y buscador'),
-    narrow: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques'),
+    wide: cat('01-portada', 2880, 1800, 'La web de Catalonia Hotels en escritorio y en móvil'),
+    narrow: cat('01-portada', 2880, 1800, 'La web de Catalonia Hotels en escritorio y en móvil'),
   },
   title: 'Catalonia Hotels',
   subtitle: 'Un sistema de diseño para una web de reservas',
@@ -40,7 +40,7 @@ const catalonia: Project = {
     { label: 'Enlaces', content: 'cataloniahotels.com', href: 'https://www.cataloniahotels.com' },
   ],
   blocks: [
-    { type: 'cover', image: cat('01-portada', 2880, 1800, 'Web de Catalonia Hotels sobre la piscina de Ses Estaques: valoración, calendario y buscador') },
+    { type: 'cover', image: cat('01-portada', 2880, 1800, 'La web de Catalonia Hotels en escritorio y en móvil') },
     { type: 'statement', label: 'Resumen', text: 'Rediseñamos la web de reservas de Catalonia Hotels en diez sprints, del buscador al área privada, sobre un sistema de 230 componentes que lo mantiene todo coherente.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '230', label: 'Componentes' },
@@ -248,8 +248,8 @@ const santalucia: Project = {
   card: {
     services: 'UX research · Producto',
     tagline: 'Saber en qué punto está la reparación de tu casa',
-    wide: sl('01-portada', 1556, 884, 'Portada de Santalucía Impulsa'),
-    narrow: sl('02-img', 425, 856, 'Notificación de la app de Santalucía Impulsa', 'contain'),
+    wide: sl('01-portada', 2880, 1800, 'Manos protegiendo una casa y la app de Santalucía Impulsa en dos móviles'),
+    narrow: sl('01-portada', 2880, 1800, 'Manos protegiendo una casa y la app de Santalucía Impulsa'),
   },
   title: 'Santalucía Impulsa',
   subtitle: 'Saber en qué punto está la reparación de tu casa',
@@ -266,7 +266,7 @@ const santalucia: Project = {
     { label: 'Enlaces', content: 'Caso publicado por UXER School', href: '' /* TODO: URL del caso en UXER School */ },
   ],
   blocks: [
-    { type: 'cover', image: sl('01-portada', 1556, 884, 'Portada de Santalucía Impulsa: manos protegiendo una casa') },
+    { type: 'cover', image: sl('01-portada', 2880, 1800, 'Manos protegiendo una casa y la app de Santalucía Impulsa en dos móviles') },
     { type: 'statement', label: 'Resumen', text: 'Una app para que el cliente de Santalucía sepa en todo momento en qué punto está la reparación de su casa: quién va, cuándo y qué falta. Proyecto del bootcamp de UXER School, elegido después como caso de estudio.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '4', label: 'Problemas detectados en el research' },
@@ -298,8 +298,8 @@ const rankMeHigher: Project = {
   card: {
     services: 'Web · SEO · UX/UI',
     tagline: 'Diseño y SEO para una agencia de Londres',
-    wide: rmh('01-portada', 2400, 1284, 'Web de Rank Me Higher'),
-    narrow: rmh('01-portada', 2400, 1284, 'Web de Rank Me Higher', 'contain'),
+    wide: rmh('01-portada', 2880, 1800, 'Portada y página de servicios de rankmehigher.co sobre el degradado de la marca'),
+    narrow: rmh('01-portada', 2880, 1800, 'Web de Rank Me Higher'),
   },
   title: 'Rank Me Higher',
   subtitle: 'Diseño y SEO para una agencia de Londres',
@@ -316,7 +316,7 @@ const rankMeHigher: Project = {
     { label: 'Enlaces', content: 'rankmehigher.co', href: 'https://rankmehigher.co' },
   ],
   blocks: [
-    { type: 'cover', image: rmh('01-portada', 2400, 1284, 'Web de Rank Me Higher en portátil') },
+    { type: 'cover', image: rmh('01-portada', 2880, 1800, 'Portada y página de servicios de rankmehigher.co sobre el degradado de la marca') },
     { type: 'statement', label: 'Resumen', text: 'Diseño la web de Rank Me Higher y llevo el SEO y el GEO de sus clientes: pymes de varios países que necesitan salir en Google y en las respuestas de los buscadores con IA.' },
     { type: 'figures', label: 'En cifras', items: [
       { value: '25', label: 'Webs de clientes diseñadas', provisional: true },
