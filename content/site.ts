@@ -19,7 +19,7 @@ export const site = {
     },
     eyebrow: 'Rodrigo Sánchez · Diseñador de producto · Málaga',
     title: 'Diseño productos digitales y webs, y los llevo hasta el código.',
-    lead: 'Sistemas de diseño, UX/UI y SEO para marcas y startups. Trabajo con Figma, Claude y Next.js para que lo que diseño sea lo que se publica.',
+    lead: 'Sistemas de diseño, UX/UI y SEO para marcas y startups. Diseño en Figma y lo desarrollo yo en Next.js, para que lo que diseño sea lo que se publica.',
     ctas: [
       { label: 'Ver proyectos →', href: '/proyectos' },
       { label: 'Escríbeme →', href: '/contacto' },
@@ -40,8 +40,8 @@ export const site = {
       title: 'De Figma a producción, sin traducir nada a mano.',
       steps: [
         { n: '01 · Sistema', title: 'Todo empieza en tokens y componentes', text: 'Color, tipografía y espaciado viven como variables en Figma y con el mismo nombre en el código.' },
-        { n: '02 · IA', title: 'Claude en medio del proceso', text: 'Con MCP, Claude lee el archivo de Figma y el repositorio. Me ayuda a montar pantallas, revisar y documentar.' },
-        { n: '03 · Código', title: 'Lo diseñado es lo publicado', text: 'Next.js, Tailwind y Vercel. Entrego webs funcionando, no solo pantallas.' },
+        { n: '02 · Código', title: 'El código lo escribo yo', text: 'Maqueto cada pantalla en Next.js y Tailwind con los mismos tokens de Figma. Sin traspasos a otro equipo ni nada que se pierda por el camino.' },
+        { n: '03 · Publicación', title: 'Lo diseñado es lo publicado', text: 'Publico en Vercel y entrego webs funcionando, rápidas y preparadas para SEO, no solo pantallas.' },
       ],
     },
   },

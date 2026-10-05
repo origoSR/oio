@@ -164,12 +164,12 @@ const pushProject: Project = {
       { value: '6', label: 'Escenarios en la app' },
     ] },
     { type: 'gallery', items: [
-      { layout: 'browser', images: [push('02-img', 1920, 1112, 'Sección de escenarios de exposición en la portada')], caption: 'Portada: los escenarios de exposición, a la vista desde el primer scroll.' },
+      { layout: 'browser', images: [push('02-img', 1920, 1091, 'Escenarios de exposición: miedo a volar y miedo a conducir')], caption: 'Portada: los escenarios de exposición, a la vista desde el primer scroll.' },
       { layout: 'phones', images: [
-        push('03-img', 390, 894, 'Portada de la web en móvil'),
-        push('04-img', 390, 906, 'Cómo funciona, en móvil'),
-        push('05-img', 390, 880, 'Evidencia clínica, en móvil'),
-      ], caption: 'En móvil: portada, cómo funciona y evidencia clínica.' },
+        push('03-img', 390, 880, 'Evidencia clínica de Push, en móvil'),
+        push('04-img', 390, 1308, 'Formulario para pedir una demo, en móvil'),
+        push('05-img', 390, 906, 'Así es una sesión con Push, en móvil'),
+      ], caption: 'En móvil: evidencia clínica, pedir una demo y cómo es una sesión.' },
     ] },
     { type: 'decision', order: 'text-media', number: '01 · SEO', title: 'Una página por fobia', text: 'Un psicólogo no busca "realidad virtual", busca cómo tratar el miedo a volar. Cada fobia tiene su página, con los niveles del escenario, preguntas frecuentes y el botón para pedir la demo.', caption: '/miedo-a-volar', image: push('06-img', 1920, 816, 'Cabecera de la página de miedo a volar', 'contain') },
     { type: 'decision', order: 'media-text', number: '02 · Venta', title: 'Dos caminos para comprar: demo o plan', text: 'Quien duda pide una demo con un formulario corto; quien lo tiene claro elige plan y paga en el momento. Los dos botones están en toda la web y cada camino acaba en su página de confirmación.', caption: '/precios', image: push('07-img', 1920, 912, 'Página de precios con los planes para profesionales', 'contain') },
