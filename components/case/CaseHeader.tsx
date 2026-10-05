@@ -20,6 +20,11 @@ export function CaseHeader({ project }: { project: Project }) {
   // esta el usuario, para que pueda bajar y leerla entera con el scroll normal de la pagina.
   const [absoluteMode, setAbsoluteMode] = useState(false)
   const [absoluteTop, setAbsoluteTop] = useState(0)
+  // Mientras dura el scroll automatico hasta la barra (abrir desde el hero), se ignora el
+  // cierre a los 24px. startYRef es la referencia para ese cierre: al abrir con la barra ya
+  // fija es el scrollY de ese momento; tras el scroll automatico, se actualiza al terminar.
+  const autoScrollingRef = useRef(false)
+  const startYRef = useRef(0)
   const sentinelRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const fixedNavRef = useRef<HTMLDivElement>(null)
@@ -91,19 +96,22 @@ export function CaseHeader({ project }: { project: Project }) {
   }, [stuck])
 
   // Se cierra al hacer scroll mas de 24px (en cualquier direccion) desde que se abrio.
-  // No aplica en modo absolute: ahi se deja leer con el scroll normal de la pagina.
+  // No aplica en modo absolute (se deja leer con el scroll normal) ni mientras dura el
+  // scroll automatico hasta la barra al abrir desde el hero.
   useEffect(() => {
     if (!open || absoluteMode) return
 
-    const startY = window.scrollY
+    startYRef.current = window.scrollY
     let ticking = false
 
     const onScroll = () => {
+      if (autoScrollingRef.current) return
       if (ticking) return
       ticking = true
       requestAnimationFrame(() => {
         ticking = false
-        if (Math.abs(window.scrollY - startY) > 24) setOpen(false)
+        if (autoScrollingRef.current) return
+        if (Math.abs(window.scrollY - startYRef.current) > 24) setOpen(false)
       })
     }
 
@@ -161,6 +169,46 @@ export function CaseHeader({ project }: { project: Project }) {
     .filter(Boolean)
     .join(' · ')
 
+  // Tras el scroll automatico hasta la barra (abrir desde el hero), con la barra ya fija:
+  // misma comprobacion que al abrir con la barra fija, pero medida en fresco (no por estado,
+  // que aqui podria venir de antes del scroll).
+  const settleAfterAutoScroll = () => {
+    if (!autoScrollingRef.current) return
+    autoScrollingRef.current = false
+    startYRef.current = window.scrollY
+
+    const freshBarHeight = barRef.current?.getBoundingClientRect().height ?? 0
+    const measuredHeight = contentRef.current?.getBoundingClientRect().height ?? 0
+    const available = window.innerHeight - freshBarHeight
+    if (measuredHeight > available) {
+      setAbsoluteTop(window.scrollY + freshBarHeight)
+      setAbsoluteMode(true)
+    }
+  }
+
+  // Abrir desde el hero (barra aun no fija): desplaza la pagina hasta el punto exacto en el
+  // que la barra queda pegada arriba (como en Bold), ignorando el cierre a los 24px mientras
+  // dura. Al terminar (scrollend, con un respaldo de 700ms para Safari), se fija la nueva
+  // referencia de scroll y se comprueba si la ficha es demasiado alta para la pantalla.
+  const scrollToBar = () => {
+    const sentinel = sentinelRef.current
+    if (!sentinel) return
+    const targetY = window.scrollY + sentinel.getBoundingClientRect().top
+
+    autoScrollingRef.current = true
+    const onScrollEnd = () => {
+      window.removeEventListener('scrollend', onScrollEnd)
+      settleAfterAutoScroll()
+    }
+    window.addEventListener('scrollend', onScrollEnd)
+    setTimeout(() => {
+      window.removeEventListener('scrollend', onScrollEnd)
+      settleAfterAutoScroll()
+    }, 700)
+
+    window.scrollTo({ top: targetY, behavior: reducedMotion ? 'instant' : 'smooth' })
+  }
+
   const handleToggle = () => {
     if (open) {
       setOpen(false)
@@ -179,10 +227,16 @@ export function CaseHeader({ project }: { project: Project }) {
         setOpen(true)
         return
       }
+      setAbsoluteMode(false)
+      setOpen(true)
+      return
     }
 
+    // Barra aun no fija: se abre ya en capa fija y la pagina se desplaza sola hasta que
+    // la barra queda pegada arriba del todo (sustituye al despliegue en el flujo).
     setAbsoluteMode(false)
     setOpen(true)
+    scrollToBar()
   }
 
   return (
@@ -242,19 +296,21 @@ export function CaseHeader({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Ficha: sin max-height ni scroll interno, mide lo que mida su contenido.
-          Fixed si la barra esta pegada, absolute si no cabe en pantalla, relativa (en el
-          flujo) si la barra esta en su sitio. Animacion con grid-template-rows 0fr -> 1fr. */}
+      {/* Ficha: sin max-height ni scroll interno, mide lo que mida su contenido. Siempre en
+          capa debajo de la barra (nunca en el flujo): fixed normalmente, absolute si no cabe
+          en pantalla. Si la barra aun no esta fija, abrir dispara el scroll hasta que lo este
+          (scrollToBar) y top ya sigue ese cambio en vivo via barTopOffset/barHeight.
+          Animacion con grid-template-rows 0fr -> 1fr. */}
       <div
         id={panelId}
         ref={panelRef}
         tabIndex={-1}
         inert={!open}
         className={cn(
-          'z-20 bg-project text-on-project',
-          absoluteMode ? 'absolute left-0 right-0 shadow-media' : stuck ? 'fixed left-0 right-0 shadow-media' : 'relative'
+          'z-20 bg-project text-on-project shadow-media',
+          absoluteMode ? 'absolute left-0 right-0' : 'fixed left-0 right-0'
         )}
-        style={{ top: absoluteMode ? absoluteTop : stuck ? barTopOffset + barHeight : undefined }}
+        style={{ top: absoluteMode ? absoluteTop : barTopOffset + barHeight }}
       >
         <div
           className="grid"
