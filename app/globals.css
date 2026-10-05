@@ -56,6 +56,10 @@
   --gutter: 16px;
   --section-y: 80px;
   --block-gap: 48px;
+
+  /* Alto real del Site/Navbar fixed, medido por SiteNavbar (ver componente).
+     Este valor es solo el respaldo antes de que el JS lo corrija. */
+  --navbar-h: 72px;
 }
 
 @media (min-width: 1024px) {

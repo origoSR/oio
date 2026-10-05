@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Logo } from '@/components/shared/Logo'
@@ -11,8 +11,22 @@ export function SiteNavbar() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const [pastHero, setPastHero] = useState(!isHome)
+  const navRef = useRef<HTMLElement>(null)
 
   const isCaseDetail = /^\/proyectos\/[^/]+$/.test(pathname)
+
+  // El navbar es fixed (se superpone al contenido): las paginas que empiezan
+  // justo debajo miden su propio alto real en --navbar-h en vez de usar un
+  // numero fijo a mano, para no desincronizarse si el navbar cambia.
+  useLayoutEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+    const setHeight = () => document.documentElement.style.setProperty('--navbar-h', `${nav.offsetHeight}px`)
+    setHeight()
+    const observer = new ResizeObserver(setHeight)
+    observer.observe(nav)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     if (!isHome) {
@@ -33,13 +47,14 @@ export function SiteNavbar() {
 
   return (
     <nav
+      ref={navRef}
       className={cn(
         'fixed top-0 left-0 w-full z-50 py-4 page-x flex items-center justify-between transition-colors duration-300',
         pastHero ? 'bg-canvas text-fg' : 'bg-transparent text-fg'
       )}
     >
       <Link href="/" aria-label="Inicio">
-        <Logo className="h-8 w-8" />
+        <Logo className="h-10 w-10" />
       </Link>
       <div className="flex items-center gap-8">
         {site.nav.map((item) => {
