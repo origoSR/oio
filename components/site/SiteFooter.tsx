@@ -13,7 +13,7 @@ export function SiteFooter() {
           LinkedIn ↗
         </a>
       </div>
-      <div className="flex items-center justify-between mt-16 pt-6 border-t border-fg-on-inverse-secondary/20">
+      <div className="flex flex-wrap items-start justify-between gap-2 mt-12 lg:mt-16 pt-6 border-t border-fg-on-inverse-secondary/20">
         <p className="label text-fg-on-inverse-secondary">
           © {new Date().getFullYear()} {site.name} · {site.brand}
         </p>
