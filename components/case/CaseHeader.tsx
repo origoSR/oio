@@ -15,16 +15,23 @@ export function CaseHeader({ project }: { project: Project }) {
   const [navVisible, setNavVisible] = useState(false)
   const [barHeight, setBarHeight] = useState(0)
   const [navHeight, setNavHeight] = useState(0)
-  const [contentHeight, setContentHeight] = useState(0)
+  // Ficha mas alta que la pantalla, abierta con la barra fija: en vez de una capa fixed
+  // (que recortaria sin dejar leerla), se coloca absolute en el sitio del documento donde
+  // esta el usuario, para que pueda bajar y leerla entera con el scroll normal de la pagina.
+  const [absoluteMode, setAbsoluteMode] = useState(false)
+  const [absoluteTop, setAbsoluteTop] = useState(0)
   const sentinelRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const fixedNavRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const bottomSentinelRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const panelId = useId()
   const reducedMotion = useReducedMotion()
   const transitionClass = reducedMotion ? '' : 'transition-all duration-[250ms] ease-out'
+  const navOut = !(stuck && navVisible)
+  const barTopOffset = stuck && navVisible ? navHeight : 0
 
   // Barra pegada: la detecta un sentinel de 1px justo antes.
   useEffect(() => {
@@ -58,14 +65,6 @@ export function CaseHeader({ project }: { project: Project }) {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    const content = contentRef.current
-    if (!content) return
-    const observer = new ResizeObserver(([entry]) => setContentHeight(entry.contentRect.height))
-    observer.observe(content)
-    return () => observer.disconnect()
-  }, [])
-
   // Con la barra pegada: al bajar se esconde la navbar fija; al subir ~8px vuelve a aparecer.
   useEffect(() => {
     if (!stuck) return
@@ -90,6 +89,48 @@ export function CaseHeader({ project }: { project: Project }) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [stuck])
+
+  // Se cierra al hacer scroll mas de 24px (en cualquier direccion) desde que se abrio.
+  // No aplica en modo absolute: ahi se deja leer con el scroll normal de la pagina.
+  useEffect(() => {
+    if (!open || absoluteMode) return
+
+    const startY = window.scrollY
+    let ticking = false
+
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        ticking = false
+        if (Math.abs(window.scrollY - startY) > 24) setOpen(false)
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [open, absoluteMode])
+
+  // Modo absolute: se cierra cuando el borde inferior de la ficha sube por encima de la barra.
+  useEffect(() => {
+    if (!open || !absoluteMode) return
+    const el = bottomSentinelRef.current
+    if (!el) return
+
+    let wasIntersecting = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          wasIntersecting = true
+        } else if (wasIntersecting) {
+          setOpen(false)
+        }
+      },
+      { rootMargin: `-${barTopOffset + barHeight}px 0px 0px 0px`, threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [open, absoluteMode, barTopOffset, barHeight])
 
   useEffect(() => {
     if (!open) return
@@ -120,8 +161,29 @@ export function CaseHeader({ project }: { project: Project }) {
     .filter(Boolean)
     .join(' · ')
 
-  const navOut = !(stuck && navVisible)
-  const barTopOffset = stuck && navVisible ? navHeight : 0
+  const handleToggle = () => {
+    if (open) {
+      setOpen(false)
+      return
+    }
+
+    if (stuck) {
+      // Medido directo del ref (no por estado vía ResizeObserver): con la ficha colapsada
+      // a 0 por el grid-template-rows, un ResizeObserver sobre ese contenido no siempre
+      // notifica el cambio, pero su alto real sigue siendo correcto en el propio layout.
+      const measuredHeight = contentRef.current?.getBoundingClientRect().height ?? 0
+      const available = window.innerHeight - barHeight
+      if (measuredHeight > available) {
+        setAbsoluteTop(window.scrollY + barTopOffset + barHeight)
+        setAbsoluteMode(true)
+        setOpen(true)
+        return
+      }
+    }
+
+    setAbsoluteMode(false)
+    setOpen(true)
+  }
 
   return (
     <>
@@ -166,7 +228,7 @@ export function CaseHeader({ project }: { project: Project }) {
             type="button"
             aria-expanded={open}
             aria-controls={panelId}
-            onClick={() => setOpen((v) => !v)}
+            onClick={handleToggle}
             className="text-body font-semibold hover:opacity-70 transition-opacity"
           >
             {open ? '− Ficha del proyecto' : '+ Ficha del proyecto'}
@@ -180,24 +242,33 @@ export function CaseHeader({ project }: { project: Project }) {
         </div>
       </div>
 
+      {/* Ficha: sin max-height ni scroll interno, mide lo que mida su contenido.
+          Fixed si la barra esta pegada, absolute si no cabe en pantalla, relativa (en el
+          flujo) si la barra esta en su sitio. Animacion con grid-template-rows 0fr -> 1fr. */}
       <div
         id={panelId}
         ref={panelRef}
         tabIndex={-1}
         inert={!open}
         className={cn(
-          'z-20 bg-project text-on-project overflow-y-auto',
-          stuck ? 'fixed left-0 right-0 shadow-media' : 'relative',
-          reducedMotion ? undefined : 'transition-[max-height,opacity] duration-[250ms] ease-out'
+          'z-20 bg-project text-on-project',
+          absoluteMode ? 'absolute left-0 right-0 shadow-media' : stuck ? 'fixed left-0 right-0 shadow-media' : 'relative'
         )}
-        style={{
-          top: stuck ? barTopOffset + barHeight : undefined,
-          maxHeight: !open ? '0px' : stuck ? `min(${contentHeight}px, 70vh)` : `${contentHeight}px`,
-          opacity: open ? 1 : 0,
-        }}
+        style={{ top: absoluteMode ? absoluteTop : stuck ? barTopOffset + barHeight : undefined }}
       >
-        <div ref={contentRef} className="page-x pt-6 pb-8">
-          <Ficha ficha={project.ficha} nda={project.nda} />
+        <div
+          className="grid"
+          style={{
+            gridTemplateRows: open ? '1fr' : '0fr',
+            transition: reducedMotion ? undefined : 'grid-template-rows 300ms ease',
+          }}
+        >
+          <div className="overflow-hidden" style={{ overflowAnchor: 'none' }}>
+            <div ref={contentRef} className="page-x pt-6 pb-8">
+              <Ficha ficha={project.ficha} nda={project.nda} />
+              <div ref={bottomSentinelRef} aria-hidden="true" />
+            </div>
+          </div>
         </div>
       </div>
 
