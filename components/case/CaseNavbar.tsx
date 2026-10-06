@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Logo } from '@/components/shared/Logo'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { site } from '@/content/site'
 
 export function CaseNavbar() {
@@ -14,6 +15,7 @@ export function CaseNavbar() {
             {item.label}
           </Link>
         ))}
+        <ThemeToggle />
       </div>
     </div>
   )

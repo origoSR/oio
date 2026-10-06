@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Logo } from '@/components/shared/Logo'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { site } from '@/content/site'
 import { cn } from '@/lib/utils'
 
@@ -70,6 +71,7 @@ export function SiteNavbar() {
             </Link>
           )
         })}
+        <ThemeToggle />
       </div>
     </nav>
   )

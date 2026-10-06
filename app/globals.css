@@ -8,10 +8,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Modo oscuro: clase html.dark (no prefers-color-scheme), la pone el script
+   anti-parpadeo de layout.tsx antes de pintar. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* --------------------------------------------------------------------------
    1. Primitivos (no se usan directamente en componentes)
    -------------------------------------------------------------------------- */
 :root {
+  color-scheme: light;
+
   --neutral-0: #ffffff;
   --neutral-50: #fafafa;
   --neutral-100: #f5f5f5;
@@ -95,6 +101,39 @@
 [data-project="salma"]       { --project-accent: #8F8749; --project-tint: #F3ECE2; --project-on-accent: #F3ECE2; --project-on-accent-2: rgb(243 236 226 / .72); }
 [data-project="malaga-tech"] { --project-accent: #465EFF; --project-tint: #FFFFFF; --project-on-accent: #FFFFFF; --project-on-accent-2: rgb(255 255 255 / .72); }
 [data-project="laskurain"]   { --project-accent: #F2F0EB; --project-tint: #E6E1D6; --project-on-accent: #1C1C1A; --project-on-accent-2: rgb(28 28 26 / .72); }
+
+/* Modo oscuro: redefine los tokens semánticos bajo html.dark, los claros no
+   se tocan. project-accent y project-on-accent son la marca del cliente y no
+   cambian; solo el tint (más oscuro) se recalcula sobre el accent de cada
+   proyecto, así que una sola regla genérica vale para los nueve. */
+html.dark {
+  color-scheme: dark;
+
+  --color-canvas: #0A0A0A;
+  --color-surface: #141414;
+  --color-subtle: #1C1C1C;
+  --color-inverse: #FAFAFA;
+
+  --color-fg: #FAFAFA;
+  --color-fg-secondary: rgb(250 250 250 / .64);
+  --color-fg-tertiary: rgb(250 250 250 / .44);
+  --color-fg-on-inverse: #0A0A0A;
+  --color-fg-on-inverse-secondary: rgb(10 10 10 / .64);
+
+  --color-line-subtle: rgb(250 250 250 / .08);
+  --color-line: rgb(250 250 250 / .14);
+  --color-line-strong: rgb(250 250 250 / .32);
+  /* No está en la tabla del brief: sigue a --color-fg, como en claro
+     (--color-focus: neutral-900 = fg), para que el anillo de foco no
+     desaparezca sobre fondo oscuro. */
+  --color-focus: #FAFAFA;
+
+  --color-white: #FAFAFA;
+}
+
+html.dark [data-project] {
+  --project-tint: color-mix(in srgb, var(--project-accent) 14%, #0A0A0A);
+}
 
 /* --------------------------------------------------------------------------
    2. @theme — lo que Tailwind convierte en utilidades
@@ -241,7 +280,12 @@
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
   }
-  body { min-height: 100dvh; font-size: var(--text-body); line-height: 1.6; }
+  body {
+    min-height: 100dvh;
+    font-size: var(--text-body);
+    line-height: 1.6;
+    transition: background-color 200ms, color 200ms;
+  }
 
   h1, h2, h3, h4 { text-wrap: balance; }
   p { text-wrap: pretty; }
