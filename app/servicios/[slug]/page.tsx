@@ -11,6 +11,14 @@ import { FaqItem } from '@/components/site/FaqItem'
 import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
+import { cn } from '@/lib/utils'
+
+// Tantas columnas como paquetes en escritorio (Diseño web: 4; el resto: 2 o 3).
+const PACKAGES_COLS: Record<number, string> = {
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+}
 
 export function generateStaticParams() {
   return servicePages.map((s) => ({ slug: s.slug }))
@@ -110,7 +118,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <p className="label text-fg-secondary">{service.packages.label}</p>
           <h2 className="text-h2 max-w-media-m">{service.packages.title}</h2>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 items-stretch">
+        {/* En escritorio, una fila con tantas columnas como paquetes (Diseño web tiene 4; el resto, 2 o 3). Clases literales: Tailwind no genera lg:grid-cols-${n} desde una variable. */}
+        <div className={cn('grid grid-cols-1 gap-4 lg:gap-8 items-stretch', PACKAGES_COLS[service.packages.items.length] ?? 'lg:grid-cols-3')}>
           {service.packages.items.map((pkg) => (
             <PackageCard key={pkg.title} pkg={pkg} />
           ))}
