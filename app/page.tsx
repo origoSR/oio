@@ -6,7 +6,7 @@ import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { Button } from '@/components/site/Button'
 import { ServiceRow } from '@/components/site/ServiceRow'
-import { homeServiceLinks } from '@/content/services'
+import { homeServiceLinks, servicePages } from '@/content/services'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
@@ -29,6 +29,10 @@ export default function HomePage() {
     address: 'Málaga',
     sameAs: [site.linkedin],
     worksFor: { '@type': 'Organization', name: site.brand },
+    makesOffer: servicePages.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: s.title, description: s.summary, url: `https://oi0.es/servicios/${s.slug}` },
+    })),
   }
 
   const featured = featuredSlugs.map(getProject).filter((p): p is NonNullable<typeof p> => Boolean(p))
