@@ -9,6 +9,8 @@ import { WorkCard } from '@/components/site/WorkCard'
 import { AgencyForm } from '@/components/site/AgencyForm'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
+import { brandNotes } from '@/content/brand'
+import { Construction } from '@/components/brand/Construction'
 
 // No va en el menú: enlazada desde el pie y /servicios.
 export const metadata: Metadata = {
@@ -30,8 +32,8 @@ export default function AgenciasPage() {
 
   return (
     <main className="bg-canvas">
-      {/* 1. Cabecera */}
-      <section className="page-x pt-[calc(var(--navbar-h)+var(--section-y))] pb-[var(--section-y)] flex flex-col gap-6">
+      {/* 1. Cabecera. Recurso de marca: retícula + anotación del h1, siempre visible desde 1024px. */}
+      <section className="relative page-x pt-[calc(var(--navbar-h)+var(--section-y))] pb-[var(--section-y)] flex flex-col gap-6">
         <p className="label text-fg-secondary">{agencies.eyebrow}</p>
         <h1 className="text-h1 max-w-media-l">{agencies.h1}</h1>
         <p className="text-lead text-fg-secondary max-w-text">{agencies.lead}</p>
@@ -39,9 +41,10 @@ export default function AgenciasPage() {
         <div className="flex flex-wrap items-center gap-8">
           {agencies.ctas.map((cta, i) =>
             i === 0 ? (
-              <Button key={cta.href} href={cta.href}>
-                {cta.label}
-              </Button>
+              <span key={cta.href} className="relative inline-block">
+                <Button href={cta.href}>{cta.label}</Button>
+                <Construction mode="always" corners notes={[brandNotes.agencias.button]} />
+              </span>
             ) : (
               <Link key={cta.href} href={cta.href} className="text-body font-semibold hover:opacity-70 transition-opacity">
                 {cta.label}
@@ -49,10 +52,11 @@ export default function AgenciasPage() {
             )
           )}
         </div>
+        <Construction mode="always" grid outline={false} notes={[brandNotes.agencias.h1]} />
       </section>
 
-      {/* 2. Qué cubro */}
-      <section className="page-x pb-[var(--section-y)] flex flex-col gap-8">
+      {/* 2. Qué cubro. Recurso de marca: ◇ Site/Step × 4. */}
+      <section className="relative page-x pb-[var(--section-y)] flex flex-col gap-8">
         <p className="label text-fg-secondary">{agencies.covers.label}</p>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-12">
           {agencies.covers.items.map((item) => (
@@ -60,16 +64,18 @@ export default function AgenciasPage() {
           ))}
         </div>
         <p className="text-body text-fg-secondary">{agencies.covers.extra}</p>
+        <Construction mode="always" notes={[brandNotes.agencias.covers]} />
       </section>
 
-      {/* 3. Cómo colaboro */}
-      <section className="page-x pb-[var(--section-y)] grid-page gap-y-6">
+      {/* 3. Cómo colaboro. Recurso de marca: ◇ Site/Point × 6. */}
+      <section className="relative page-x pb-[var(--section-y)] grid-page gap-y-6">
         <h2 className="col-span-4 lg:col-span-4 text-h2">{agencies.rules.label}</h2>
         <ul className="col-span-4 lg:col-span-8 flex flex-col">
           {agencies.rules.items.map((item) => (
             <Point key={item} text={item} />
           ))}
         </ul>
+        <Construction mode="always" notes={[brandNotes.agencias.rules]} />
       </section>
 
       {/* 4. Formatos, sobre bg-surface */}

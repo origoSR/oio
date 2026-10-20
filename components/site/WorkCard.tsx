@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { Construction } from '@/components/brand/Construction'
+import { publicFileSize } from '@/lib/file-size'
 import type { Project } from '@/content/types'
 
 /**
@@ -12,6 +14,16 @@ export function WorkCard({ project, variant }: { project: Project; variant: 'wid
   const { card } = project
   const image = card.logo ? undefined : variant === 'narrow' ? card.narrow : card.wide
   const sizes = variant === 'narrow' ? '(min-width: 1024px) 416px, 100vw' : '(min-width: 1024px) 1312px, 100vw'
+
+  // Recurso de marca (paso 8): medidas y peso del archivo, calculado en build.
+  const media = card.logo ?? image
+  const weight = media ? publicFileSize(media.src) : null
+  const constructionNotes = media
+    ? [
+        { text: `${media.w} × ${media.h} · ${(media.w / media.h).toFixed(2)}:1`, kind: 'guide' as const },
+        { text: weight ? `${media.src} · ${weight}` : media.src, kind: 'guide' as const },
+      ]
+    : []
 
   return (
     <Link href={`/proyectos/${project.slug}`} data-project={project.key} className="group block">
@@ -42,6 +54,7 @@ export function WorkCard({ project, variant }: { project: Project; variant: 'wid
             />
           </div>
         ) : null}
+        <Construction mode="hover" dashed corners notes={constructionNotes} />
       </div>
 
       <div className="flex items-center gap-2 mt-4">

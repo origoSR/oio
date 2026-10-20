@@ -12,6 +12,8 @@ import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 import { cn } from '@/lib/utils'
+import { brandNotes } from '@/content/brand'
+import { Construction } from '@/components/brand/Construction'
 
 // Tantas columnas como paquetes en escritorio (Diseño web: 4; el resto: 2 o 3).
 const PACKAGES_COLS: Record<number, string> = {
@@ -127,12 +129,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         {service.packages.note && <p className="text-body text-fg-secondary">{service.packages.note}</p>}
       </section>
 
-      {/* 4. Cómo trabajo, sobre bg-surface. */}
-      <section className="bg-surface section-y page-x flex flex-col block-gap">
+      {/* 4. Cómo trabajo, sobre bg-surface. group+relative: en hover, Construction pinta la retícula y anota el h2. */}
+      <section className="group relative bg-surface section-y page-x flex flex-col block-gap">
         <div className="max-w-media-m flex flex-col gap-4">
           <p className="label text-fg-tertiary">{process.label}</p>
           <h2 className="text-h2">{process.title}</h2>
         </div>
+        <Construction mode="hover" grid outline={false} notes={[brandNotes.howWeWork.title]} />
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-12">
           {process.steps.map((step) => (
             <Step key={step.n} n={step.n} title={step.title} text={step.text} />

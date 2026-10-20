@@ -7,6 +7,8 @@ import { SiteFooter } from '@/components/site/SiteFooter'
 import { Button } from '@/components/site/Button'
 import { ServiceRow } from '@/components/site/ServiceRow'
 import { homeServiceLinks, servicePages } from '@/content/services'
+import { brandNotes } from '@/content/brand'
+import { Construction } from '@/components/brand/Construction'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
@@ -104,12 +106,13 @@ export default function HomePage() {
         <div className="bg-line h-px w-full" />
       </section>
 
-      {/* 4. Cómo trabajo: fondo surface, bloque propio. */}
-      <section className="bg-surface section-y page-x flex flex-col block-gap">
+      {/* 4. Cómo trabajo: fondo surface, bloque propio. group+relative: en hover, Construction pinta la retícula y anota el h2. */}
+      <section className="group relative bg-surface section-y page-x flex flex-col block-gap">
         <div className="max-w-media-m flex flex-col gap-4">
           <p className="label text-fg-tertiary">{site.home.how.label}</p>
           <h2 className="text-h2">{site.home.how.title}</h2>
         </div>
+        <Construction mode="hover" grid outline={false} notes={[brandNotes.howWeWork.title]} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
           {site.home.how.steps.map((step) => (
             <div key={step.n} className="border-t border-line-strong pt-4 flex flex-col gap-2">
