@@ -321,7 +321,7 @@ export function CaseHeader({ project }: { project: Project }) {
         >
           <div className="overflow-hidden" style={{ overflowAnchor: 'none' }}>
             <div ref={contentRef} className="page-x pt-6 pb-8">
-              <Ficha ficha={project.ficha} nda={project.nda} />
+              <Ficha ficha={project.ficha} nda={project.nda} slug={project.slug} />
               <div ref={bottomSentinelRef} aria-hidden="true" />
             </div>
           </div>
