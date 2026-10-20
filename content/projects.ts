@@ -427,8 +427,7 @@ const laskurain: Project = {
   card: {
     services: 'Web · WordPress',
     tagline: 'Web para un consultor de estrategia de marca',
-    wide: img('laskurain', '00-tarjeta', 2880, 1800, 'Portada de laskurain.es en un navegador'),
-    narrow: img('laskurain', '00-tarjeta', 2880, 1800, 'Portada de laskurain.es en un navegador', 'contain'),
+    logo: svg('laskurain', 295, 64, 'Logotipo de Laskurain'),
   },
   cardMeta: 'Consultoría · Web · 2026',
   rowMeta: 'Consultoría · Diseño y desarrollo web · 2026',
