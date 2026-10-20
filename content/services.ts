@@ -477,6 +477,7 @@ export const formErrors = {
   email: 'Escribe un email válido, por ejemplo nombre@dominio.com.',
   mensaje: 'Cuéntame algo del proyecto, aunque sea una frase.',
   trabajo: 'Elige al menos una opción.',
+  servicio: 'Elige una opción.',
   privacidad: 'Marca la casilla para que pueda responderte.',
   sending: 'Enviando…',
 }

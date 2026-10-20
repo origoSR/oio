@@ -33,7 +33,7 @@ const clientSchema = z.object({
   nombre: z.string().trim().min(1, formErrors.nombre),
   email: z.string().trim().email(formErrors.email),
   telefono: z.string().optional(),
-  servicio: z.string().min(1, 'Elige una opción.'), // formErrors no trae clave para este campo.
+  servicio: z.string().min(1, formErrors.servicio),
   web: z.string().optional(),
   cuando: z.string().optional(),
   mensaje: z.string().trim().min(1, formErrors.mensaje),
