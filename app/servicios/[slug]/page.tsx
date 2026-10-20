@@ -10,10 +10,10 @@ import { Step } from '@/components/site/Step'
 import { FaqItem } from '@/components/site/FaqItem'
 import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
-import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
+import { workCardVariant, workCardColSpan, workCardColLabel } from '@/lib/work-grid'
 import { cn } from '@/lib/utils'
 import { brandNotes } from '@/content/brand'
-import { Construction } from '@/components/brand/Construction'
+import { SectionGrid, SectionTopPadding, GuideBox, GuideLabel } from '@/components/brand/Construction'
 
 // Tantas columnas como paquetes en escritorio (Diseño web: 4; el resto: 2 o 3).
 const PACKAGES_COLS: Record<number, string> = {
@@ -129,14 +129,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         {service.packages.note && <p className="text-body text-fg-secondary">{service.packages.note}</p>}
       </section>
 
-      {/* 4. Cómo trabajo, sobre bg-surface. group+relative: en hover, Construction pinta la retícula y anota el h2. */}
+      {/* 4. Cómo trabajo, sobre bg-surface. group+relative: al pasar el ratón, la capa de construcción pinta la
+          retícula, la medida del padding superior, el contorno del h2 y la anotación de los pasos. */}
       <section className="group relative bg-surface section-y page-x flex flex-col block-gap">
+        <SectionGrid fillOpacity={0.05} lineOpacity={0.5} visible="hover" />
+        <SectionTopPadding label={brandNotes.howWeWork.paddingPill} />
         <div className="max-w-media-m flex flex-col gap-4">
           <p className="label text-fg-tertiary">{process.label}</p>
-          <h2 className="text-h2">{process.title}</h2>
+          <GuideBox label={brandNotes.howWeWork.h2} opacity={1} visible="hover" className="max-w-media-m">
+            <h2 className="text-h2">{process.title}</h2>
+          </GuideBox>
         </div>
-        <Construction mode="hover" grid outline={false} notes={[brandNotes.howWeWork.title]} />
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-12">
+        <div className="relative grid grid-cols-1 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-12">
+          <GuideLabel visible="hover" className="left-0 bottom-full mb-4">
+            {brandNotes.howWeWork.steps(process.steps.length)}
+          </GuideLabel>
           {process.steps.map((step) => (
             <Step key={step.n} n={step.n} title={step.title} text={step.text} />
           ))}
@@ -161,7 +168,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               const variant = workCardVariant(i, cases.length)
               return (
                 <div key={project.slug} className={workCardColSpan(variant)}>
-                  <WorkCard project={project} variant={variant} />
+                  <WorkCard project={project} variant={variant} colLabel={workCardColLabel(i, cases.length)} />
                 </div>
               )
             })}

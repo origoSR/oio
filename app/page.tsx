@@ -8,8 +8,8 @@ import { Button } from '@/components/site/Button'
 import { ServiceRow } from '@/components/site/ServiceRow'
 import { homeServiceLinks, servicePages } from '@/content/services'
 import { brandNotes } from '@/content/brand'
-import { Construction } from '@/components/brand/Construction'
-import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
+import { SectionGrid, SectionTopPadding, GuideBox, GuideLabel } from '@/components/brand/Construction'
+import { workCardVariant, workCardColSpan, workCardColLabel } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
   title: site.home.seo.title,
@@ -86,7 +86,7 @@ export default function HomePage() {
             const variant = workCardVariant(i, featured.length)
             return (
               <div key={project.slug} className={workCardColSpan(variant)}>
-                <WorkCard project={project} variant={variant} />
+                <WorkCard project={project} variant={variant} colLabel={workCardColLabel(i, featured.length)} />
               </div>
             )
           })}
@@ -106,14 +106,21 @@ export default function HomePage() {
         <div className="bg-line h-px w-full" />
       </section>
 
-      {/* 4. Cómo trabajo: fondo surface, bloque propio. group+relative: en hover, Construction pinta la retícula y anota el h2. */}
+      {/* 4. Cómo trabajo: fondo surface, bloque propio. group+relative: al pasar el ratón, la capa de construcción
+          pinta la retícula, la medida del padding superior, el contorno del h2 y la anotación de los pasos. */}
       <section className="group relative bg-surface section-y page-x flex flex-col block-gap">
+        <SectionGrid fillOpacity={0.05} lineOpacity={0.5} visible="hover" />
+        <SectionTopPadding label={brandNotes.howWeWork.paddingPill} />
         <div className="max-w-media-m flex flex-col gap-4">
           <p className="label text-fg-tertiary">{site.home.how.label}</p>
-          <h2 className="text-h2">{site.home.how.title}</h2>
+          <GuideBox label={brandNotes.howWeWork.h2} opacity={1} visible="hover" className="max-w-media-m">
+            <h2 className="text-h2">{site.home.how.title}</h2>
+          </GuideBox>
         </div>
-        <Construction mode="hover" grid outline={false} notes={[brandNotes.howWeWork.title]} />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+        <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-x-4 lg:gap-x-8 gap-y-12 lg:gap-y-16">
+          <GuideLabel visible="hover" className="left-0 bottom-full mb-4">
+            {brandNotes.howWeWork.steps(site.home.how.steps.length)}
+          </GuideLabel>
           {site.home.how.steps.map((step) => (
             <div key={step.n} className="border-t border-line-strong pt-4 flex flex-col gap-2">
               <p className="label text-fg-tertiary">{step.n}</p>

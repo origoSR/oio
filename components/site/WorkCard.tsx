@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { Construction } from '@/components/brand/Construction'
+import { WorkCardMediaConstruction, WorkCardOuterConstruction } from '@/components/brand/Construction'
 import { publicFileSize } from '@/lib/file-size'
 import type { Project } from '@/content/types'
 
@@ -9,26 +9,22 @@ import type { Project } from '@/content/types'
  * Site/WorkCard. `variant` decide que imagen de `card` se usa y el ancho en la rejilla.
  * 'full' es la ultima tarjeta cuando el numero de proyectos visibles es impar: usa la
  * imagen wide (o el logo) a las 12 columnas, con una media mas alta en desktop.
+ * `colLabel` (recurso de marca): "col 1–8" etc., de lib/work-grid.ts.
  */
-export function WorkCard({ project, variant }: { project: Project; variant: 'wide' | 'narrow' | 'full' }) {
+export function WorkCard({ project, variant, colLabel }: { project: Project; variant: 'wide' | 'narrow' | 'full'; colLabel?: string }) {
   const { card } = project
   const image = card.logo ? undefined : variant === 'narrow' ? card.narrow : card.wide
   const sizes = variant === 'narrow' ? '(min-width: 1024px) 416px, 100vw' : '(min-width: 1024px) 1312px, 100vw'
+  const mediaHeightClass = cn('h-[300px]', variant === 'full' ? 'lg:h-[640px]' : 'lg:h-[540px]')
 
-  // Recurso de marca (paso 8): medidas y peso del archivo, calculado en build.
+  // Recurso de marca: ruta (sin la "/" inicial) y peso del archivo, calculado en build.
   const media = card.logo ?? image
+  const path = media ? media.src.replace(/^\//, '') : null
   const weight = media ? publicFileSize(media.src) : null
-  const constructionNotes = media
-    ? [
-        { text: `${media.w} × ${media.h} · ${(media.w / media.h).toFixed(2)}:1`, kind: 'guide' as const },
-        { text: weight ? `${media.src} · ${weight}` : media.src, kind: 'guide' as const },
-      ]
-    : []
 
   return (
-    <Link href={`/proyectos/${project.slug}`} data-project={project.key} className="group block">
-      <div className={cn('relative w-full h-[300px] overflow-hidden', variant === 'full' ? 'lg:h-[640px]' : 'lg:h-[540px]')}>
-
+    <Link href={`/proyectos/${project.slug}`} data-project={project.key} className="group relative block">
+      <div className={cn('relative w-full overflow-hidden', mediaHeightClass)}>
         {card.logo ? (
           <div className="absolute inset-0 bg-project flex items-center justify-center p-12">
             <Image
@@ -54,8 +50,11 @@ export function WorkCard({ project, variant }: { project: Project; variant: 'wid
             />
           </div>
         ) : null}
-        <Construction mode="hover" dashed corners notes={constructionNotes} />
       </div>
+      {/* Fuera del overflow-hidden de la media: el contorno y las marcas de corte se salen
+          10px del borde, y "col X–Y" / ruta·peso van por encima y por debajo de la media. */}
+      <WorkCardMediaConstruction mediaHeightClass={mediaHeightClass} />
+      {path && colLabel && <WorkCardOuterConstruction colLabel={colLabel} path={path} weight={weight} mediaHeightClass={mediaHeightClass} />}
 
       <div className="flex items-center gap-2 mt-4">
         <h4 className="text-h4">{project.title}</h4>

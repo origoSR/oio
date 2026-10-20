@@ -6,7 +6,7 @@ import { FilterChip } from '@/components/site/FilterChip'
 import { WorkCard } from '@/components/site/WorkCard'
 import { OtherRow } from '@/components/site/OtherRow'
 import { SiteFooter } from '@/components/site/SiteFooter'
-import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
+import { workCardVariant, workCardColSpan, workCardColLabel } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
   title: site.projectsPage.seo.title,
@@ -52,7 +52,7 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
             const variant = workCardVariant(i, visible.length)
             return (
               <div key={project.slug} className={workCardColSpan(variant)}>
-                <WorkCard project={project} variant={variant} />
+                <WorkCard project={project} variant={variant} colLabel={workCardColLabel(i, visible.length)} />
               </div>
             )
           })}

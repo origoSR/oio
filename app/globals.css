@@ -12,6 +12,10 @@
    anti-parpadeo de layout.tsx antes de pintar. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Recurso de marca: la capa de construcción solo existe con ratón/trackpad
+   (nunca en táctil) y desde 1024px (nunca en móvil). */
+@custom-variant construction (@media (hover: hover) and (pointer: fine) and (min-width: 1024px));
+
 /* --------------------------------------------------------------------------
    1. Primitivos (no se usan directamente en componentes)
    -------------------------------------------------------------------------- */
