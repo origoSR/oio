@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Button } from '@/components/site/Button'
 
 export function CopyEmailButton({ email, copyLabel, copiedLabel }: { email: string; copyLabel: string; copiedLabel: string }) {
   const [copied, setCopied] = useState(false)
@@ -12,8 +13,8 @@ export function CopyEmailButton({ email, copyLabel, copiedLabel }: { email: stri
   }
 
   return (
-    <button type="button" onClick={handleCopy} className="text-body font-semibold hover:opacity-70 transition-opacity self-start">
+    <Button type="button" variant="secondary" onClick={handleCopy} className="self-start">
       <span aria-live="polite">{copied ? copiedLabel : copyLabel}</span>
-    </button>
+    </Button>
   )
 }

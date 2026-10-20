@@ -4,6 +4,9 @@ import { site } from '@/content/site'
 import { projects, featuredSlugs, getProject } from '@/content/projects'
 import { WorkCard } from '@/components/site/WorkCard'
 import { SiteFooter } from '@/components/site/SiteFooter'
+import { Button } from '@/components/site/Button'
+import { ServiceRow } from '@/components/site/ServiceRow'
+import { homeServiceLinks } from '@/content/services'
 import { workCardVariant, workCardColSpan } from '@/lib/work-grid'
 
 export const metadata: Metadata = {
@@ -47,12 +50,19 @@ export default function HomePage() {
             <h1 className="text-h1">{site.home.title}</h1>
             <p className="text-lead text-fg-secondary max-w-text">{site.home.lead}</p>
           </div>
-          <div className="flex flex-wrap gap-8 mt-[var(--hero-cta-gap)]">
-            {site.home.ctas.map((cta) => (
-              <Link key={cta.href} href={cta.href} className="text-body font-semibold hover:opacity-70 transition-opacity">
-                {cta.label}
-              </Link>
-            ))}
+          <div className="flex flex-wrap items-center gap-8 mt-[var(--hero-cta-gap)]">
+            {/* Regla del sitio: la acción principal de la página es un Button principal; la secundaria, un enlace de texto. */}
+            {site.home.ctas.map((cta, i) =>
+              i === 0 ? (
+                <Button key={cta.href} href={cta.href}>
+                  {cta.label}
+                </Button>
+              ) : (
+                <Link key={cta.href} href={cta.href} className="text-body font-semibold hover:opacity-70 transition-opacity">
+                  {cta.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -81,18 +91,11 @@ export default function HomePage() {
       <section className="section-y page-x">
         <p className="label text-fg-secondary mb-12">{site.home.servicesLabel}</p>
         <div>
-          {site.home.services.map((service) => (
-            <div key={service.slug} className="border-t border-line-strong py-6 grid-page gap-y-4 items-start">
-              <h2 className="col-span-4 lg:col-span-4 text-h2">{service.title}</h2>
-              <p className="col-span-4 lg:col-span-5 text-body text-fg-secondary">{service.text}</p>
-              <Link
-                href={`/proyectos?servicio=${service.slug}`}
-                className="col-span-4 lg:col-span-3 label lg:text-right hover:opacity-70 transition-opacity"
-              >
-                {site.home.servicesLinkLabel}
-              </Link>
-            </div>
-          ))}
+          {site.home.services.map((service) => {
+            const href = homeServiceLinks[service.slug] ?? `/proyectos?servicio=${service.slug}`
+            const linkLabel = href.startsWith('/servicios/') ? site.home.serviceLinkLabel : site.home.servicesLinkLabel
+            return <ServiceRow key={service.slug} href={href} title={service.title} summary={service.text} linkLabel={linkLabel} />
+          })}
         </div>
         <div className="bg-line h-px w-full" />
       </section>
