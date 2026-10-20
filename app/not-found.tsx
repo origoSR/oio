@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFoundPage } from '@/content/services'
 import { site } from '@/content/site'
 import { Button } from '@/components/site/Button'
 import { SiteFooter } from '@/components/site/SiteFooter'
-import { Pebble } from '@/components/brand/Pebble'
 
 export const metadata: Metadata = {
   title: 'Página no encontrada',
@@ -36,11 +36,13 @@ export default function NotFound() {
           </p>
         </div>
 
-        {/* Piedra de marca: 280px (160px en móvil), solo respirando (paso 8). */}
-        <Pebble breatheOnly className="w-40 h-40 lg:w-70 lg:h-70" />
+        {/* Pegatina de Michael Scott (solo en la 404, en Figma): 280px (160px en móvil), respira como Pebble, sin radio ni sombra. */}
+        <div className="relative shrink-0 w-40 h-40 lg:w-70 lg:h-70 pebble-breathe">
+          <Image src="/brand/404.webp" alt="Michael Scott con cara de apuro" fill sizes="280px" className="object-contain" />
+        </div>
       </section>
 
-      <SiteFooter hidePebble />
+      <SiteFooter />
     </main>
   )
 }
