@@ -25,6 +25,7 @@ export default function HomePage() {
     jobTitle: 'Diseñador de producto',
     address: 'Málaga',
     sameAs: [site.linkedin],
+    worksFor: { '@type': 'Organization', name: site.brand },
   }
 
   const featured = featuredSlugs.map(getProject).filter((p): p is NonNullable<typeof p> => Boolean(p))

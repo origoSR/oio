@@ -29,6 +29,7 @@ export type Service =
   | 'ux-ui'
   | 'seo'
   | 'branding'
+  | 'redes-sociales'
 
 /** Variantes de Case/Media */
 export type MediaLayout = 'bleed' | 'full' | 'pair' | 'browser' | 'phones' | 'video'

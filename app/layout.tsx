@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
+    siteName: 'oio',
     title: 'Rodrigo Sánchez — Diseñador de producto',
     description: 'Portfolio de diseño digital, producto, UX/UI, XR y sistemas',
     images: ['/og-image.png'], // si aún no lo tienes, puedo generarlo

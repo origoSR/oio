@@ -54,7 +54,7 @@ export function SiteNavbar() {
         pastHero ? 'bg-canvas text-fg' : 'bg-transparent text-fg'
       )}
     >
-      <Link href="/" aria-label="Inicio">
+      <Link href="/" aria-label="oio, inicio">
         <Logo className="h-10 w-10" />
       </Link>
       <div className="flex items-center gap-8">

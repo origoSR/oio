@@ -1,6 +1,7 @@
 // Contenido de los casos. Extraído de Figma (página "Casos · v1") el 3 oct 2026; v2 el 5 oct 2026 (tarjetas, filtros y proyectos de marca).
 // El orden del array es el orden de la web y la cadena de "Siguiente proyecto".
 // Las cifras con provisional: true son ficticias o están por confirmar: no publicarlas sin revisar.
+// v3 · 17 oct 2026: revisión de copys aprobada (C2–C3, C5–C7, M1–M5), «kiosco» y pie de Push como en Figma.
 
 import type { Img, Project } from './types'
 
@@ -57,7 +58,7 @@ const catalonia: Project = {
     { type: 'gallery', items: [
       { layout: 'full', images: [cat('06-img', 2160, 1290, 'Web de Catalonia Hotels en portátil y móvil')] },
     ] },
-    { type: 'decision', order: 'text-media', number: '03 · Proceso', title: 'Un sprint, una review', text: 'Cada sprint acababa con una review con el cliente: qué se había diseñado y qué cambiaba. Así el alcance creció sin perder el hilo: home, buscador, hotel, checkout, multihabitación, área privada, landings y Rewards.', caption: 'Índice de la review del sprint 2.', image: cat('07-img', 1920, 1080, 'Diapositiva de la review del sprint 2 con el índice de lo diseñado', 'contain') },
+    { type: 'decision', order: 'text-media', number: '03 · Proceso', title: 'Un sprint, una review', text: 'Cada sprint acababa con una review con el cliente: qué se había diseñado y qué cambiaba. Así el alcance creció sin perder el hilo: home, buscador, hotel, checkout, multihabitación, área privada, landings y Rewards.', caption: 'Índice de la review del sprint 2.', image: cat('07-img', 1920, 1080, 'Diapositiva de la review del sprint 2 con el índice de lo diseñado') },
     { type: 'outcome', variant: 'data', label: 'Resultado', title: 'La conversión en reserva subió un 18 % en los tres meses siguientes al lanzamiento.', text: 'Datos de analítica de la cadena, comparando el trimestre anterior con el siguiente.', items: [
       { value: '+18 %', label: 'Conversión en reserva', provisional: true },
       { value: '−22 %', label: 'Rebote en la portada', provisional: true },
@@ -75,30 +76,30 @@ const burgerKing: Project = {
   kind: 'case',
   services: ['producto', 'sistemas-de-diseno', 'ux-ui'],
   card: {
-    services: 'Producto · Sistema de diseño · Kioskos',
-    tagline: 'Kioskos de pedido para dos marcas con una sola librería',
-    wide: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con su portada de promociones'),
-    narrow: bk('03-img', 1080, 1920, 'Kiosko de Burger King: más vendidos', 'contain'),
+    services: 'Producto · Sistema de diseño · Kioscos',
+    tagline: 'Kioscos de pedido para dos marcas con una sola librería',
+    wide: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosco con su portada de promociones'),
+    narrow: bk('03-img', 1080, 1920, 'Kiosco de Burger King: más vendidos', 'contain'),
   },
   title: 'Burger King / Popeyes',
-  subtitle: 'Kioskos de pedido para dos marcas con una sola librería',
-  sector: 'Restauración · Kioskos',
+  subtitle: 'Kioscos de pedido para dos marcas con una sola librería',
+  sector: 'Restauración · Kioscos',
   role: 'Diseñador UX/UI · Garaje de Ideas',
   year: '2024',
   nda: true,
-  cardMeta: 'Restauración · Kioskos · 2024',
+  cardMeta: 'Restauración · Kioscos · 2024',
   rowMeta: 'Restauración · Diseñador UX/UI · 2024 · NDA',
   ficha: [
-    { label: 'Contexto', content: 'Kiosk 2.0: la nueva experiencia de pedido en los kioskos de Burger King y Popeyes, con una librería de diseño común para las dos marcas.' },
-    { label: 'Rol y equipo', content: 'Diseñador UX/UI en Garaje de Ideas. Diseñé flujos del kiosko y mantuve la librería.' },
-    { label: 'Servicios / stack', content: 'UX/UI · Sistema de diseño · Kioskos' },
+    { label: 'Contexto', content: 'Kiosk 2.0: la nueva experiencia de pedido en los kioscos de Burger King y Popeyes, con una librería de diseño común para las dos marcas.' },
+    { label: 'Rol y equipo', content: 'Diseñador UX/UI en Garaje de Ideas. Diseñé flujos del kiosco y mantuve la librería.' },
+    { label: 'Servicios / stack', content: 'UX/UI · Sistema de diseño · Kioscos' },
     { label: 'Enlaces', content: 'Proyecto bajo NDA.' },
   ],
   blocks: [
-    { type: 'cover', image: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosko con su portada de promociones') },
-    { type: 'statement', label: 'Resumen', text: 'Diseñé flujos del Kiosk 2.0 de Burger King y Popeyes y mantuve su librería: una sola base de componentes para dos marcas y más de 500 pantallas de kiosko.' },
+    { type: 'cover', image: bk('01-portada', 2880, 1800, 'Hamburguesa, logo de Burger King y el kiosco con su portada de promociones') },
+    { type: 'statement', label: 'Resumen', text: 'Diseñé flujos del Kiosk 2.0 de Burger King y Popeyes y mantuve su librería: una sola base de componentes para dos marcas y más de 500 pantallas de kiosco.' },
     { type: 'figures', label: 'En cifras', items: [
-      { value: '515', label: 'Pantallas de kiosko' },
+      { value: '515', label: 'Pantallas de kiosco' },
       { value: '154', label: 'Componentes en la librería' },
       { value: '2', label: 'Marcas con los mismos componentes' },
       { value: '+9 %', label: 'Ticket medio', provisional: true },
@@ -106,17 +107,17 @@ const burgerKing: Project = {
     { type: 'gallery', items: [
       { layout: 'full', images: [bk('02-img', 2624, 1476, 'La misma pantalla de hamburguesas en Burger King y en Popeyes')], caption: 'Burger King y Popeyes con los mismos componentes.' },
       { layout: 'phones', images: [
-        bk('10-img', 1080, 1920, 'Portada del kiosko de Burger King con promociones y MyBurgerKing'),
-        bk('03-img', 1080, 1920, 'Kiosko de Burger King: más vendidos'),
-        bk('05-img', 1080, 1920, 'Kiosko de Popeyes: categoría de pollo'),
+        bk('10-img', 1080, 1920, 'Portada del kiosco de Burger King con promociones y MyBurgerKing'),
+        bk('03-img', 1080, 1920, 'Kiosco de Burger King: más vendidos'),
+        bk('05-img', 1080, 1920, 'Kiosco de Popeyes: categoría de pollo'),
       ], caption: 'Portada y más vendidos de Burger King, y pollo de Popeyes.' },
     ] },
-    { type: 'decision', order: 'text-media', number: '01 · Carrito', title: 'El carrito siempre a la vista', text: 'Al navegar por el menú el pedido se perdía de vista. El carrito pasa a estar fijo abajo durante todo el recorrido, con el número de productos y el botón de pago, para que nadie llegue al final con sorpresas.', caption: 'Barra inferior con carrito y pago.', image: bk('06-img', 1080, 1920, 'Kiosko de Popeyes con la barra inferior de carrito y pago', 'contain') },
+    { type: 'decision', order: 'text-media', number: '01 · Carrito', title: 'El carrito siempre a la vista', text: 'Al navegar por el menú el pedido se perdía de vista. El carrito pasa a estar fijo abajo durante todo el recorrido, con el número de productos y el botón de pago, para que nadie llegue al final con sorpresas.', caption: 'Barra inferior con carrito y pago.', image: bk('06-img', 1080, 1920, 'Kiosco de Popeyes con la barra inferior de carrito y pago', 'contain') },
     { type: 'decision', order: 'media-text', number: '02 · Venta', title: 'Recomendaciones según lo que llevas', text: 'Las sugerencias dependen del carrito: si falta la bebida o el postre, se ofrecen en el paso donde tienen sentido. Y quien ya ha pedido antes puede repetir su pedido con un toque.', caption: 'Resumen del pedido con productos en tendencia.', image: bk('07-img', 1080, 1920, 'Resumen del pedido con productos recomendados', 'contain') },
     { type: 'decision', order: 'text-media', number: '03 · Librería', title: 'Reglas también para la foto de producto', text: 'La librería comparte componentes entre marcas, con un modo de tokens para cada una. Y fija cómo se encuadra cada foto: tamaño, composición del menú y altura del producto principal, para que la carta se vea ordenada.', caption: 'Guía de imagen de producto: antes y después.', image: bk('08-img', 2028, 1167, 'Guía de composición de foto de producto, antes y después', 'contain') },
-    { type: 'decision', order: 'media-text', number: '04 · Alérgenos', title: 'Los alérgenos, en el móvil del cliente', text: 'La tabla de alérgenos no cabe en el kiosko sin estorbar al pedido. Desde el menú superior se abre un código QR: el cliente lo escanea, elige alérgenos o información nutricional y consulta en su móvil el PDF siempre actualizado.', caption: 'Del kiosko al móvil con un código QR.', image: bk('11-img', 2400, 1500, 'Kiosko con el código QR de alérgenos y tres móviles con el listado en PDF', 'contain') },
+    { type: 'decision', order: 'media-text', number: '04 · Alérgenos', title: 'Los alérgenos, en el móvil del cliente', text: 'La tabla de alérgenos no cabe en el kiosco sin estorbar al pedido. Desde el menú superior se abre un código QR: el cliente lo escanea, elige alérgenos o información nutricional y consulta en su móvil el PDF siempre actualizado.', caption: 'Del kiosco al móvil con un código QR.', image: bk('11-img', 2400, 1500, 'Kiosco con el código QR de alérgenos y tres móviles con el listado en PDF', 'contain') },
     { type: 'gallery', items: [
-      { layout: 'full', images: [bk('09-img', 1280, 853, 'Clientes pidiendo en un kiosko de Burger King')], caption: 'El kiosko en el restaurante.' },
+      { layout: 'full', images: [bk('09-img', 1280, 853, 'Clientes pidiendo en un kiosco de Burger King')], caption: 'El kiosco en el restaurante.' },
     ] },
     { type: 'outcome', variant: 'data', label: 'Resultado', title: 'El ticket medio subió un 9 % con las recomendaciones según el carrito.', text: 'Datos del piloto en restaurantes, comparados con el flujo anterior.', items: [
       { value: '+9 %', label: 'Ticket medio', provisional: true },
@@ -124,7 +125,7 @@ const burgerKing: Project = {
       { value: '515', label: 'Pantallas' },
     ] },
   ],
-  seo: { title: 'Burger King y Popeyes: kioskos de pedido con una sola librería', description: 'Flujos del Kiosk 2.0 de Burger King y Popeyes y una librería común para dos marcas.' },
+  seo: { title: 'Burger King y Popeyes: kioscos de pedido con una sola librería', description: 'Flujos del Kiosk 2.0 de Burger King y Popeyes y una librería común para dos marcas.' },
 }
 
 // ───────────────────────────────── Push
@@ -171,14 +172,14 @@ const pushProject: Project = {
         push('05-img', 390, 906, 'Así es una sesión con Push, en móvil'),
       ], caption: 'En móvil: evidencia clínica, pedir una demo y cómo es una sesión.' },
     ] },
-    { type: 'decision', order: 'text-media', number: '01 · SEO', title: 'Una página por fobia', text: 'Un psicólogo no busca "realidad virtual", busca cómo tratar el miedo a volar. Cada fobia tiene su página, con los niveles del escenario, preguntas frecuentes y el botón para pedir la demo.', caption: '/miedo-a-volar', image: push('06-img', 1920, 816, 'Cabecera de la página de miedo a volar', 'contain') },
+    { type: 'decision', order: 'text-media', number: '01 · SEO', title: 'Una página por fobia', text: 'Un psicólogo no busca «realidad virtual»: busca cómo tratar el miedo a volar. Cada fobia tiene su página, con los niveles del escenario, preguntas frecuentes y el botón para pedir la demo.', caption: '/miedo-a-volar', image: push('06-img', 1920, 816, 'Cabecera de la página de miedo a volar', 'contain') },
     { type: 'decision', order: 'media-text', number: '02 · Venta', title: 'Dos caminos para comprar: demo o plan', text: 'Quien duda pide una demo con un formulario corto; quien lo tiene claro elige plan y paga en el momento. Los dos botones están en toda la web y cada camino acaba en su página de confirmación.', caption: '/precios', image: push('07-img', 1920, 912, 'Página de precios con los planes para profesionales', 'contain') },
     { type: 'decision', order: 'text-media', number: '03 · Sistema', title: 'Un archivo pensado para pasar a código', text: 'Tokens con nombre CSS, modos de escritorio y móvil, componentes para todo lo que se repite y un prototipo enlazado. La web se monta en Next.js y Tailwind sin traducir nada a mano.', caption: 'Fundamentos de la web: color.', image: push('08-img', 1680, 988, 'Paleta de color y tokens de la web de Push', 'contain') },
     { type: 'gallery', items: [
-      { layout: 'full', images: [push('09-img', 2400, 1500, 'Construcción del escenario de miedo a conducir')], caption: 'Construcción escenario del miedo a conducir.' },
+      { layout: 'full', images: [push('09-img', 2400, 1500, 'Construcción del escenario de miedo a conducir')], caption: 'Construcción del escenario de miedo a conducir.' },
       { layout: 'full', images: [push('10-img', 2400, 1500, 'Panel de control y escenario de una cabina de avión')], caption: 'Panel de control y escenario de una cabina de avión.' },
     ] },
-    { type: 'decision', order: 'media-text', number: '04 · App', title: 'La exposición sube por niveles y la decide el psicólogo', text: 'Antes de diseñar analicé diez gafas de realidad virtual y mixta y seis apps de salud mental y terapia. Con eso y las entrevistas con psicólogos, cada escenario se dividió en capítulos de intensidad creciente que desbloquea el terapeuta.', caption: 'Parte del estudio de mercado de gafas.', image: push('11-img', 2400, 1500, 'Estudio de mercado de gafas de realidad virtual', 'contain') },
+    { type: 'decision', order: 'media-text', number: '04 · App', title: 'La exposición sube por niveles y la decide el psicólogo', text: 'Antes de diseñar analicé diez gafas de realidad virtual y mixta y seis apps de salud mental y terapia. Con eso y las entrevistas con psicólogos, cada escenario se dividió en capítulos de intensidad creciente que desbloquea el psicólogo.', caption: 'Parte del estudio de mercado de gafas.', image: push('11-img', 2400, 1500, 'Estudio de mercado de gafas de realidad virtual', 'contain') },
     { type: 'outcome', variant: 'data', label: 'Resultado', title: 'En sus tres primeros meses, la web nueva trae 14 demos al mes.', text: 'Medido con la analítica de la web, comparando con los tres meses anteriores al rediseño.', items: [
       { value: '14', label: 'Demos al mes', provisional: true },
       { value: '+65 %', label: 'Tráfico orgánico', provisional: true },
@@ -210,7 +211,7 @@ const rbiProject: Project = {
   cardMeta: 'App interna · 2023–2024',
   rowMeta: 'Restauración · Diseñador UX/UI · 2023–2024 · NDA',
   ficha: [
-    { label: 'Contexto', content: 'App interna de RBI para los empleados de restaurantes y oficinas: turnos, vacaciones, ausencias, noticias, comunidad, beneficios y loyalty, para cuatro marcas.' },
+    { label: 'Contexto', content: 'App interna de RBI para los empleados de restaurantes y oficinas: turnos, vacaciones, ausencias, noticias, comunidad, beneficios y programa de fidelización, para cuatro marcas.' },
     { label: 'Rol y equipo', content: 'Diseñador UX/UI en Garaje de Ideas. Entré sobre la base de una compañera y diseñé módulos nuevos.' },
     { label: 'Servicios / stack', content: 'UX/UI · App iOS y Android · Web · Fichas de tienda' },
     { label: 'Enlaces', content: 'Proyecto bajo NDA.' },
@@ -263,7 +264,6 @@ const santalucia: Project = {
     { label: 'Contexto', content: 'Proyecto del bootcamp de UXER School sobre Santalucía, no un encargo de la aseguradora. El reto: un canal para que el cliente siga el estado de un siniestro de su casa.' },
     { label: 'Rol y equipo', content: 'Diseñador UX/UI: research, flujo, wireframes, guía de estilo y diseño final.' },
     { label: 'Servicios / stack', content: 'Research · User flow · Wireframes · UX/UI · Guía de estilo' },
-    { label: 'Enlaces', content: 'Caso publicado por UXER School', href: '' /* TODO: URL del caso en UXER School */ },
   ],
   blocks: [
     { type: 'cover', image: sl('01-portada', 2880, 1800, 'Manos protegiendo una casa y la app de Santalucía Impulsa en dos móviles') },
@@ -283,7 +283,7 @@ const santalucia: Project = {
     ] },
     { type: 'decision', order: 'text-media', number: '01 · Research', title: 'El problema era no saber qué estaba pasando', text: 'El research dejó claro que no saber en qué punto está el siniestro ni qué viene después genera inseguridad y desconfianza. La app gira alrededor de un estado claro: abierto, en curso, resolución y cierre.', caption: 'Estado del siniestro, paso a paso.', image: sl('05-img', 425, 856, 'Pantalla de estado del siniestro paso a paso', 'contain') },
     { type: 'decision', order: 'media-text', number: '02 · Flujo', title: 'Cambiar la visita en un par de gestos', text: 'El cliente ve qué profesional va, a qué hora llega y puede cambiar fecha u hora en un par de gestos. Santalucía o la empresa reparadora se encargan del resto, incluido el videoperitaje cuando hace falta.', caption: 'Wireframe del videoperitaje.', image: sl('06-img', 628, 766, 'Wireframe del flujo de videoperitaje', 'contain') },
-    { type: 'outcome', variant: 'learning', label: 'Qué aprendí', title: 'En un proceso largo, lo que más tranquiliza es saber cuál es el siguiente paso.', text: 'Por eso cada pantalla del estado dice qué ha pasado, qué va a pasar y cuándo. UXER School eligió el proyecto como caso de estudio.' },
+    { type: 'outcome', variant: 'learning', label: 'Qué aprendí', title: 'En un proceso largo, lo que más tranquiliza es saber cuál es el siguiente paso.', text: 'Por eso cada pantalla del estado dice qué ha pasado, qué va a pasar y cuándo.' },
   ],
   seo: { title: 'Santalucía Impulsa: seguir la reparación de tu casa', description: 'App para seguir el estado de un siniestro del hogar. Proyecto de bootcamp de UXER School elegido como caso de estudio.' },
 }
@@ -327,8 +327,8 @@ const rankMeHigher: Project = {
     { type: 'gallery', items: [
       { layout: 'browser', images: [rmh('02-img', 2400, 1282, 'Portada de rankmehigher.co')], caption: 'Portada: casos de clientes antes que promesas.' },
     ] },
-    { type: 'decision', order: 'text-media', number: '01 · Web', title: 'Una web que vende con casos de clientes', text: 'La web anterior hablaba de SEO en abstracto. En la nueva, la portada enseña resultados de clientes y cada servicio tiene su propia página, pensada también para posicionar.', caption: 'Página de servicio.', image: rmh('03-img', 2400, 1282, 'Página de servicio de Rank Me Higher', 'contain') },
-    { type: 'decision', order: 'media-text', number: '02 · SEO y GEO', title: 'Salir en Google y también en las respuestas de la IA', text: 'Desde 2024 no basta con Google: los clientes también tienen que aparecer en ChatGPT, Perplexity o Gemini. Ordeno el contenido con datos estructurados y respuestas directas para que esos buscadores lo citen.', caption: 'Contenido preparado para buscadores con IA.', image: rmh('04-img', 2400, 1282, 'Página con contenido estructurado para buscadores', 'contain') },
+    { type: 'decision', order: 'text-media', number: '01 · Web', title: 'Una web que vende con casos de clientes', text: 'La web anterior hablaba de SEO en abstracto. En la nueva, la portada enseña resultados de clientes y cada servicio tiene su propia página, pensada también para posicionar.', caption: 'Página de servicio.', image: rmh('03-img', 2400, 1282, 'Página de servicio de Rank Me Higher') },
+    { type: 'decision', order: 'media-text', number: '02 · SEO y GEO', title: 'Salir en Google y también en las respuestas de la IA', text: 'Desde 2024 no basta con Google: los clientes también tienen que aparecer en ChatGPT, Perplexity o Gemini. Ordeno el contenido con datos estructurados y respuestas directas para que esos buscadores lo citen.', caption: 'Contenido preparado para buscadores con IA.', image: rmh('04-img', 2400, 1282, 'Página con contenido estructurado para buscadores') },
     { type: 'outcome', variant: 'data', label: 'Resultado', title: 'El tráfico orgánico de los clientes creció un 140 % de media en el primer año.', text: 'Media de las cuentas que llevo, medida en Google Search Console.', items: [
       { value: '+140 %', label: 'Tráfico orgánico', provisional: true },
       { value: '+35 %', label: 'Contactos desde la web de RMH', provisional: true },
@@ -353,7 +353,7 @@ const salma: Project = {
   role: 'Branding y redes sociales',
   year: '2026', // TODO Rodrigo: confirmar año
   nda: false,
-  services: ['branding'],
+  services: ['branding', 'redes-sociales'],
   card: {
     services: 'Branding · Redes sociales',
     tagline: 'Identidad y redes para un centro de entrenamiento en Málaga',
@@ -362,10 +362,10 @@ const salma: Project = {
   cardMeta: 'Fitness · Branding · 2026',
   rowMeta: 'Fitness · Branding y redes sociales · 2026',
   ficha: [
-    { label: 'Contexto', content: 'Salma es un centro de entrenamiento en grupos pequeños en Málaga, pensado para entrenar a tu ritmo y cuidar el cuerpo en momentos delicados: embarazo, postparto o a partir de cierta edad.' },
+    { label: 'Contexto', content: 'Salma es un centro de entrenamiento en grupos pequeños en Málaga, pensado para entrenar a tu ritmo y cuidar el cuerpo en momentos delicados: embarazo, posparto o a partir de cierta edad.' },
     { label: 'Rol y equipo', content: 'Diseñador de marca y redes sociales. Trabajo directo con los dos fundadores.' },
     { label: 'Servicios / stack', content: 'Identidad de marca · Logotipo e isotipo · Plantillas y calendario de contenido para Instagram' },
-    { label: 'Enlaces', content: 'Instagram', href: '' /* TODO Rodrigo: URL de Instagram de Salma, o borrar la fila */ },
+    { label: 'Enlaces', content: 'Instagram', href: 'https://www.instagram.com/salmacentro/' },
   ],
   blocks: [
     { type: 'gallery', items: [
@@ -383,7 +383,7 @@ const malagaTech: Project = {
   key: 'malaga-tech',
   kind: 'brand',
   title: 'Málaga Tech',
-  subtitle: 'Identidad de marca para la comunidad de startups de Málaga', // TODO Rodrigo: si fue una propuesta, cambiar a "Propuesta de identidad…"
+  subtitle: 'Identidad de marca para la comunidad de startups de Málaga', // Confirmado (17 oct): la identidad está en uso, no fue una propuesta.
   sector: 'Emprendimiento',
   role: 'Branding',
   year: '2026', // TODO Rodrigo: confirmar año
@@ -397,7 +397,7 @@ const malagaTech: Project = {
   cardMeta: 'Emprendimiento · Branding · 2026',
   rowMeta: 'Emprendimiento · Branding · 2026',
   ficha: [
-    { label: 'Contexto', content: 'Málaga Tech es la asociación de emprendedores tecnológicos más grande del sur de España. Organiza eventos, programas de incubación y aceleración, y conecta a las startups con inversores y empresas.' },
+    { label: 'Contexto', content: 'Málaga Tech es una asociación de emprendedores tecnológicos de Málaga. Organiza eventos, programas de incubación y aceleración, y conecta a las startups con inversores y empresas.' },
     { label: 'Rol y equipo', content: 'Diseñador de marca.' },
     { label: 'Servicios / stack', content: 'Identidad de marca · Logotipo e isotipo · Sistema de iconos' },
     { label: 'Enlaces', content: 'techmalaga.com', href: 'https://techmalaga.com' },
@@ -433,7 +433,7 @@ const laskurain: Project = {
   cardMeta: 'Consultoría · Web · 2026',
   rowMeta: 'Consultoría · Diseño y desarrollo web · 2026',
   ficha: [
-    { label: 'Contexto', content: 'Miguel Ángel Laskurain ayuda a empresas cuyo valor no llega al mercado, después de veinte años en Silicon Valley. Su web tenía que explicar un servicio intangible con la misma claridad que vende.' },
+    { label: 'Contexto', content: 'Miguel Ángel Laskurain pasó veinte años en Silicon Valley y ahora ayuda a empresas cuyo valor no llega al mercado. Su web tenía que explicar con claridad un servicio que no se ve.' },
     { label: 'Rol y equipo', content: 'Diseño web y desarrollo en WordPress con Elementor Pro.' },
     { label: 'Servicios / stack', content: 'Diseño web · Desarrollo en WordPress · Web bilingüe (ES/EN)' },
     { label: 'Enlaces', content: 'laskurain.es', href: 'https://laskurain.es' },
