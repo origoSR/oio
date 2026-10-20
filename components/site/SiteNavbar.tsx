@@ -57,7 +57,7 @@ export function SiteNavbar() {
       <Link href="/" aria-label="oio, inicio">
         <Logo className="h-10 w-10" />
       </Link>
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-[var(--gutter)]">
         {site.nav.map((item) => {
           const active = pathname === item.href
           return (

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { site } from '@/content/site'
 
 export function SiteFooter() {
@@ -12,6 +13,9 @@ export function SiteFooter() {
         <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="text-body hover:opacity-70 transition-opacity">
           LinkedIn ↗
         </a>
+        <Link href={site.footer.agencies.href} className="text-body hover:opacity-70 transition-opacity">
+          {site.footer.agencies.label}
+        </Link>
       </div>
       <div className="flex flex-wrap items-start justify-between gap-2 mt-12 lg:mt-16 pt-6 border-t border-fg-on-inverse-secondary/20 dark:border-line">
         <p className="label text-fg-on-inverse-secondary dark:text-fg-secondary">
