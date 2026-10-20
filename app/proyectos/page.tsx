@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { permanentRedirect } from 'next/navigation'
 import { site } from '@/content/site'
 import { projects } from '@/content/projects'
 import type { Service } from '@/content/types'
@@ -21,8 +20,6 @@ export const metadata: Metadata = {
 
 export default async function ProyectosPage({ searchParams }: { searchParams: Promise<{ servicio?: string }> }) {
   const { servicio } = await searchParams
-  // El filtro de redes-sociales ya no existe (ver FIXES-5): quien llegue con el, a /proyectos.
-  if (servicio === 'redes-sociales') permanentRedirect('/proyectos')
   const activeSlug = (servicio as Service | undefined) ?? null
 
   const visible = activeSlug ? projects.filter((p) => p.services.includes(activeSlug)) : projects
@@ -36,6 +33,7 @@ export default async function ProyectosPage({ searchParams }: { searchParams: Pr
     <main className="bg-canvas">
       <section className="page-x pt-[calc(var(--navbar-h)+48px)] lg:pt-[calc(var(--navbar-h)+96px)] pb-8 lg:pb-16">
         <h1 className="text-h2">{site.projectsPage.title}</h1>
+        <p className="text-lead text-fg-secondary max-w-text mt-6">{site.projectsPage.lead}</p>
         <div className="flex gap-2 mt-6 lg:mt-8 overflow-x-auto scrollbar-hide lg:flex-wrap">
           {filters.map((f) => (
             <FilterChip
