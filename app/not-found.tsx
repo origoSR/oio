@@ -4,6 +4,7 @@ import { notFoundPage } from '@/content/services'
 import { site } from '@/content/site'
 import { Button } from '@/components/site/Button'
 import { SiteFooter } from '@/components/site/SiteFooter'
+import { Pebble } from '@/components/brand/Pebble'
 
 export const metadata: Metadata = {
   title: 'Página no encontrada',
@@ -35,11 +36,11 @@ export default function NotFound() {
           </p>
         </div>
 
-        {/* Paso 8 (al final, en commit aparte): aquí va Pebble, 280px (160px en móvil), solo respirando. */}
-        <div aria-hidden="true" className="shrink-0 w-40 h-40 lg:w-[280px] lg:h-[280px]" />
+        {/* Piedra de marca: 280px (160px en móvil), solo respirando (paso 8). */}
+        <Pebble breatheOnly className="w-40 h-40 lg:w-70 lg:h-70" />
       </section>
 
-      <SiteFooter />
+      <SiteFooter hidePebble />
     </main>
   )
 }
