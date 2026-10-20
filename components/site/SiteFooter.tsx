@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { site } from '@/content/site'
+import { legalLinks } from '@/content/services'
 
 export function SiteFooter() {
   return (
@@ -20,6 +21,16 @@ export function SiteFooter() {
       <div className="flex flex-wrap items-start justify-between gap-2 mt-12 lg:mt-16 pt-6 border-t border-fg-on-inverse-secondary/20 dark:border-line">
         <p className="label text-fg-on-inverse-secondary dark:text-fg-secondary">
           © {new Date().getFullYear()} {site.name} · {site.brand}
+        </p>
+        <p className="label text-fg-on-inverse-secondary dark:text-fg-secondary flex flex-wrap items-center gap-1">
+          {legalLinks.map((link, i) => (
+            <span key={link.href} className="flex items-center gap-1">
+              {i > 0 && <span aria-hidden="true">·</span>}
+              <Link href={link.href} className="underline hover:opacity-70 transition-opacity">
+                {link.label}
+              </Link>
+            </span>
+          ))}
         </p>
         <p className="label text-fg-on-inverse-secondary dark:text-fg-secondary">{site.location}</p>
       </div>

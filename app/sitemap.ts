@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/agencias`, lastModified: new Date() },
     { url: `${BASE_URL}/contacto`, lastModified: new Date() },
     { url: `${BASE_URL}/privacidad`, lastModified: new Date() },
+    { url: `${BASE_URL}/aviso-legal`, lastModified: new Date() },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
