@@ -27,8 +27,18 @@ export const site = {
       { label: 'Escríbeme →', href: '/contacto' },
       { label: 'Ver proyectos →', href: '/proyectos' },
     ],
+    // Debajo de las CTAs: "Trabajo en marca blanca →" subrayado y enlazado a /agencias.
+    agencyNote: { text: '¿Eres una agencia? ', link: { label: 'Trabajo en marca blanca →', href: '/agencias' } },
     projectsLabel: 'Proyectos destacados',
     projectsLink: { label: 'Ver los 9 proyectos →', href: '/proyectos' }, // el número se calcula con projects.length
+    // Sección "agencias" de la home, entre "Proyectos destacados" y "Qué hago", sobre bg-inverse.
+    agencies: {
+      label: 'Para agencias',
+      title: '¿A tu agencia le falta una mano? Trabajo en marca blanca.',
+      lead: 'Diseño en Figma y lo llevo a código en Next.js o WordPress, con tu equipo y tus herramientas. Tus clientes son tuyos.',
+      cta: { label: 'Cómo colaboro con agencias →', href: '/agencias' },
+      cta2: { label: 'Cuéntame el proyecto →', href: '/agencias#formulario' },
+    },
     servicesLabel: 'Qué hago',
     // El enlace de cada fila sale de homeServiceLinks (content/services.ts):
     // las que tienen página de servicio usan «Ver servicio →»; producto y sistemas de diseño, «Ver proyectos →».

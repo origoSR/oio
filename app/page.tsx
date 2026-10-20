@@ -70,6 +70,12 @@ export default function HomePage() {
               )
             )}
           </div>
+          <p className="text-body text-fg-secondary mt-6 lg:mt-8">
+            {site.home.agencyNote.text}
+            <Link href={site.home.agencyNote.link.href} className="text-fg underline hover:opacity-70 transition-opacity">
+              {site.home.agencyNote.link.label}
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -93,7 +99,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Qué hago: en canvas, sin fondo propio (Figma: bloque separado de "Cómo trabajo"). */}
+      {/* 3. Agencias: sobre bg-inverse, entre "Proyectos destacados" y "Qué hago". En móvil, todo apilado. */}
+      <section className="bg-inverse dark:bg-surface text-fg-on-inverse dark:text-fg section-y page-x">
+        <p className="label text-fg-on-inverse-secondary dark:text-fg-secondary">{site.home.agencies.label}</p>
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-8 lg:items-end">
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <h2 className="text-h2 text-fg-on-inverse dark:text-fg">{site.home.agencies.title}</h2>
+            <p className="text-lead text-fg-on-inverse-secondary dark:text-fg-secondary">{site.home.agencies.lead}</p>
+          </div>
+          <div className="lg:col-span-5 flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-8">
+            <Button href={site.home.agencies.cta.href} className="bg-canvas text-fg hover:opacity-80">
+              {site.home.agencies.cta.label}
+            </Button>
+            <Link href={site.home.agencies.cta2.href} className="text-body font-semibold text-fg-on-inverse dark:text-fg hover:opacity-70 transition-opacity">
+              {site.home.agencies.cta2.label}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Qué hago: en canvas, sin fondo propio (Figma: bloque separado de "Cómo trabajo"). */}
       <section className="section-y page-x">
         <p className="label text-fg-secondary mb-12">{site.home.servicesLabel}</p>
         <div>
@@ -106,7 +131,7 @@ export default function HomePage() {
         <div className="bg-line h-px w-full" />
       </section>
 
-      {/* 4. Cómo trabajo: fondo surface, bloque propio. group+relative: al pasar el ratón, la capa de construcción
+      {/* 5. Cómo trabajo: fondo surface, bloque propio. group+relative: al pasar el ratón, la capa de construcción
           pinta la retícula, la medida del padding superior, el contorno del h2 y la anotación de los pasos. */}
       <section className="group relative bg-surface section-y page-x flex flex-col block-gap">
         <SectionGrid fillOpacity={0.05} lineOpacity={0.5} visible="hover" />
@@ -131,7 +156,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Pie. */}
+      {/* 6. Pie. */}
       <SiteFooter />
     </main>
   )
