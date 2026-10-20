@@ -71,6 +71,11 @@
      propia escala de 3 pasos, 96/128/160), así que son variables propias. */
   --hero-pad-y: 96px;
   --hero-cta-gap: 40px;
+
+  /* Recurso de marca: la capa de construcción (components/brand/Construction.tsx).
+     Solo se usan dentro de esa capa, nunca como utilidad de color del sitio. */
+  --color-construction-guide: #2F6BFF;
+  --color-construction-component: #9747FF;
 }
 
 @media (min-width: 768px) {
@@ -316,4 +321,15 @@ html.dark [data-project] {
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
+}
+
+/* Recurso de marca: Pebble "respira" (scale 1 → 1.04 → 1, 6s, en bucle) solo con
+   ratón/trackpad. En táctil la imagen queda fija. prefers-reduced-motion ya la
+   frena con la regla global de arriba (animation-duration: 0.01ms). */
+@keyframes pebble-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .pebble-breathe { animation: pebble-breathe 6s var(--ease-out) infinite; }
 }
