@@ -4,7 +4,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { SiteNavbar } from '@/components/site/SiteNavbar'
-import { RouteLoader } from '@/components/brand/RouteLoader'
 
 const manrope = Manrope({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-manrope', display: 'swap' })
 const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['500'], variable: '--font-geist-mono', display: 'swap' })
@@ -42,7 +41,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <SiteNavbar />
         {children}
-        <RouteLoader />
         <Analytics />
         <SpeedInsights />
       </body>
