@@ -4,6 +4,7 @@ import { CaseLayout } from '@/components/case/CaseLayout'
 import { CaseHeader } from '@/components/case/CaseHeader'
 import { CaseBlocks } from '@/components/case/CaseBlocks'
 import { NextProject } from '@/components/case/NextProject'
+import { SiteFooter } from '@/components/site/SiteFooter'
 import { getProject, getNextProject, projects } from '@/content/projects'
 
 export function generateStaticParams() {
@@ -52,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <CaseHeader project={project} />
       <CaseBlocks blocks={project.blocks} />
       <NextProject next={next} />
+      <SiteFooter />
     </CaseLayout>
   )
 }
