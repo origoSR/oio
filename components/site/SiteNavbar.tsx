@@ -65,7 +65,11 @@ export function SiteNavbar() {
               key={item.href}
               href={item.href}
               aria-current={active ? 'page' : undefined}
-              className={cn('text-body font-medium text-fg hover:text-fg-secondary transition-colors', active && 'underline')}
+              className={cn(
+                'text-body font-medium text-fg hover:text-fg-secondary transition-colors',
+                'hideOnMobile' in item && item.hideOnMobile && 'hidden md:inline',
+                active && 'underline'
+              )}
             >
               {item.label}
             </Link>

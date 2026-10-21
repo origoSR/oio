@@ -11,6 +11,7 @@ export const site = {
   nav: [
     { label: 'Proyectos', href: '/proyectos' },
     { label: 'Servicios', href: '/servicios' },
+    { label: 'Agencias', href: '/agencias', hideOnMobile: true }, // no cabe en una línea a 360/390: oculto hasta md (768px).
     { label: 'Contacto', href: '/contacto' },
   ],
 
