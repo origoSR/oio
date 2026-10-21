@@ -28,21 +28,21 @@ const MIN_ELAPSED_MS = 2000
  * queda un console.warn (sin datos personales) para poder diagnosticarlo en los
  * logs de Vercel.
  */
-function isSpam(formData: FormData, formName: 'contacto' | 'agencias'): boolean {
+function isSpam(formData: FormData, formName: 'contact' | 'agencias'): boolean {
   if (formData.get(HONEYPOT_FIELD)) {
-    console.warn(`[${formName}] envío descartado: campo trampa relleno (posible autorrelleno del navegador)`)
+    console.warn(`${formName}: spam=honeypot`)
     return true
   }
 
   const startedAt = Number(formData.get('started_at') ?? 0)
   if (!startedAt) {
-    console.warn(`[${formName}] envío descartado: falta started_at`)
+    console.warn(`${formName}: spam=sin-started-at`)
     return true
   }
 
   const elapsed = Date.now() - startedAt
   if (elapsed < MIN_ELAPSED_MS) {
-    console.warn(`[${formName}] envío descartado: demasiado rápido (${elapsed}ms < ${MIN_ELAPSED_MS}ms)`)
+    console.warn(`${formName}: spam=demasiado-rapido(${elapsed}ms)`)
     return true
   }
 
@@ -82,14 +82,15 @@ const agencySchema = z.object({
 })
 
 export async function submitContactForm(_prev: FormState, formData: FormData): Promise<FormState> {
-  if (isSpam(formData, 'contacto')) return { status: 'success' } // no se envía nada; quien lo manda no lo nota.
+  if (isSpam(formData, 'contact')) return { status: 'success' } // no se envía nada; quien lo manda no lo nota.
 
   const parsed = clientSchema.safeParse(Object.fromEntries(formData))
   if (!parsed.success) return { status: 'error', errors: zodErrors(parsed.error) }
 
   const v = parsed.data
+  let data: { id: string } | null = null
   try {
-    await getResendClient().emails.send({
+    const result = await getResendClient().emails.send({
       from: CONTACT_FROM,
       to: CONTACT_TO,
       replyTo: v.email,
@@ -107,11 +108,27 @@ export async function submitContactForm(_prev: FormState, formData: FormData): P
         .filter(Boolean)
         .join('\n'),
     })
+    // resend.emails.send() NO lanza: devuelve { data, error }. Un error de la API
+    // (dominio sin verificar, clave inválida, remitente no autorizado…) llega aquí,
+    // no al catch.
+    if (result.error) {
+      console.error(`contact: resend error=${result.error.name}`, result.error.message)
+      return { status: 'error', errors: { form: contactForm.error } }
+    }
+    data = result.data
   } catch (error) {
-    console.error('[contacto] error al enviar con Resend:', error)
+    const name = error instanceof Error ? error.name : 'unknown'
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(`contact: resend error=${name}`, message)
     return { status: 'error', errors: { form: contactForm.error } }
   }
 
+  if (!data?.id) {
+    console.error('contact: resend error=sin-id (respuesta sin data.id)')
+    return { status: 'error', errors: { form: contactForm.error } }
+  }
+
+  console.log(`contact: sent id=${data.id}`)
   return { status: 'success' }
 }
 
@@ -124,8 +141,9 @@ export async function submitAgencyForm(_prev: FormState, formData: FormData): Pr
   if (!parsed.success) return { status: 'error', errors: zodErrors(parsed.error) }
 
   const v = parsed.data
+  let data: { id: string } | null = null
   try {
-    await getResendClient().emails.send({
+    const result = await getResendClient().emails.send({
       from: CONTACT_FROM,
       to: CONTACT_TO,
       replyTo: v.email,
@@ -144,10 +162,23 @@ export async function submitAgencyForm(_prev: FormState, formData: FormData): Pr
         .filter(Boolean)
         .join('\n'),
     })
+    if (result.error) {
+      console.error(`agencias: resend error=${result.error.name}`, result.error.message)
+      return { status: 'error', errors: { form: agencies.form.error } }
+    }
+    data = result.data
   } catch (error) {
-    console.error('[agencias] error al enviar con Resend:', error)
+    const name = error instanceof Error ? error.name : 'unknown'
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(`agencias: resend error=${name}`, message)
     return { status: 'error', errors: { form: agencies.form.error } }
   }
 
+  if (!data?.id) {
+    console.error('agencias: resend error=sin-id (respuesta sin data.id)')
+    return { status: 'error', errors: { form: agencies.form.error } }
+  }
+
+  console.log(`agencias: sent id=${data.id}`)
   return { status: 'success' }
 }
