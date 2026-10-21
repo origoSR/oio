@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/site/Checkbox'
 import { Button } from '@/components/site/Button'
 import { agencies, formErrors } from '@/content/services'
 import { submitAgencyForm, type FormState } from '@/app/actions/contact'
+import { HONEYPOT_FIELD } from '@/lib/antispam'
 
 const initialState: FormState = { status: 'idle' }
 
@@ -18,6 +19,8 @@ export function AgencyForm() {
   const successRef = useRef<HTMLHeadingElement>(null)
   const form = agencies.form
 
+  // En el cliente, al montar el formulario (no en build ni en servidor): es la hora
+  // contra la que app/actions/contact.ts mide el antispam de los 2s.
   useEffect(() => {
     if (startedAtRef.current) startedAtRef.current.value = String(Date.now())
   }, [])
@@ -43,11 +46,12 @@ export function AgencyForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-6">
-      {/* Antispam: campo trampa oculto + started_at para descartar envíos a menos de 3s. */}
+      {/* Antispam: campo trampa oculto (fuera de pantalla, con un name que el autorrelleno
+          no reconoce) + started_at para descartar envíos a menos de 2s de pintarse. */}
       <input ref={startedAtRef} type="hidden" name="started_at" />
-      <div aria-hidden="true" className="sr-only">
-        <label htmlFor="agency-company-website">No rellenar</label>
-        <input id="agency-company-website" type="text" name="company_website" tabIndex={-1} autoComplete="off" />
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+        <label htmlFor="agency-hp">No rellenar este campo</label>
+        <input id="agency-hp" type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" aria-hidden="true" />
       </div>
 
       <div aria-live="polite">

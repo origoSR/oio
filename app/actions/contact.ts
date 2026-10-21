@@ -3,21 +3,50 @@
 import { Resend } from 'resend'
 import { z } from 'zod'
 import { formErrors, contactForm, agencies } from '@/content/services'
+import { HONEYPOT_FIELD } from '@/lib/antispam'
 
 export type FormState = {
   status: 'idle' | 'success' | 'error'
   errors?: Record<string, string>
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const CONTACT_TO = process.env.CONTACT_TO ?? 'rodrigo@oi0.es'
 const CONTACT_FROM = process.env.CONTACT_FROM ?? 'web@oi0.es'
 
-/** Campo trampa oculto + envíos a menos de 3s desde que se pinta el formulario: se descartan sin avisar. */
-function isSpam(formData: FormData) {
-  if (formData.get('company_website')) return true
+// El constructor de Resend lanza una excepción sin RESEND_API_KEY. Si eso pasara con
+// `new Resend(...)` a nivel de módulo, tumbaría la página entera (500) en vez de ir al
+// estado de error del formulario. Se construye dentro del try/catch de cada envío.
+function getResendClient() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
+
+const MIN_ELAPSED_MS = 2000
+
+/**
+ * Campo trampa relleno, o envío a menos de MIN_ELAPSED_MS del momento en que el
+ * formulario se pintó en el cliente: se descarta sin avisar a quien lo manda, pero
+ * queda un console.warn (sin datos personales) para poder diagnosticarlo en los
+ * logs de Vercel.
+ */
+function isSpam(formData: FormData, formName: 'contacto' | 'agencias'): boolean {
+  if (formData.get(HONEYPOT_FIELD)) {
+    console.warn(`[${formName}] envío descartado: campo trampa relleno (posible autorrelleno del navegador)`)
+    return true
+  }
+
   const startedAt = Number(formData.get('started_at') ?? 0)
-  return !startedAt || Date.now() - startedAt < 3000
+  if (!startedAt) {
+    console.warn(`[${formName}] envío descartado: falta started_at`)
+    return true
+  }
+
+  const elapsed = Date.now() - startedAt
+  if (elapsed < MIN_ELAPSED_MS) {
+    console.warn(`[${formName}] envío descartado: demasiado rápido (${elapsed}ms < ${MIN_ELAPSED_MS}ms)`)
+    return true
+  }
+
+  return false
 }
 
 function zodErrors(error: z.ZodError) {
@@ -53,14 +82,14 @@ const agencySchema = z.object({
 })
 
 export async function submitContactForm(_prev: FormState, formData: FormData): Promise<FormState> {
-  if (isSpam(formData)) return { status: 'success' } // no se envía nada; quien lo manda no lo nota.
+  if (isSpam(formData, 'contacto')) return { status: 'success' } // no se envía nada; quien lo manda no lo nota.
 
   const parsed = clientSchema.safeParse(Object.fromEntries(formData))
   if (!parsed.success) return { status: 'error', errors: zodErrors(parsed.error) }
 
   const v = parsed.data
   try {
-    await resend.emails.send({
+    await getResendClient().emails.send({
       from: CONTACT_FROM,
       to: CONTACT_TO,
       replyTo: v.email,
@@ -78,7 +107,8 @@ export async function submitContactForm(_prev: FormState, formData: FormData): P
         .filter(Boolean)
         .join('\n'),
     })
-  } catch {
+  } catch (error) {
+    console.error('[contacto] error al enviar con Resend:', error)
     return { status: 'error', errors: { form: contactForm.error } }
   }
 
@@ -86,7 +116,7 @@ export async function submitContactForm(_prev: FormState, formData: FormData): P
 }
 
 export async function submitAgencyForm(_prev: FormState, formData: FormData): Promise<FormState> {
-  if (isSpam(formData)) return { status: 'success' }
+  if (isSpam(formData, 'agencias')) return { status: 'success' }
 
   const raw = Object.fromEntries(formData)
   const trabajo = formData.getAll('trabajo[]').map(String)
@@ -95,7 +125,7 @@ export async function submitAgencyForm(_prev: FormState, formData: FormData): Pr
 
   const v = parsed.data
   try {
-    await resend.emails.send({
+    await getResendClient().emails.send({
       from: CONTACT_FROM,
       to: CONTACT_TO,
       replyTo: v.email,
@@ -114,7 +144,8 @@ export async function submitAgencyForm(_prev: FormState, formData: FormData): Pr
         .filter(Boolean)
         .join('\n'),
     })
-  } catch {
+  } catch (error) {
+    console.error('[agencias] error al enviar con Resend:', error)
     return { status: 'error', errors: { form: agencies.form.error } }
   }
 
